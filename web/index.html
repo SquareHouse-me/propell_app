@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    
+    <!-- Base href for Flutter web deployment -->
+    <base href="/">
+
+    <meta charset="UTF-8">
+    <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+    <meta name="description" content="A new Flutter project.">
+
+    <!-- iOS meta tags & icons -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="propell">
+    <link rel="apple-touch-icon" href="icons/Icon-192.png">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="favicon.png">
+
+    <title>propell</title>
+    <link rel="manifest" href="manifest.json">
+
+    <!-- Optimized viewport settings -->
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"> -->
+
+    <!-- Splash screen styling -->
+    <style id="splash-screen-style">
+      html {
+        height: 100%;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100%;
+        background-color: #000000;
+        background-size: 100% 100%;
+      }
+
+      .center {
+        margin: 0;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+
+      .contain {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+      }
+
+      .stretch {
+        display: block;
+        width: 100%;
+        height: 100%;
+      }
+
+      .cover {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .bottom {
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translate(-50%, 0);
+      }
+
+      @media (prefers-color-scheme: dark) {
+        body {
+          background-color: #000000;
+        }
+      }
+    </style>
+
+    <!-- Splash screen script -->
+    <script id="splash-screen-script">
+      function removeSplashFromWeb() {
+        document.getElementById("splash")?.remove();
+        document.getElementById("splash-branding")?.remove();
+        document.body.style.background = "transparent";
+      }
+    </script>
+
+    <!-- Flutter engine initialization -->
+    <script type="module">
+      import { initializeEngine } from "https://www.gstatic.com/flutter/engine/v1.0.0/flutter_engine_loader.js";
+
+      const config = {
+        renderer: 'html', // Use 'canvaskit' for CanvasKit renderer
+      };
+
+      initializeEngine(config).then(() => {
+        console.log('Flutter web engine initialized');
+      });
+    </script>
+
+    <!-- Flutter web support (if using flutter_inappwebview) -->
+    <script type="application/javascript" src="/assets/packages/flutter_inappwebview_web/assets/web/web_support.js" defer></script>
+  </head>
+  <body>
+    <!-- Main entry point for Flutter -->
+    <script src="flutter_bootstrap.js" async></script>
+  </body>
+</html>
