@@ -207,7 +207,7 @@ class _BookingCalanderState extends State<BookingCalander> {
                                       .copyWith(left: 60, top: 60),
                                   child: TextComponents(
                                     color: Colors.white,
-                                    title: 'No Time Slot Avaibleble',
+                                    title: 'No Time Slot Available',
                                     size: isMobile ? 15.sp : 24,
                                     weight: FontWeight.bold,
                                   ),

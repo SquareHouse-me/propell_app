@@ -64,7 +64,7 @@ class StepOne extends StatelessWidget {
                 controller: inputEmail,
                 validator: (value) {
                   if (value!.isEmpty) {
-                    return 'email field must not be empty';
+                    return 'Your email here';
                   }
                 }),
           ),
@@ -91,48 +91,49 @@ class StepOne extends StatelessWidget {
                 hint: 'Add Description (Optional)',
                 controller: inputDescription),
           ),
+          // ResponsiveRowColumnItem(
+          //   child: 9.heightSpace,
+          // ),
+          // ResponsiveRowColumnItem(
+          //     child: DashedContainer(
+          //   dashColor: AppColor.kGreen1Color,
+          //   borderRadius: isMobile ? 15.r : 15,
+          //   child: Container(
+          //     padding: EdgeInsets.symmetric(
+          //         vertical: isMobile ? 22.h : 22,
+          //         horizontal: isMobile ? 70.w : 70),
+          //     width: isMobile ? 347.w : 512,
+          //     // height: ResponsiveBreakpoints.of(context).isMobile ? 98.h : 121,
+          //     decoration: BoxDecoration(
+          //       color: AppColor.kGreen1Color.withOpacity(0.2),
+          //       borderRadius: BorderRadius.all(
+          //         Radius.circular(isMobile ? 15.r : 15),
+          //       ),
+          //     ),
+          //     child: Center(
+          //       child: ResponsiveRowColumn(
+          //         layout: ResponsiveRowColumnType.COLUMN,
+          //         columnCrossAxisAlignment: CrossAxisAlignment.center,
+          //         rowMainAxisAlignment: MainAxisAlignment.center,
+          //         columnSpacing: 1,
+          //         children: [
+          //           ResponsiveRowColumnItem(
+          //               child: SvgPicture.asset(AppIcons.sendSquare)),
+          //           ResponsiveRowColumnItem(
+          //               child: TextComponents(
+          //             color: AppColor.kSquareText,
+          //             title: "Upload your file here (Optional)",
+          //             size: isMobile ? 12.sp : 14,
+          //             weight: FontWeight.w400,
+          //           ))
+          //         ],
+          //       ),
+          //     ),
+          //   ),
+          // )),
+
           ResponsiveRowColumnItem(
-            child: 9.heightSpace,
-          ),
-          ResponsiveRowColumnItem(
-              child: DashedContainer(
-            dashColor: AppColor.kGreen1Color,
-            borderRadius: isMobile ? 15.r : 15,
-            child: Container(
-              padding: EdgeInsets.symmetric(
-                  vertical: isMobile ? 22.h : 22,
-                  horizontal: isMobile ? 70.w : 70),
-              width: isMobile ? 347.w : 512,
-              // height: ResponsiveBreakpoints.of(context).isMobile ? 98.h : 121,
-              decoration: BoxDecoration(
-                color: AppColor.kGreen1Color.withOpacity(0.2),
-                borderRadius: BorderRadius.all(
-                  Radius.circular(isMobile ? 15.r : 15),
-                ),
-              ),
-              child: Center(
-                child: ResponsiveRowColumn(
-                  layout: ResponsiveRowColumnType.COLUMN,
-                  columnCrossAxisAlignment: CrossAxisAlignment.center,
-                  rowMainAxisAlignment: MainAxisAlignment.center,
-                  columnSpacing: 1,
-                  children: [
-                    ResponsiveRowColumnItem(
-                        child: SvgPicture.asset(AppIcons.sendSquare)),
-                    ResponsiveRowColumnItem(
-                        child: TextComponents(
-                      color: AppColor.kSquareText,
-                      title: "Upload your file here (Optional)",
-                      size: isMobile ? 12.sp : 14,
-                      weight: FontWeight.w400,
-                    ))
-                  ],
-                ),
-              ),
-            ),
-          )),
-          ResponsiveRowColumnItem(
-            child: 40.heightSpace,
+            child: 120.heightSpace,
           ),
           ResponsiveRowColumnItem(
               child: Obx(() => PrimaryButton(

@@ -21,7 +21,7 @@ Widget buildOptionCard(BuildContext context,
   return Container(
     padding: EdgeInsets.symmetric(
         horizontal: ResponsiveBreakpoints.of(context).isMobile ? 19.h : 70,
-        vertical: ResponsiveBreakpoints.of(context).isMobile ? 30.h : 50),
+        vertical: ResponsiveBreakpoints.of(context).isMobile ? 12.h : 50),
     decoration: BoxDecoration(
       color: AppColor.kBlck23,
       borderRadius: BorderRadius.circular(

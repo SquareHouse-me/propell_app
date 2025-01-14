@@ -31,7 +31,7 @@ class _PaymentWebState extends State<PaymentWeb> {
       body: InAppWebView(
         initialUrlRequest: URLRequest(
             url: WebUri(
-                'https://demo.MyFatoorah.com/KWT/ie/01072494389642-b9b2dec3')),
+                widget.url)),
         initialSettings: InAppWebViewSettings(
           javaScriptEnabled: true,
           useHybridComposition: true, // Android-specific setting

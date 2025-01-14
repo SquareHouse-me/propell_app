@@ -8,9 +8,11 @@ import 'package:propell/configs/generalWidgets/export_general.dart';
 import 'package:propell/configs/generalWidgets/textstyle_component.dart';
 import 'package:propell/configs/res/colors.dart';
 import 'package:propell/configs/res/icons.dart';
+import 'package:propell/configs/res/images.dart';
 import 'package:propell/configs/utlis/extension.dart';
 import 'package:propell/viewModels/controllers/home_controller.dart';
 import 'package:responsive_framework/responsive_framework.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class AppbarWidget extends StatelessWidget {
   final String title;
@@ -36,10 +38,11 @@ class AppbarWidget extends StatelessWidget {
               rowMainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 ResponsiveRowColumnItem(
-                  child: SvgPicture.asset(
-                      ResponsiveBreakpoints.of(context).isMobile
-                          ? AppIcons.appBarLogo
-                          : AppIcons.appBarWebLogo),
+                  child: Image.asset(
+                    AppImage.appLogo, // URL of the image
+                    width: 120,
+                    height: 50,
+                  ),
                 ),
                 ResponsiveRowColumnItem(
                   child: Container(
@@ -59,10 +62,13 @@ class AppbarWidget extends StatelessWidget {
                     ),
                     child: Row(
                       children: [
-                        SvgPicture.asset(AppIcons.globalIcon),
+                        SvgPicture.asset(
+                          AppIcons.globalIcon,
+                          color: AppColor.kGreen1Color,
+                        ),
                         8.widthSpace,
                         Obx(() => DropdownButton<String>(
-                              value: homeC.langauge.value,
+                              value: homeC.language.value,
                               iconEnabledColor: AppColor.kGreen1Color,
                               dropdownColor: Colors.black,
                               style: GoogleFonts.montserrat(
@@ -87,8 +93,18 @@ class AppbarWidget extends StatelessWidget {
                                         ),
                                       ))
                                   .toList(),
-                              onChanged: (value) {
-                                homeC.langauge.value = value!;
+                              onChanged: (value) async {
+                                if (value == 'English') {
+                                  homeC.languageCode.value = 'en';
+                                  _saveData('en', value!);
+                                  homeC.language.value = value!;
+                                  await homeC.myCategoryApi();
+                                } else {
+                                  homeC.languageCode.value = 'ar';
+                                  homeC.language.value = value!;
+                                  _saveData('ar', value);
+                                  await homeC.myCategoryApi();
+                                }
                               },
                               underline: const SizedBox.shrink(),
                             )),
@@ -112,5 +128,12 @@ class AppbarWidget extends StatelessWidget {
               weight: FontWeight.bold,
             ),
           );
+  }
+
+  Future<void> _saveData(String languageCode, String language) async {
+    SharedPreferences _prefs = await SharedPreferences.getInstance();
+
+    await _prefs.setString('lang', language);
+    await _prefs.setString('langCode', languageCode);
   }
 }

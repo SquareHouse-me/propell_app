@@ -68,7 +68,7 @@ class HomeView extends StatelessWidget {
                               shrinkWrap: true,
 
                               horizontalGridSpacing: isMobile
-                                  ? 16.sp
+                                  ? 2.sp
                                   : 16, // Horizontal space between grid items
                               verticalGridSpacing: isMobile
                                   ? 16.sp
@@ -77,10 +77,10 @@ class HomeView extends StatelessWidget {
                                   ? 0.sp
                                   : 17, // Horizontal space around the grid
                               verticalGridMargin: isMobile
-                                  ? 10.sp
+                                  ? 0.sp
                                   : 15, // Vertical space around the grid
                               minItemWidth:
-                                  700, // The minimum item width (can be smaller, if the layout constraints are smaller)
+                                  500, // The minimum item width (can be smaller, if the layout constraints are smaller)
                               minItemsPerRow: isMobile
                                   ? 1
                                   : 3, // The minimum items to show in a single row. Takes precedence over minItemWidth

@@ -182,9 +182,9 @@ Widget _buildLocationOption(
         contentPadding: EdgeInsets.zero,
         leading: Image.network(
           icon, // URL of the image
-          width: 50,
-          height: 50,
-          fit: BoxFit.fitWidth,
+          width: 30,
+          height: 30,
+          fit: BoxFit.fitHeight,
           loadingBuilder: (BuildContext context, Widget child,
               ImageChunkEvent? loadingProgress) {
             if (loadingProgress == null)

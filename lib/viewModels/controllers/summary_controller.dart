@@ -28,8 +28,10 @@ class SummaryController extends GetxController {
       isCheckoutLoading.value = true;
       String formattedDate =
           DateFormat('yyyy-MM-dd').format(home.selectedDate.value);
+      HomeController homeController = Get.find<HomeController>();
+     homeController. languageCode.value =homeController.  language.value.contains('English') ? 'en' : 'ar';
       var data = {
-        "lang": 'en',
+        "lang": homeController.languageCode.value.toString(),
         "service_id": home.serviceId,
         "consultation_id": home.consultationId,
         "cat_id": home.catId,
@@ -40,7 +42,7 @@ class SummaryController extends GetxController {
         "phone": countryCode + phone,
         "discription": description,
         "method": 'knet',
-        'fcm_token':fCMtoken.value.toString()
+        'fcm_token': fCMtoken.value.toString()
       };
       await summaryRepo
           .checkoutApi(data: data, isHeaderRequired: false)

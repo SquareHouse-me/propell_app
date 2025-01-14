@@ -5,8 +5,8 @@ class HomeRepo {
   final _apiService = NetworkApiService();
 
   /// Category Api
-  Future<dynamic> categoryApi() async {
-    String url = "$category?lang=en";
+  Future<dynamic> categoryApi({required String lng}) async {
+    String url = "$category?lang=$lng";
     dynamic response = _apiService.getApi(url: url, isHeaderRequired: false);
 
     return response;

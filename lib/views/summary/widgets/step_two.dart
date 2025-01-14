@@ -316,10 +316,18 @@ class StepTwo extends StatelessWidget {
                 width: isMobile ? 346.w : 512,
                 height: isMobile ? 56.h : 56,
                 onTap: () {
-                  Get.to(() => PaymentWeb(
+                  if (kIsWeb) {
+                    Get.to(() => PaymentWeb(
+                          url:
+                              'https://demo.MyFatoorah.com/KWT/ie/01072494389642-b9b2dec3',
+                        ));
+                    Get.find<HomeController>().isLocationSelected = true.obs;
+                  } else {
+                    Get.to(() => PaymentWeb(
                           url: summaryC.summaryModel.value!.url.toString(),
                         ));
                     Get.find<HomeController>().isLocationSelected = true.obs;
+                  }
                 },
                 childWidget: TextComponents(
                   title: "Pay Now",

@@ -11,6 +11,7 @@ import 'package:propell/models/consultationTimeSlot/time_slot.dart';
 import 'package:propell/models/services/services.dart';
 import 'package:propell/viewModels/controllers/summary_controller.dart';
 import 'package:propell/viewModels/services/notification_services.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class HomeController extends GetxController {
   HomeRepo homeRepo;
@@ -18,7 +19,8 @@ class HomeController extends GetxController {
   RxBool isLocationSelected = true.obs;
   int catId = 1;
   RxString selectedTimeId = '-1'.obs;
-  RxString langauge = 'English'.obs;
+  RxString language = 'English'.obs;
+  RxString languageCode = 'English'.obs;
   int serviceId = 0;
   int consultationId = 0;
   Rx<DateTime> selectedDate = Rx<DateTime>(DateTime.now());
@@ -78,25 +80,34 @@ class HomeController extends GetxController {
   void setTimeSlot(List<TimeSlotResponseData> _value) =>
       timeSlotList.value = _value;
 
- 
   NotificationServices services = NotificationServices();
   @override
   void onReady() {
     super.onReady();
-        myCategoryApi();
+    _loadSavedValue();
     services.requestNotificationPermission();
     services.setupInteractMessage(Get.context!);
     services.firebaseInit(Get.context!);
     Get.put(SummaryController(summaryRepo: getIt()));
   }
 
+  void _loadSavedValue() async {
+    SharedPreferences _prefs = await SharedPreferences.getInstance();
+
+    language.value = await _prefs.getString('lang') ?? "English";
+    languageCode.value = await _prefs.getString('langCode') ?? "en";
+    print(language.value + 'fgdfgdgfdgdfg ' + languageCode.value);
+    await myCategoryApi();
+  }
 
   /// Category API
   Future<void> myCategoryApi() async {
     try {
       setCateogryStatus(Status.LOADING);
-
-      await homeRepo.categoryApi().then((value) {
+      languageCode.value = language.value.contains('English') ? 'en' : 'ar';
+      await homeRepo
+          .categoryApi(lng: languageCode.value.toString())
+          .then((value) {
         // Check if the response is a List or Map
         if (value is Map<String, dynamic>) {
           // If the response is a Map
@@ -130,8 +141,9 @@ class HomeController extends GetxController {
   Future<void> consultationApi() async {
     try {
       setConsultStatus(Status.LOADING);
+      languageCode.value = language.value.contains('English') ? 'en' : 'ar';
       var data = {
-        "lang": 'en',
+        "lang": languageCode.value.toString(),
         "category_id": catId,
       };
       await homeRepo
@@ -167,8 +179,9 @@ class HomeController extends GetxController {
   Future<void> servicesApi() async {
     try {
       setServicesStatus(Status.LOADING);
+      languageCode.value = language.value.contains('English') ? 'en' : 'ar';
       var data = {
-        "lang": 'en',
+        "lang": languageCode.value.toString(),
         "category_id": catId,
       };
       await homeRepo
@@ -207,8 +220,10 @@ class HomeController extends GetxController {
       {required String consultationId, required String date}) async {
     try {
       setTimeSlotStatus(Status.LOADING);
+
+      languageCode.value = language.value.contains('English') ? 'en' : 'ar';
       var data = {
-        "lang": 'en',
+        "lang": languageCode.value.toString(),
         "consultation_id": consultationId,
         "date": date,
       };

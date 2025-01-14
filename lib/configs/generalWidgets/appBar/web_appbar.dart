@@ -9,9 +9,10 @@ import 'package:propell/configs/res/icons.dart';
 import 'package:propell/configs/utlis/extension.dart';
 import 'package:propell/viewModels/controllers/home_controller.dart';
 import 'package:responsive_framework/responsive_framework.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class WebAppbarWidget extends StatelessWidget {
-    WebAppbarWidget({super.key});
+  WebAppbarWidget({super.key});
 
   HomeController homeC = Get.find<HomeController>();
   @override
@@ -50,36 +51,44 @@ class WebAppbarWidget extends StatelessWidget {
                     SvgPicture.asset(AppIcons.globalIcon),
                     8.widthSpace,
                     Obx(() => DropdownButton<String>(
-                              value: homeC.langauge.value,
-                              iconEnabledColor: AppColor.kGreen1Color,
-                              dropdownColor: Colors.black,
-                              style: GoogleFonts.montserrat(
-                                fontSize:
-                                    ResponsiveBreakpoints.of(context).isMobile
-                                        ? 12.sp
-                                        : 12,
-                                color: AppColor.kWhiteColor,
-                                fontWeight: FontWeight.w500,
-                              ),
-                              items: ['English', 'Arabic']
-                                  .map((e) => DropdownMenuItem(
-                                        value: e,
-                                        child: TextComponents(
-                                          color: Colors.white,
-                                          title: e,
-                                          size:
-                                              ResponsiveBreakpoints.of(context)
-                                                      .isMobile
-                                                  ? 12.sp
-                                                  : 12,
-                                        ),
-                                      ))
-                                  .toList(),
-                              onChanged: (value) {
-                                homeC.langauge.value = value!;
-                              },
-                              underline: const SizedBox.shrink(),
-                            )),
+                          value: homeC.language.value,
+                          iconEnabledColor: AppColor.kGreen1Color,
+                          dropdownColor: Colors.black,
+                          style: GoogleFonts.montserrat(
+                            fontSize: ResponsiveBreakpoints.of(context).isMobile
+                                ? 12.sp
+                                : 12,
+                            color: AppColor.kWhiteColor,
+                            fontWeight: FontWeight.w500,
+                          ),
+                          items: ['English', 'Arabic']
+                              .map((e) => DropdownMenuItem(
+                                    value: e,
+                                    child: TextComponents(
+                                      color: Colors.white,
+                                      title: e,
+                                      size: ResponsiveBreakpoints.of(context)
+                                              .isMobile
+                                          ? 12.sp
+                                          : 12,
+                                    ),
+                                  ))
+                              .toList(),
+                          onChanged: (value) async {
+                            if (value == 'English') {
+                              homeC.languageCode.value = 'en';
+                              _saveData('en', value!);
+                              homeC.language.value = value!;
+                              await homeC.myCategoryApi();
+                            } else {
+                              homeC.languageCode.value = 'ar';
+                              homeC.language.value = value!;
+                              _saveData('ar', value);
+                              await homeC.myCategoryApi();
+                            }
+                          },
+                          underline: const SizedBox.shrink(),
+                        )),
                   ],
                 ),
               ),
@@ -88,5 +97,12 @@ class WebAppbarWidget extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  Future<void> _saveData(String languageCode, String language) async {
+    SharedPreferences _prefs = await SharedPreferences.getInstance();
+
+    await _prefs.setString('lang', language);
+    await _prefs.setString('langCode', languageCode);
   }
 }

@@ -20,6 +20,7 @@ class ServiceTypeTwo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    
     bool isMobile = ResponsiveBreakpoints.of(context).isMobile;
     return Obx(() => homeC.consultStatus.value == Status.LOADING
         ? SizedBox(
