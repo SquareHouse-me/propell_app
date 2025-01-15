@@ -33,24 +33,28 @@ Widget buildOptionCard(BuildContext context,
             leading: SizedBox(
               width: 50,
               height: 50,
-              child: Image.network(
-                icon, // URL of the image
-                width: 50,
-                height: 50,
-                fit: BoxFit.fitWidth,
-                loadingBuilder: (BuildContext context, Widget child,
-                    ImageChunkEvent? loadingProgress) {
-                  if (loadingProgress == null)
-                    return child; // Return the image once loaded
-                  return getIndicator(); // Show the custom loading indicator
-                },
-                errorBuilder: (BuildContext context, Object error,
-                    StackTrace? stackTrace) {
-                  return Icon(
-                    Icons.error,
-                    color: AppColor.kGreen1Color, // Custom error icon and color
-                  );
-                },
+              child: Padding(
+                padding: const EdgeInsets.all(8.0).copyWith(left: 0, right: 0),
+                child: Image.network(
+                  icon, // URL of the image
+                  width: 50, color: AppColor.kGreen1Color,
+                  height: 50,
+                  fit: BoxFit.fitWidth,
+                  loadingBuilder: (BuildContext context, Widget child,
+                      ImageChunkEvent? loadingProgress) {
+                    if (loadingProgress == null)
+                      return child; // Return the image once loaded
+                    return getIndicator(); // Show the custom loading indicator
+                  },
+                  errorBuilder: (BuildContext context, Object error,
+                      StackTrace? stackTrace) {
+                    return Icon(
+                      Icons.error,
+                      color:
+                          AppColor.kGreen1Color, // Custom error icon and color
+                    );
+                  },
+                ),
               ),
             ),
             title: TextComponents(
@@ -94,6 +98,7 @@ Widget buildOptionCard(BuildContext context,
                       icon, // URL of the image
                       width: 50,
                       height: 50,
+                      color: AppColor.kGreen1Color,
                       fit: BoxFit.fitWidth,
                       loadingBuilder: (BuildContext context, Widget child,
                           ImageChunkEvent? loadingProgress) {

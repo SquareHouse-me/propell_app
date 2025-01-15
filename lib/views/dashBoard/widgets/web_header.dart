@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:propell/configs/generalWidgets/textstyle_component.dart';
@@ -35,7 +34,10 @@ class WebHeaderTitle extends StatelessWidget {
           rowSpacing: 11,
           children: [
             ResponsiveRowColumnItem(
-              child: SvgPicture.asset(AppIcons.starIcon),
+              child: SvgPicture.asset(
+                AppIcons.starIcon,
+                color: AppColor.kGreen1Color,
+              ),
             ),
             ResponsiveRowColumnItem(
               child: ResponsiveRowColumnItem(
@@ -58,7 +60,10 @@ class WebHeaderTitle extends StatelessWidget {
           rowSpacing: 11,
           children: [
             ResponsiveRowColumnItem(
-              child: SvgPicture.asset(AppIcons.starIcon),
+              child: SvgPicture.asset(
+                AppIcons.starIcon,
+                color: AppColor.kGreen1Color,
+              ),
             ),
             ResponsiveRowColumnItem(
               child: ResponsiveRowColumnItem(
@@ -81,7 +86,10 @@ class WebHeaderTitle extends StatelessWidget {
           rowSpacing: 11,
           children: [
             ResponsiveRowColumnItem(
-              child: SvgPicture.asset(AppIcons.starIcon),
+              child: SvgPicture.asset(
+                AppIcons.starIcon,
+                color: AppColor.kGreen1Color,
+              ),
             ),
             ResponsiveRowColumnItem(
               child: ResponsiveRowColumnItem(

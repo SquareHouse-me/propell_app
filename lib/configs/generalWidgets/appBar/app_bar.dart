@@ -29,7 +29,7 @@ class AppbarWidget extends StatelessWidget {
         ? AppBar(
             backgroundColor: AppColor.kPrimary,
             elevation: 0,
-            toolbarHeight: 70,
+            toolbarHeight: 200,
             centerTitle: true,
             surfaceTintColor: AppColor.kPrimary,
             iconTheme: IconThemeData(color: AppColor.kWhiteColor),
@@ -40,25 +40,22 @@ class AppbarWidget extends StatelessWidget {
                 ResponsiveRowColumnItem(
                   child: Image.asset(
                     AppImage.appLogo, // URL of the image
-                    width: 120,
+                    width: 100,
                     height: 50,
                   ),
                 ),
                 ResponsiveRowColumnItem(
                   child: Container(
                     padding: EdgeInsets.symmetric(
-                        horizontal: ResponsiveBreakpoints.of(context).isMobile
-                            ? 12.w
-                            : 12,
-                        vertical: ResponsiveBreakpoints.of(context).isMobile
-                            ? 8.h
-                            : 8),
+                      horizontal:
+                          ResponsiveBreakpoints.of(context).isMobile ? 4.w : 6,
+                    ),
                     decoration: BoxDecoration(
                       color: AppColor.klightBalck,
                       borderRadius: BorderRadius.circular(
                           ResponsiveBreakpoints.of(context).isMobile
-                              ? 30.r
-                              : 30),
+                              ? 20.r
+                              : 20),
                     ),
                     child: Row(
                       children: [
@@ -69,6 +66,7 @@ class AppbarWidget extends StatelessWidget {
                         8.widthSpace,
                         Obx(() => DropdownButton<String>(
                               value: homeC.language.value,
+                              padding: EdgeInsets.zero,
                               iconEnabledColor: AppColor.kGreen1Color,
                               dropdownColor: Colors.black,
                               style: GoogleFonts.montserrat(
@@ -99,10 +97,12 @@ class AppbarWidget extends StatelessWidget {
                                   _saveData('en', value!);
                                   homeC.language.value = value!;
                                   await homeC.myCategoryApi();
+                                  Get.updateLocale(Locale('en'));
                                 } else {
                                   homeC.languageCode.value = 'ar';
                                   homeC.language.value = value!;
                                   _saveData('ar', value);
+                                  Get.updateLocale(Locale('ar'));
                                   await homeC.myCategoryApi();
                                 }
                               },

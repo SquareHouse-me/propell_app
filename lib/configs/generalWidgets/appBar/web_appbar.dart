@@ -6,6 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:propell/configs/generalWidgets/textstyle_component.dart';
 import 'package:propell/configs/res/colors.dart';
 import 'package:propell/configs/res/icons.dart';
+import 'package:propell/configs/res/images.dart';
 import 'package:propell/configs/utlis/extension.dart';
 import 'package:propell/viewModels/controllers/home_controller.dart';
 import 'package:responsive_framework/responsive_framework.dart';
@@ -20,7 +21,7 @@ class WebAppbarWidget extends StatelessWidget {
     return AppBar(
       backgroundColor: AppColor.kPrimary,
       elevation: 0,
-      toolbarHeight: 55,
+      toolbarHeight: 100,
       surfaceTintColor: Colors.transparent,
       iconTheme: IconThemeData(color: AppColor.kWhiteColor),
       title: ResponsiveRowColumn(
@@ -28,69 +29,65 @@ class WebAppbarWidget extends StatelessWidget {
         rowMainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           ResponsiveRowColumnItem(
-            child: SvgPicture.asset(ResponsiveBreakpoints.of(context).isMobile
-                ? AppIcons.appBarLogo
-                : AppIcons.appBarWebLogo),
+            child: Image.asset(
+              ResponsiveBreakpoints.of(context).isMobile
+                  ? AppImage.appLogo
+                  : AppImage.webLogo,
+              width: 100,
+              height: 50,
+            ),
           ),
           ResponsiveRowColumnItem(
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Container(
-                padding: EdgeInsets.symmetric(
-                    horizontal:
-                        ResponsiveBreakpoints.of(context).isMobile ? 12.w : 12,
-                    vertical:
-                        ResponsiveBreakpoints.of(context).isMobile ? 6.h : 6),
-                decoration: BoxDecoration(
-                  color: AppColor.klightBalck,
-                  borderRadius: BorderRadius.circular(
-                      ResponsiveBreakpoints.of(context).isMobile ? 30.r : 30),
-                ),
-                child: Row(
-                  children: [
-                    SvgPicture.asset(AppIcons.globalIcon),
-                    8.widthSpace,
-                    Obx(() => DropdownButton<String>(
-                          value: homeC.language.value,
-                          iconEnabledColor: AppColor.kGreen1Color,
-                          dropdownColor: Colors.black,
-                          style: GoogleFonts.montserrat(
-                            fontSize: ResponsiveBreakpoints.of(context).isMobile
-                                ? 12.sp
-                                : 12,
-                            color: AppColor.kWhiteColor,
-                            fontWeight: FontWeight.w500,
-                          ),
-                          items: ['English', 'Arabic']
-                              .map((e) => DropdownMenuItem(
-                                    value: e,
-                                    child: TextComponents(
-                                      color: Colors.white,
-                                      title: e,
-                                      size: ResponsiveBreakpoints.of(context)
-                                              .isMobile
-                                          ? 12.sp
-                                          : 12,
-                                    ),
-                                  ))
-                              .toList(),
-                          onChanged: (value) async {
-                            if (value == 'English') {
-                              homeC.languageCode.value = 'en';
-                              _saveData('en', value!);
-                              homeC.language.value = value!;
-                              await homeC.myCategoryApi();
-                            } else {
-                              homeC.languageCode.value = 'ar';
-                              homeC.language.value = value!;
-                              _saveData('ar', value);
-                              await homeC.myCategoryApi();
-                            }
-                          },
-                          underline: const SizedBox.shrink(),
-                        )),
-                  ],
-                ),
+            child: Container(
+              padding: EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+              decoration: BoxDecoration(
+                color: AppColor.klightBalck,
+                borderRadius: BorderRadius.circular(30),
+              ),
+              child: Row(
+                children: [
+                  SvgPicture.asset(
+                    AppIcons.globalIcon,
+                    color: AppColor.kGreen1Color,
+                  ),
+                  8.widthSpace,
+                  Obx(() => DropdownButton<String>(
+                        value: homeC.language.value,
+                        iconEnabledColor: AppColor.kGreen1Color,
+                        dropdownColor: Colors.black,
+                        style: GoogleFonts.montserrat(
+                          fontSize: 12,
+                          color: AppColor.kWhiteColor,
+                          fontWeight: FontWeight.w500,
+                        ),
+                        items: ['English', 'Arabic']
+                            .map((e) => DropdownMenuItem(
+                                  value: e,
+                                  child: TextComponents(
+                                    color: Colors.white,
+                                    title: e,
+                                    size: 12,
+                                  ),
+                                ))
+                            .toList(),
+                        onChanged: (value) async {
+                          if (value == 'English') {
+                            homeC.languageCode.value = 'en';
+                            _saveData('en', value!);
+                            Get.updateLocale(Locale('en'));
+                            homeC.language.value = value!;
+                            await homeC.myCategoryApi();
+                          } else {
+                            homeC.languageCode.value = 'ar';
+                            homeC.language.value = value!;
+                            _saveData('ar', value);
+                            Get.updateLocale(Locale('ar'));
+                            await homeC.myCategoryApi();
+                          }
+                        },
+                        underline: const SizedBox.shrink(),
+                      )),
+                ],
               ),
             ),
           ),

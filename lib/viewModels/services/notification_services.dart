@@ -9,11 +9,13 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 import 'package:permission_handler/permission_handler.dart';
 import 'package:shared_preferences/shared_preferences.dart';
- 
+
 class NotificationServices {
   FirebaseMessaging messaging = FirebaseMessaging.instance;
   final FlutterLocalNotificationsPlugin localNotificationsPlugin =
       FlutterLocalNotificationsPlugin();
+
+  //request permission for notification
   void requestNotificationPermission() async {
     NotificationSettings settings = await messaging.requestPermission(
       alert: true,
@@ -44,36 +46,83 @@ class NotificationServices {
     }
   }
 
-  Future<String> getDeviceToken() async {
-    String? token = await messaging.getToken();
-    log('$token getDeviceToken');
+  Future<String> getDeviceToken({int maxRetires = 3}) async {
+    String? token;
+    try {
+      if (kIsWeb) {
+        token = await messaging.getToken(
+            vapidKey:
+                "BGnjikP-Upz_ONlVkrWevajmk5RymrL4RfiVvXV1QzStH1B3Jss5CRkoX-R5gPlQZhwD-35vRU3pESENawcWG0Y");
+        log('$token getDeviceToken');
 
-    // Save the token and the current timestamp
-    ;
-    SharedPreferences sp = await SharedPreferences.getInstance();
-    await sp.setString('DeviceToken', token.toString());
-    await sp.setString(
-        'TokenTimestamp', DateTime.now().millisecondsSinceEpoch.toString());
+        // Save the token and the current timestamp
 
-    return token!;
+        SharedPreferences sp = await SharedPreferences.getInstance();
+        await sp.setString('DeviceToken', token.toString());
+        await sp.setString(
+            'TokenTimestamp', DateTime.now().millisecondsSinceEpoch.toString());
+        print("for web device token: $token");
+      } else {
+        token = await messaging.getToken();
+        log('$token getDeviceToken');
+
+        // Save the token and the current timestamp
+
+        SharedPreferences sp = await SharedPreferences.getInstance();
+        await sp.setString('DeviceToken', token.toString());
+        await sp.setString(
+            'TokenTimestamp', DateTime.now().millisecondsSinceEpoch.toString());
+      }
+      return token!;
+    } catch (e) {
+      log('Error: $e');
+      print("failed to get device token");
+      if (maxRetires > 0) {
+        print("try after 10 sec");
+        await Future.delayed(Duration(seconds: 10));
+        return getDeviceToken(maxRetires: maxRetires - 1);
+      } else {
+        return '';
+      }
+    }
   }
 
   Future<String> isTokenRefresh() async {
     String newToken = '';
-    messaging.onTokenRefresh.listen((event) async {
-      newToken = event;
+
+    try {
+      messaging.onTokenRefresh.listen((event) async {
+        newToken = event;
+
+        SharedPreferences sp = await SharedPreferences.getInstance();
+        await sp.setString('DeviceToken', newToken.toString());
+        await sp.setString(
+            'TokenTimestamp', DateTime.now().millisecondsSinceEpoch.toString());
+
+        log('Token refreshed: $newToken');
+      }).asFuture();
+
       SharedPreferences sp = await SharedPreferences.getInstance();
-      await sp.setString('DeviceToken', newToken.toString());
-      await sp.setString(
-          'TokenTimestamp', DateTime.now().millisecondsSinceEpoch.toString());
+      if (kIsWeb) {
+        // For web, use the vapidKey to fetch the token
+        newToken = await messaging.getToken(
+                vapidKey:
+                    "BGnjikP-Upz_ONlVkrWevajmk5RymrL4RfiVvXV1QzStH1B3Jss5CRkoX-R5gPlQZhwD-35vRU3pESENawcWG0Y") ??
+            '';
+        await sp.setString('DeviceToken', newToken);
+        await sp.setString(
+            'TokenTimestamp', DateTime.now().millisecondsSinceEpoch.toString());
+        log('Token refreshed for web: $newToken');
+      } else {
+        // For other platforms
+        newToken = sp.getString('DeviceToken') ?? '';
+      }
 
-      log('Token refreshed: $newToken');
-    }).asFuture(); // Be careful with this, it might not work as expected if onTokenRefresh doesn't emit immediately
-    SharedPreferences sp = await SharedPreferences.getInstance();
-    // Return the new or existing token
-    newToken = await sp.getString('DeviceToken').toString();
-
-    return newToken;
+      return newToken;
+    } catch (e) {
+      log('Error during token refresh: $e');
+      return '';
+    }
   }
 
   void firebaseInit(BuildContext context) {
@@ -108,6 +157,12 @@ class NotificationServices {
       android: initializationSettingsAndroid,
       iOS: initializationSettingsIOS,
     );
+
+    // request notification permissions for android 13 or above
+    localNotificationsPlugin
+        .resolvePlatformSpecificImplementation<
+            AndroidFlutterLocalNotificationsPlugin>()!
+        .requestNotificationsPermission();
     await localNotificationsPlugin.initialize(initializationSettings,
         onDidReceiveNotificationResponse:
             (NotificationResponse notificationResponse) async {

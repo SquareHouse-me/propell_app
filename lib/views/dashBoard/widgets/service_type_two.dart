@@ -20,7 +20,6 @@ class ServiceTypeTwo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    
     bool isMobile = ResponsiveBreakpoints.of(context).isMobile;
     return Obx(() => homeC.consultStatus.value == Status.LOADING
         ? SizedBox(
@@ -148,23 +147,26 @@ class ResUseableContainer extends StatelessWidget {
           width: 44,
           height: 44,
           decoration: const BoxDecoration(
-              color: AppColor.kWhiteColor, shape: BoxShape.circle),
+              color: AppColor.kGreen1Color, shape: BoxShape.circle),
           child: Image.network(
-  appIcon, // URL of the image
-  width: 50,
-  height: 50,
-  fit: BoxFit.fitWidth,
-  loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent? loadingProgress) {
-    if (loadingProgress == null) return child; // Return the image once loaded
-    return getIndicator(); // Show the custom loading indicator
-  },
-  errorBuilder: (BuildContext context, Object error, StackTrace? stackTrace) {
-    return Icon(
-      Icons.error,
-      color: AppColor.kGreen1Color, // Custom error icon and color
-    );
-  },
-),
+            appIcon, // URL of the image
+            width: 50,
+            height: 50,
+            fit: BoxFit.fitWidth,
+            loadingBuilder: (BuildContext context, Widget child,
+                ImageChunkEvent? loadingProgress) {
+              if (loadingProgress == null)
+                return child; // Return the image once loaded
+              return getIndicator(); // Show the custom loading indicator
+            },
+            errorBuilder:
+                (BuildContext context, Object error, StackTrace? stackTrace) {
+              return Icon(
+                Icons.error,
+                color: AppColor.kGreen1Color, // Custom error icon and color
+              );
+            },
+          ),
         ),
         title: TextComponents(
           color: Colors.white,

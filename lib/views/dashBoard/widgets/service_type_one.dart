@@ -182,7 +182,7 @@ Widget _buildLocationOption(
         contentPadding: EdgeInsets.zero,
         leading: Image.network(
           icon, // URL of the image
-          width: 30,
+          width: 30, color: AppColor.kGreen1Color,
           height: 30,
           fit: BoxFit.fitHeight,
           loadingBuilder: (BuildContext context, Widget child,

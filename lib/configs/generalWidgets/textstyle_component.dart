@@ -1,5 +1,7 @@
 // ignore_for_file: must_be_immutable
 
+import 'package:propell/viewModels/controllers/home_controller.dart';
+
 import 'export_general.dart';
 
 class TextComponents extends StatelessWidget {
@@ -23,6 +25,7 @@ class TextComponents extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final homeC = Get.find<HomeController>();
     return Text(
       title,
       style: GoogleFonts.montserrat(

@@ -60,6 +60,7 @@ class MyApp extends StatelessWidget {
       designSize: const Size(360, 800), // Base design for mobile
       builder: (context, child) {
         return GetMaterialApp(
+          locale: Get.locale,
           theme: ThemeData(
             scaffoldBackgroundColor:
                 Color(0xFF231F20), // Background color for the app

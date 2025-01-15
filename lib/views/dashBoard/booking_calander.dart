@@ -43,6 +43,13 @@ class _BookingCalanderState extends State<BookingCalander> {
   }
 
   @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    homeC.timeSlotList.value = [];
+  }
+
+  @override
   Widget build(BuildContext context) {
     bool isMobile = ResponsiveBreakpoints.of(context).isMobile;
 
@@ -300,7 +307,8 @@ class _BookingCalanderState extends State<BookingCalander> {
                                                       color: time.isBooked == 1
                                                           ? AppColor.kLightGrey
                                                           : isSelected
-                                                              ? Colors.teal
+                                                              ? AppColor
+                                                                  .kGreen1Color
                                                               : AppColor
                                                                   .kBlck23,
                                                       borderRadius:
@@ -316,7 +324,7 @@ class _BookingCalanderState extends State<BookingCalander> {
                                                             ? 9.sp
                                                             : 14,
                                                         color: isSelected
-                                                            ? Colors.black
+                                                            ? Colors.white
                                                             : Colors.white,
                                                         weight: FontWeight.w400,
                                                       ),

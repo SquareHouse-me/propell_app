@@ -1,6 +1,6 @@
 class AppIcons {
   static const String appBarLogo = 'assets/icons/appBarLogo.svg';
-  static const String appBarWebLogo = 'assets/icons/appBarWebLogo.svg';
+  static const String appBarWebLogo = 'assets/icons/appBarLogo.svg';
   static const String globalIcon = 'assets/icons/globalIcon.svg';
   static const String interiorConsultation =
       "assets/icons/interiorConsultation.svg";

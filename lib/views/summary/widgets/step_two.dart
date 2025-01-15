@@ -18,328 +18,351 @@ class StepTwo extends StatelessWidget {
     summaryC.calculateTotal(
         timeSlot: summaryC.summaryModel.value!.bookingRespons.timeslot);
     bool isMobile = ResponsiveBreakpoints.of(context).isMobile;
-    return ResponsiveRowColumn(
-      columnCrossAxisAlignment: CrossAxisAlignment.start,
-      layout: ResponsiveRowColumnType.COLUMN,
-      children: [
-        ResponsiveRowColumnItem(
-          child: TextComponents(
-            color: Colors.white,
-            title: 'Your Booking',
-            size: isMobile ? 16.sp : 16,
-            weight: FontWeight.bold,
-          ),
-        ),
-        ResponsiveRowColumnItem(
-          child: 9.heightSpace,
-        ),
-        ResponsiveRowColumnItem(
-          child: ResUseableContainer(
-            isMobile: isMobile,
-            appIcon: AppIcons.interiorConsultation,
-            title: summaryC.summaryModel.value!.bookingRespons.category_name
-                .split(' ')[0]
-                .toString(),
-            subTitle: summaryC.summaryModel.value!.bookingRespons.category_name
-                .split(' ')[1]
-                .toString(),
-          ),
-        ),
-        ResponsiveRowColumnItem(
-          child: 9.heightSpace,
-        ),
-        ResponsiveRowColumnItem(
-          child: TextComponents(
-            color: Colors.white,
-            title: 'Consultant',
-            size: isMobile ? 16.sp : 16,
-            weight: FontWeight.bold,
-          ),
-        ),
-        ResponsiveRowColumnItem(
-          child: 9.heightSpace,
-        ),
-        ResponsiveRowColumnItem(
-          child: ResUseableTwoContainer(
-            isMobile: isMobile,
-            appIcon: AppIcons.profileCircle,
-            title: summaryC.summaryModel.value!.bookingRespons.consultation_name
-                .toString(),
-          ),
-        ),
-        ResponsiveRowColumnItem(
-          child: 9.heightSpace,
-        ),
-        ResponsiveRowColumnItem(
-          child: TextComponents(
-            color: Colors.white,
-            title: 'Date and Time',
-            size: isMobile ? 16.sp : 16,
-            weight: FontWeight.bold,
-          ),
-        ),
-        ResponsiveRowColumnItem(
-          child: 9.heightSpace,
-        ),
-        ResponsiveRowColumnItem(
-            child: Container(
-          padding: EdgeInsets.symmetric(
-            horizontal: isMobile ? 14.w : 14,
-            vertical: isMobile ? 14.h : 14,
-          ),
-          width: isMobile ? 343.w : 512,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(isMobile ? 15.r : 15),
-            color: AppColor.kBlck23,
-          ),
-          child: ResponsiveRowColumn(
-            layout: ResponsiveRowColumnType.COLUMN,
-            children: [
-              // row 1
-              ResponsiveRowColumnItem(
-                  child: ResponsiveRowColumn(
-                layout: ResponsiveRowColumnType.ROW,
-                rowMainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  ResponsiveRowColumnItem(
-                    child: ResponsiveRowColumn(
-                      layout: ResponsiveRowColumnType.COLUMN,
-                      columnCrossAxisAlignment: CrossAxisAlignment.start,
-                      columnSpacing: 6,
-                      children: [
-                        ResponsiveRowColumnItem(
-                            child: ResponsiveRowColumn(
-                          layout: ResponsiveRowColumnType.ROW,
-                          rowSpacing: 2,
-                          children: [
-                            ResponsiveRowColumnItem(
-                              child: SvgPicture.asset(
-                                AppIcons.buildings,
-                                color: AppColor.kLightTitleColor,
-                              ),
-                            ),
-                            ResponsiveRowColumnItem(
-                                child: TextComponents(
-                              color: AppColor.kLightTitleColor,
-                              title: 'Type',
-                              size: isMobile ? 12.sp : 12,
-                              weight: FontWeight.w400,
-                            ))
-                          ],
-                        )),
-                        ResponsiveRowColumnItem(
-                            child: TextComponents(
-                          color: AppColor.kWhiteColor,
-                          title: summaryC
-                              .summaryModel.value!.bookingRespons.service_name
-                              .toString(),
-                          size: isMobile ? 12.sp : 12,
-                          weight: FontWeight.w400,
-                        )),
-                      ],
-                    ),
-                  ),
-                  ResponsiveRowColumnItem(
-                    child: ResponsiveRowColumn(
-                      layout: ResponsiveRowColumnType.COLUMN,
-                      columnCrossAxisAlignment: CrossAxisAlignment.end,
-                      columnSpacing: 6,
-                      children: [
-                        ResponsiveRowColumnItem(
-                            child: ResponsiveRowColumn(
-                          layout: ResponsiveRowColumnType.ROW,
-                          rowSpacing: 2,
-                          children: [
-                            ResponsiveRowColumnItem(
-                              child: SvgPicture.asset(
-                                AppIcons.calendarCircle,
-                                color: AppColor.kLightTitleColor,
-                              ),
-                            ),
-                            ResponsiveRowColumnItem(
-                                child: TextComponents(
-                              color: AppColor.kLightTitleColor,
-                              title: 'Date',
-                              size: isMobile ? 12.sp : 12,
-                              weight: FontWeight.w400,
-                            ))
-                          ],
-                        )),
-                        ResponsiveRowColumnItem(
-                            child: TextComponents(
-                          color: AppColor.kWhiteColor,
-                          title: summaryC
-                              .summaryModel.value!.bookingRespons.booking_date
-                              .toString(),
-                          size: isMobile ? 12.sp : 12,
-                          weight: FontWeight.w400,
-                        )),
-                      ],
-                    ),
-                  )
-                ],
-              )),
-              ResponsiveRowColumnItem(
-                child: 27.heightSpace,
-              ),
-              // row 2
-              ResponsiveRowColumnItem(
-                  child: ResponsiveRowColumn(
-                layout: ResponsiveRowColumnType.ROW,
-                rowMainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  ResponsiveRowColumnItem(
-                    child: ResponsiveRowColumn(
-                      layout: ResponsiveRowColumnType.COLUMN,
-                      columnCrossAxisAlignment: CrossAxisAlignment.start,
-                      columnSpacing: 6,
-                      children: [
-                        ResponsiveRowColumnItem(
-                            child: ResponsiveRowColumn(
-                          layout: ResponsiveRowColumnType.ROW,
-                          rowSpacing: 2,
-                          children: [
-                            ResponsiveRowColumnItem(
-                              child: SvgPicture.asset(
-                                AppIcons.clockCircle,
-                                color: AppColor.kLightTitleColor,
-                              ),
-                            ),
-                            ResponsiveRowColumnItem(
-                                child: TextComponents(
-                              color: AppColor.kLightTitleColor,
-                              title: 'Time',
-                              size: isMobile ? 12.sp : 12,
-                              weight: FontWeight.w400,
-                            ))
-                          ],
-                        )),
-                        ResponsiveRowColumnItem(
-                            child: TextComponents(
-                          color: AppColor.kWhiteColor,
-                          title: summaryC
-                              .summaryModel.value!.bookingRespons.timeslot,
-                          size: isMobile ? 12.sp : 12,
-                          weight: FontWeight.w400,
-                        )),
-                      ],
-                    ),
-                  ),
-                  ResponsiveRowColumnItem(
-                    child: ResponsiveRowColumn(
-                      layout: ResponsiveRowColumnType.COLUMN,
-                      columnCrossAxisAlignment: CrossAxisAlignment.end,
-                      columnSpacing: 6,
-                      children: [
-                        ResponsiveRowColumnItem(
-                            child: ResponsiveRowColumn(
-                          layout: ResponsiveRowColumnType.ROW,
-                          rowSpacing: 2,
-                          children: [
-                            ResponsiveRowColumnItem(
-                              child: SvgPicture.asset(
-                                AppIcons.clockCircle,
-                                color: AppColor.kLightTitleColor,
-                              ),
-                            ),
-                            ResponsiveRowColumnItem(
-                                child: TextComponents(
-                              color: AppColor.kLightTitleColor,
-                              title: 'Duration',
-                              size: isMobile ? 12.sp : 12,
-                              weight: FontWeight.w400,
-                            ))
-                          ],
-                        )),
-                        ResponsiveRowColumnItem(
-                            child: Obx(() => TextComponents(
-                                  color: AppColor.kWhiteColor,
-                                  title: '${summaryC.totalHour.value} hours',
-                                  size: isMobile ? 12.sp : 12,
-                                  weight: FontWeight.w400,
-                                ))),
-                      ],
-                    ),
-                  )
-                ],
-              )),
-            ],
-          ),
-        )),
-        ResponsiveRowColumnItem(
-          child: 9.heightSpace,
-        ),
-        ResponsiveRowColumnItem(
-          child: TextComponents(
-            color: Colors.white,
-            title: 'Payment ',
-            size: isMobile ? 16.sp : 16,
-            weight: FontWeight.bold,
-          ),
-        ),
-        ResponsiveRowColumnItem(
-          child: 9.heightSpace,
-        ),
-        ResponsiveRowColumnItem(
-            child: Container(
-          padding: EdgeInsets.symmetric(
-            horizontal: isMobile ? 7.w : 7,
-            vertical: isMobile ? 8.h : 8,
-          ),
-          width: isMobile ? 343.w : 512,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(isMobile ? 15.r : 15),
-            color: AppColor.kBlck23,
-          ),
-          child: ListTile(
-            contentPadding: EdgeInsets.zero,
-            trailing: TextComponents(
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: isMobile ? 10.w : 10),
+      child: ResponsiveRowColumn(
+        columnCrossAxisAlignment: CrossAxisAlignment.start,
+        layout: ResponsiveRowColumnType.COLUMN,
+        children: [
+          ResponsiveRowColumnItem(
+            child: TextComponents(
               color: Colors.white,
-              title: summaryC.summaryModel.value!.bookingRespons.total_amount
+              title: 'Your Booking',
+              size: isMobile ? 16.sp : 16,
+              weight: FontWeight.bold,
+            ),
+          ),
+          ResponsiveRowColumnItem(
+            child: 9.heightSpace,
+          ),
+          ResponsiveRowColumnItem(
+            child: ResUseableContainer(
+              isMobile: isMobile,
+              appIcon: summaryC
+                          .summaryModel.value!.bookingRespons.category_name ==
+                      'Landscaping Consultation'
+                  ? AppIcons.landscapingConsultation
+                  : summaryC.summaryModel.value!.bookingRespons.category_name ==
+                          'Architecture Consultation'
+                      ? AppIcons.architectureConsultation
+                      : AppIcons.interiorConsultation,
+              title: summaryC.summaryModel.value!.bookingRespons.category_name
+                  .split(' ')[0]
                   .toString(),
-              size: isMobile ? 12.sp : 12,
-              weight: FontWeight.w500,
-            ),
-            title: TextComponents(
-              color: Colors.white,
-              title: 'Total (KWD)',
-              size: isMobile ? 12.sp : 12,
-              weight: FontWeight.w500,
+              subTitle: summaryC
+                  .summaryModel.value!.bookingRespons.category_name
+                  .split(' ')[1]
+                  .toString(),
             ),
           ),
-        )),
-        ResponsiveRowColumnItem(
-          child: 22.heightSpace,
-        ),
-        ResponsiveRowColumnItem(
-            child: PrimaryButton(
-                width: isMobile ? 346.w : 512,
-                height: isMobile ? 56.h : 56,
-                onTap: () {
-                  if (kIsWeb) {
-                    Get.to(() => PaymentWeb(
-                          url:
-                              'https://demo.MyFatoorah.com/KWT/ie/01072494389642-b9b2dec3',
-                        ));
-                    Get.find<HomeController>().isLocationSelected = true.obs;
-                  } else {
-                    Get.to(() => PaymentWeb(
-                          url: summaryC.summaryModel.value!.url.toString(),
-                        ));
-                    Get.find<HomeController>().isLocationSelected = true.obs;
-                  }
-                },
-                childWidget: TextComponents(
-                  title: "Pay Now",
-                  size: isMobile ? 16.sp : 16,
-                  color: AppColor.kWhiteColor,
-                  weight: FontWeight.w400,
+          ResponsiveRowColumnItem(
+            child: 9.heightSpace,
+          ),
+          ResponsiveRowColumnItem(
+            child: TextComponents(
+              color: Colors.white,
+              title: 'Consultant',
+              size: isMobile ? 16.sp : 16,
+              weight: FontWeight.bold,
+            ),
+          ),
+          ResponsiveRowColumnItem(
+            child: 9.heightSpace,
+          ),
+          ResponsiveRowColumnItem(
+            child: ResUseableTwoContainer(
+              isMobile: isMobile,
+              appIcon: AppIcons.profileCircle,
+              title: summaryC
+                  .summaryModel.value!.bookingRespons.consultation_name
+                  .toString(),
+            ),
+          ),
+          ResponsiveRowColumnItem(
+            child: 9.heightSpace,
+          ),
+          ResponsiveRowColumnItem(
+            child: TextComponents(
+              color: Colors.white,
+              title: 'Date and Time',
+              size: isMobile ? 16.sp : 16,
+              weight: FontWeight.bold,
+            ),
+          ),
+          ResponsiveRowColumnItem(
+            child: 9.heightSpace,
+          ),
+          ResponsiveRowColumnItem(
+              child: Container(
+            padding: EdgeInsets.symmetric(
+              horizontal: isMobile ? 14.w : 14,
+              vertical: isMobile ? 14.h : 14,
+            ),
+            width: isMobile ? 343.w : 512,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(isMobile ? 15.r : 15),
+              color: AppColor.kBlck23,
+            ),
+            child: ResponsiveRowColumn(
+              layout: ResponsiveRowColumnType.COLUMN,
+              children: [
+                // row 1
+                ResponsiveRowColumnItem(
+                    child: ResponsiveRowColumn(
+                  layout: ResponsiveRowColumnType.ROW,
+                  rowMainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    ResponsiveRowColumnItem(
+                      child: ResponsiveRowColumn(
+                        layout: ResponsiveRowColumnType.COLUMN,
+                        columnCrossAxisAlignment: CrossAxisAlignment.start,
+                        columnSpacing: 6,
+                        children: [
+                          ResponsiveRowColumnItem(
+                              child: ResponsiveRowColumn(
+                            layout: ResponsiveRowColumnType.ROW,
+                            rowSpacing: 2,
+                            children: [
+                              ResponsiveRowColumnItem(
+                                child: SvgPicture.asset(
+                                  summaryC.summaryModel.value!.bookingRespons
+                                              .service_name ==
+                                          'Office'
+                                      ? AppIcons.buildings
+                                      : summaryC
+                                                  .summaryModel
+                                                  .value!
+                                                  .bookingRespons
+                                                  .service_name ==
+                                              'Online'
+                                          ? AppIcons.wifi
+                                          : AppIcons.profileUser,
+                                  color: AppColor.kLightTitleColor,
+                                ),
+                              ),
+                              ResponsiveRowColumnItem(
+                                  child: TextComponents(
+                                color: AppColor.kLightTitleColor,
+                                title: 'Type',
+                                size: isMobile ? 12.sp : 12,
+                                weight: FontWeight.w400,
+                              ))
+                            ],
+                          )),
+                          ResponsiveRowColumnItem(
+                              child: TextComponents(
+                            color: AppColor.kWhiteColor,
+                            title: summaryC
+                                .summaryModel.value!.bookingRespons.service_name
+                                .toString(),
+                            size: isMobile ? 12.sp : 12,
+                            weight: FontWeight.w400,
+                          )),
+                        ],
+                      ),
+                    ),
+                    ResponsiveRowColumnItem(
+                      child: ResponsiveRowColumn(
+                        layout: ResponsiveRowColumnType.COLUMN,
+                        columnCrossAxisAlignment: CrossAxisAlignment.end,
+                        columnSpacing: 6,
+                        children: [
+                          ResponsiveRowColumnItem(
+                              child: ResponsiveRowColumn(
+                            layout: ResponsiveRowColumnType.ROW,
+                            rowSpacing: 2,
+                            children: [
+                              ResponsiveRowColumnItem(
+                                child: SvgPicture.asset(
+                                  AppIcons.calendarCircle,
+                                  color: AppColor.kLightTitleColor,
+                                ),
+                              ),
+                              ResponsiveRowColumnItem(
+                                  child: TextComponents(
+                                color: AppColor.kLightTitleColor,
+                                title: 'Date',
+                                size: isMobile ? 12.sp : 12,
+                                weight: FontWeight.w400,
+                              ))
+                            ],
+                          )),
+                          ResponsiveRowColumnItem(
+                              child: TextComponents(
+                            color: AppColor.kWhiteColor,
+                            title: summaryC
+                                .summaryModel.value!.bookingRespons.booking_date
+                                .toString(),
+                            size: isMobile ? 12.sp : 12,
+                            weight: FontWeight.w400,
+                          )),
+                        ],
+                      ),
+                    )
+                  ],
+                )),
+                ResponsiveRowColumnItem(
+                  child: 27.heightSpace,
                 ),
-                bgColor: AppColor.kGreen1Color)),
-        ResponsiveRowColumnItem(
-          child: 20.heightSpace,
-        ),
-      ],
+                // row 2
+                ResponsiveRowColumnItem(
+                    child: ResponsiveRowColumn(
+                  layout: ResponsiveRowColumnType.ROW,
+                  rowMainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    ResponsiveRowColumnItem(
+                      child: ResponsiveRowColumn(
+                        layout: ResponsiveRowColumnType.COLUMN,
+                        columnCrossAxisAlignment: CrossAxisAlignment.start,
+                        columnSpacing: 6,
+                        children: [
+                          ResponsiveRowColumnItem(
+                              child: ResponsiveRowColumn(
+                            layout: ResponsiveRowColumnType.ROW,
+                            rowSpacing: 2,
+                            children: [
+                              ResponsiveRowColumnItem(
+                                child: SvgPicture.asset(
+                                  AppIcons.clockCircle,
+                                  color: AppColor.kLightTitleColor,
+                                ),
+                              ),
+                              ResponsiveRowColumnItem(
+                                  child: TextComponents(
+                                color: AppColor.kLightTitleColor,
+                                title: 'Time',
+                                size: isMobile ? 12.sp : 12,
+                                weight: FontWeight.w400,
+                              ))
+                            ],
+                          )),
+                          ResponsiveRowColumnItem(
+                              child: TextComponents(
+                            color: AppColor.kWhiteColor,
+                            title: summaryC
+                                .summaryModel.value!.bookingRespons.timeslot,
+                            size: isMobile ? 12.sp : 12,
+                            weight: FontWeight.w400,
+                          )),
+                        ],
+                      ),
+                    ),
+                    ResponsiveRowColumnItem(
+                      child: ResponsiveRowColumn(
+                        layout: ResponsiveRowColumnType.COLUMN,
+                        columnCrossAxisAlignment: CrossAxisAlignment.end,
+                        columnSpacing: 6,
+                        children: [
+                          ResponsiveRowColumnItem(
+                              child: ResponsiveRowColumn(
+                            layout: ResponsiveRowColumnType.ROW,
+                            rowSpacing: 2,
+                            children: [
+                              ResponsiveRowColumnItem(
+                                child: SvgPicture.asset(
+                                  AppIcons.clockCircle,
+                                  color: AppColor.kLightTitleColor,
+                                ),
+                              ),
+                              ResponsiveRowColumnItem(
+                                  child: TextComponents(
+                                color: AppColor.kLightTitleColor,
+                                title: 'Duration',
+                                size: isMobile ? 12.sp : 12,
+                                weight: FontWeight.w400,
+                              ))
+                            ],
+                          )),
+                          ResponsiveRowColumnItem(
+                              child: Obx(() => TextComponents(
+                                    color: AppColor.kWhiteColor,
+                                    title: '${summaryC.totalHour.value} hours',
+                                    size: isMobile ? 12.sp : 12,
+                                    weight: FontWeight.w400,
+                                  ))),
+                        ],
+                      ),
+                    )
+                  ],
+                )),
+              ],
+            ),
+          )),
+          ResponsiveRowColumnItem(
+            child: 9.heightSpace,
+          ),
+          ResponsiveRowColumnItem(
+            child: TextComponents(
+              color: Colors.white,
+              title: 'Payment ',
+              size: isMobile ? 16.sp : 16,
+              weight: FontWeight.bold,
+            ),
+          ),
+          ResponsiveRowColumnItem(
+            child: 9.heightSpace,
+          ),
+          ResponsiveRowColumnItem(
+              child: Container(
+            padding: EdgeInsets.symmetric(
+              horizontal: isMobile ? 7.w : 7,
+              vertical: isMobile ? 8.h : 8,
+            ),
+            width: isMobile ? 343.w : 512,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(isMobile ? 15.r : 15),
+              color: AppColor.kBlck23,
+            ),
+            child: ListTile(
+              contentPadding: EdgeInsets.zero,
+              trailing: TextComponents(
+                color: Colors.white,
+                title: summaryC.summaryModel.value!.bookingRespons.total_amount
+                    .toString(),
+                size: isMobile ? 12.sp : 12,
+                weight: FontWeight.w500,
+              ),
+              title: TextComponents(
+                color: Colors.white,
+                title: 'Total (KWD)',
+                size: isMobile ? 12.sp : 12,
+                weight: FontWeight.w500,
+              ),
+            ),
+          )),
+          ResponsiveRowColumnItem(
+            child: 22.heightSpace,
+          ),
+          ResponsiveRowColumnItem(
+              child: PrimaryButton(
+                  width: isMobile ? 346.w : 512,
+                  height: isMobile ? 56.h : 56,
+                  onTap: () {
+                    if (kIsWeb) {
+                      Get.to(() => PaymentWeb(
+                            url:
+                                'https://demo.MyFatoorah.com/KWT/ie/01072494389642-b9b2dec3',
+                          ));
+                      Get.find<HomeController>().isLocationSelected = true.obs;
+                    } else {
+                      Get.to(() => PaymentWeb(
+                            url: summaryC.summaryModel.value!.url.toString(),
+                          ));
+                      Get.find<HomeController>().isLocationSelected = true.obs;
+                    }
+                  },
+                  childWidget: TextComponents(
+                    title: "Pay Now",
+                    size: isMobile ? 16.sp : 16,
+                    color: AppColor.kWhiteColor,
+                    weight: FontWeight.w400,
+                  ),
+                  bgColor: AppColor.kGreen1Color)),
+          ResponsiveRowColumnItem(
+            child: 20.heightSpace,
+          ),
+        ],
+      ),
     );
   }
 }
@@ -378,8 +401,8 @@ class ResUseableContainer extends StatelessWidget {
               color: AppColor.kWhiteColor, shape: BoxShape.circle),
           child: Center(
               child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: SvgPicture.asset(appIcon),
+            padding: EdgeInsets.all(8.0),
+            child: SvgPicture.asset(appIcon, color: AppColor.kGreen1Color),
           )),
         ),
         title: TextComponents(
@@ -433,7 +456,7 @@ class ResUseableTwoContainer extends StatelessWidget {
           child: Center(
               child: Padding(
             padding: const EdgeInsets.all(8.0),
-            child: SvgPicture.asset(appIcon),
+            child: SvgPicture.asset(appIcon, color: AppColor.kGreen1Color),
           )),
         ),
         title: TextComponents(

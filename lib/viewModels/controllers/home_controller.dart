@@ -96,6 +96,9 @@ class HomeController extends GetxController {
 
     language.value = await _prefs.getString('lang') ?? "English";
     languageCode.value = await _prefs.getString('langCode') ?? "en";
+    language.value == 'English'
+        ? Get.updateLocale(Locale('en'))
+        : Get.updateLocale(Locale('ar'));
     print(language.value + 'fgdfgdgfdgdfg ' + languageCode.value);
     await myCategoryApi();
   }

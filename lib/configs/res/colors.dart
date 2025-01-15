@@ -9,7 +9,7 @@ class AppColor {
   static const Color klightBalck = Color(0XFF322B2D);
   static const Color kWhiteColor = Colors.white;
   static const Color KBody = Color(0xffA7AEC1);
-  static const Color kGreen1Color = Color(0XFF00AD8D);
+  static const Color kGreen1Color = Color(0XFF305A96);
   static const Color kLightGrey = Color(0xffA7AEC1);
   static const Color kLightText = Color(0XFF9CA3AF);
   static const Color kLightHintText = Color(0XFFB5B5B5);
