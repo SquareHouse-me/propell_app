@@ -146,26 +146,16 @@ class ResUseableContainer extends StatelessWidget {
         leading: Container(
           width: 44,
           height: 44,
-          decoration: const BoxDecoration(
-              color: AppColor.kGreen1Color, shape: BoxShape.circle),
-          child: Image.network(
-            appIcon, // URL of the image
-            width: 50,
-            height: 50,
-            fit: BoxFit.fitWidth,
-            loadingBuilder: (BuildContext context, Widget child,
-                ImageChunkEvent? loadingProgress) {
-              if (loadingProgress == null)
-                return child; // Return the image once loaded
-              return getIndicator(); // Show the custom loading indicator
-            },
-            errorBuilder:
-                (BuildContext context, Object error, StackTrace? stackTrace) {
-              return Icon(
-                Icons.error,
-                color: AppColor.kGreen1Color, // Custom error icon and color
-              );
-            },
+          decoration: BoxDecoration(
+            color: AppColor.kGreen1Color,
+            shape: BoxShape.circle,
+            image: DecorationImage(
+              image: NetworkImage(
+                appIcon, // URL of the image
+              ),
+              fit: BoxFit.cover,
+              onError: (exception, stackTrace) {},
+            ),
           ),
         ),
         title: TextComponents(

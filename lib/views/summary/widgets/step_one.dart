@@ -133,7 +133,7 @@ class StepOne extends StatelessWidget {
           // )),
 
           ResponsiveRowColumnItem(
-            child: 120.heightSpace,
+            child: 50.heightSpace,
           ),
           ResponsiveRowColumnItem(
               child: Obx(() => PrimaryButton(

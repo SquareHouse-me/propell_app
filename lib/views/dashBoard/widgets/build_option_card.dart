@@ -20,8 +20,8 @@ Widget buildOptionCard(BuildContext context,
   print(icon);
   return Container(
     padding: EdgeInsets.symmetric(
-        horizontal: ResponsiveBreakpoints.of(context).isMobile ? 19.h : 70,
-        vertical: ResponsiveBreakpoints.of(context).isMobile ? 12.h : 50),
+        horizontal: ResponsiveBreakpoints.of(context).isMobile ? 19.h : 20,
+        vertical: ResponsiveBreakpoints.of(context).isMobile ? 12.h : 20),
     decoration: BoxDecoration(
       color: AppColor.kBlck23,
       borderRadius: BorderRadius.circular(
@@ -29,6 +29,8 @@ Widget buildOptionCard(BuildContext context,
     ),
     child: ResponsiveBreakpoints.of(context).isMobile
         ? ListTile(
+            splashColor: AppColor.kGreen1Color.withOpacity(0.5),
+            hoverColor: AppColor.kGreen1Color.withOpacity(0.5),
             contentPadding: EdgeInsets.zero,
             leading: SizedBox(
               width: 50,
@@ -78,7 +80,9 @@ Widget buildOptionCard(BuildContext context,
               await SelectType.showLocationDialog(context);
             },
           )
-        : GestureDetector(
+        : InkWell(
+            splashColor: AppColor.kGreen1Color,
+            hoverColor: AppColor.kGreen1Color,
             onTap: () async {
               print('object pressed');
               homeC.catId = id;

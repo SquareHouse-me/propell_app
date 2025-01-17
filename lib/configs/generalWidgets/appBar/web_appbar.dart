@@ -21,9 +21,9 @@ class WebAppbarWidget extends StatelessWidget {
     return AppBar(
       backgroundColor: AppColor.kPrimary,
       elevation: 0,
-      toolbarHeight: 100,
+      toolbarHeight: 200,
       surfaceTintColor: Colors.transparent,
-      iconTheme: IconThemeData(color: AppColor.kWhiteColor),
+      iconTheme: const IconThemeData(color: AppColor.kGreen1Color),
       title: ResponsiveRowColumn(
         layout: ResponsiveRowColumnType.ROW,
         rowMainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -39,10 +39,14 @@ class WebAppbarWidget extends StatelessWidget {
           ),
           ResponsiveRowColumnItem(
             child: Container(
-              padding: EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+              padding: EdgeInsets.symmetric(
+                horizontal:
+                    ResponsiveBreakpoints.of(context).isMobile ? 4.w : 6,
+              ),
               decoration: BoxDecoration(
                 color: AppColor.klightBalck,
-                borderRadius: BorderRadius.circular(30),
+                borderRadius: BorderRadius.circular(
+                    ResponsiveBreakpoints.of(context).isMobile ? 20.r : 20),
               ),
               child: Row(
                 children: [
@@ -74,14 +78,14 @@ class WebAppbarWidget extends StatelessWidget {
                           if (value == 'English') {
                             homeC.languageCode.value = 'en';
                             _saveData('en', value!);
-                            Get.updateLocale(Locale('en'));
+                            Get.updateLocale(const Locale('en'));
                             homeC.language.value = value!;
                             await homeC.myCategoryApi();
                           } else {
                             homeC.languageCode.value = 'ar';
                             homeC.language.value = value!;
                             _saveData('ar', value);
-                            Get.updateLocale(Locale('ar'));
+                            Get.updateLocale(const Locale('ar'));
                             await homeC.myCategoryApi();
                           }
                         },

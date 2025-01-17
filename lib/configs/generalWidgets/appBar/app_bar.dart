@@ -1,8 +1,4 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:google_fonts/google_fonts.dart';
+ 
 import 'package:propell/configs/generalWidgets/export_general.dart';
 
 import 'package:propell/configs/generalWidgets/textstyle_component.dart';
@@ -32,7 +28,7 @@ class AppbarWidget extends StatelessWidget {
             toolbarHeight: 200,
             centerTitle: true,
             surfaceTintColor: AppColor.kPrimary,
-            iconTheme: IconThemeData(color: AppColor.kWhiteColor),
+            iconTheme: const IconThemeData(color: AppColor.kGreen1Color),
             title: ResponsiveRowColumn(
               layout: ResponsiveRowColumnType.ROW,
               rowMainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -97,12 +93,12 @@ class AppbarWidget extends StatelessWidget {
                                   _saveData('en', value!);
                                   homeC.language.value = value!;
                                   await homeC.myCategoryApi();
-                                  Get.updateLocale(Locale('en'));
+                                  Get.updateLocale(const Locale('en'));
                                 } else {
                                   homeC.languageCode.value = 'ar';
                                   homeC.language.value = value!;
                                   _saveData('ar', value);
-                                  Get.updateLocale(Locale('ar'));
+                                  Get.updateLocale(const Locale('ar'));
                                   await homeC.myCategoryApi();
                                 }
                               },
@@ -120,7 +116,7 @@ class AppbarWidget extends StatelessWidget {
             elevation: 0,
             centerTitle: true,
             surfaceTintColor: AppColor.kPrimary,
-            iconTheme: const IconThemeData(color: AppColor.kWhiteColor),
+            iconTheme: const IconThemeData(color: AppColor.kGreen1Color),
             title: TextComponents(
               color: Colors.white,
               title: title,

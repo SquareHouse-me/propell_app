@@ -18,7 +18,14 @@ class SummaryStepper extends StatefulWidget {
 }
 
 class _SummaryStepperState extends State<SummaryStepper> {
-  SummaryController summaryController = Get.find<SummaryController>( );
+  SummaryController summaryController = Get.find<SummaryController>();
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    summaryController.currentStep.value = 0;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -26,13 +33,13 @@ class _SummaryStepperState extends State<SummaryStepper> {
     return Scaffold(
       backgroundColor: AppColor.kPrimary,
       appBar: PreferredSize(
-          preferredSize: const Size(100, 40),
+          preferredSize: Size.fromHeight(isMobile ? 150 : 100),
           child: isMobile
-              ?   AppbarWidget(
+              ? AppbarWidget(
                   title: 'Summary',
                   isFirstPage: false,
                 )
-              :   WebAppbarWidget()),
+              : WebAppbarWidget()),
       body: Obx(() => SingleChildScrollView(
             child: Center(
               child: SizedBox(
@@ -95,7 +102,7 @@ class _SummaryStepperState extends State<SummaryStepper> {
                     ),
                     summaryController.currentStep.value == 0
                         ? StepOne()
-                        :   StepTwo(),
+                        : StepTwo(),
                   ],
                 ),
               ),

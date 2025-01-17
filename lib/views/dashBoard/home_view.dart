@@ -49,64 +49,73 @@ class HomeView extends StatelessWidget {
                           columnCrossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             ResponsiveRowColumnItem(child: 40.heightSpace),
-                            isMobile
-                                ? ResponsiveRowColumnItem(
-                                    child: TextComponents(
-                                      color: Colors.white,
-                                      title: 'Book an appointment',
-                                      size: isMobile ? 24.sp : 24,
-                                      weight: FontWeight.bold,
-                                    ),
-                                  )
-                                : const ResponsiveRowColumnItem(
-                                    child: WebHeaderTitle()),
+                            // isMobile
+                            //     ?
+                            ResponsiveRowColumnItem(
+                              child: Padding(
+                                padding: EdgeInsets.only(
+                                    left: isMobile ? 0.0 : 25.0),
+                                child: TextComponents(
+                                  color: Colors.white,
+                                  title: 'Book an appointment',
+                                  size: isMobile ? 20.sp : 20,
+                                  weight: FontWeight.w500,
+                                ),
+                              ),
+                            ),
+                            // : const ResponsiveRowColumnItem(
+                            //     child: WebHeaderTitle()),
                             ResponsiveRowColumnItem(
                               child: 20.heightSpace,
                             ),
                             ResponsiveRowColumnItem(
-                                child: ResponsiveGridList(
-                              shrinkWrap: true,
+                                child: SizedBox(
+                              width: isMobile ? null : 1100,
+                              child: ResponsiveGridList(
+                                shrinkWrap: true,
 
-                              horizontalGridSpacing: isMobile
-                                  ? 2.sp
-                                  : 16, // Horizontal space between grid items
-                              verticalGridSpacing: isMobile
-                                  ? 16.sp
-                                  : 14, // Vertical space between grid items
-                              horizontalGridMargin: isMobile
-                                  ? 0.sp
-                                  : 17, // Horizontal space around the grid
-                              verticalGridMargin: isMobile
-                                  ? 0.sp
-                                  : 15, // Vertical space around the grid
-                              minItemWidth:
-                                  500, // The minimum item width (can be smaller, if the layout constraints are smaller)
-                              minItemsPerRow: isMobile
-                                  ? 1
-                                  : 3, // The minimum items to show in a single row. Takes precedence over minItemWidth
-                              maxItemsPerRow:
-                                  3, // The maximum items to show in a single row. Can be useful on large screens
-                              listViewBuilderOptions: ListViewBuilderOptions(
-                                  physics: const NeverScrollableScrollPhysics(),
-                                  padding: EdgeInsets
-                                      .zero), // Options that are getting passed to the ListView.builder() function
-                              children: homeC.categoryList.value.map((item) {
-                                return buildOptionCard(
-                                  id: item.id,
-                                  context,
-                                  icon: item
-                                      .image, // Use the appropriate field for the icon
-                                  label: item.name.split(' ')[
-                                      0], // Use the appropriate field for the label
-                                  subTitle: item.name.split(' ')[
-                                      1], // Use the appropriate field for the subtitle
-                                );
-                              }).toList(), // The list of widgets in the list
+                                horizontalGridSpacing: isMobile
+                                    ? 2.sp
+                                    : 16, // Horizontal space between grid items
+                                verticalGridSpacing: isMobile
+                                    ? 16.sp
+                                    : 14, // Vertical space between grid items
+                                horizontalGridMargin: isMobile
+                                    ? 0.sp
+                                    : 17, // Horizontal space around the grid
+                                verticalGridMargin: isMobile
+                                    ? 0.sp
+                                    : 15, // Vertical space around the grid
+                                minItemWidth:
+                                    500, // The minimum item width (can be smaller, if the layout constraints are smaller)
+                                minItemsPerRow: isMobile
+                                    ? 1
+                                    : 3, // The minimum items to show in a single row. Takes precedence over minItemWidth
+                                maxItemsPerRow:
+                                    3, // The maximum items to show in a single row. Can be useful on large screens
+                                listViewBuilderOptions: ListViewBuilderOptions(
+                                    physics:
+                                        const NeverScrollableScrollPhysics(),
+                                    padding: EdgeInsets
+                                        .zero), // Options that are getting passed to the ListView.builder() function
+                                children: homeC.categoryList.value.map((item) {
+                                  return buildOptionCard(
+                                    id: item.id,
+                                    context,
+                                    icon: item
+                                        .image, // Use the appropriate field for the icon
+                                    label: item.name.split(' ')[
+                                        0], // Use the appropriate field for the label
+                                    subTitle: item.name.split(' ')[
+                                        1], // Use the appropriate field for the subtitle
+                                  );
+                                }).toList(), // The list of widgets in the list
+                              ),
                             )),
                             ResponsiveRowColumnItem(child: 12.heightSpace),
                             ResponsiveRowColumnItem(
                                 child: SizedBox(
-                              width: double.infinity,
+                              width: isMobile ? null : 1100,
                               child: Image.network(
                                 homeC.sliderList.value.first.image.toString(),
                                 fit: BoxFit.fill,

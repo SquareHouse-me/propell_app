@@ -134,12 +134,13 @@ class _ServiceTypeOneState extends State<ServiceTypeOne> {
                           shrinkWrap: true,
                           itemCount: homeC.servicesList.value.length,
                           itemBuilder: (BuildContext context, int index) {
+                            log(homeC.servicesList.value[index].price);
                             return _buildLocationOption(
                                 id: homeC.servicesList.value[index].id,
                                 icon: homeC.servicesList.value[index].images,
                                 label: homeC.servicesList.value[index].name,
-                                price:
-                                    '\$${homeC.servicesList.value[index].price}',
+                                price: homeC.servicesList.value[index].price
+                                    .toString(),
                                 context: context);
                           })
                     ],
@@ -200,18 +201,18 @@ Widget _buildLocationOption(
           },
         ),
         title: TextComponents(
-          color: AppColor.kLightText,
+          color: AppColor.kWhiteColor,
           title: label,
           size: ResponsiveBreakpoints.of(context).isMobile ? 12.sp : 14,
           weight: FontWeight.w500,
         ),
         trailing: Container(
-          width: ResponsiveBreakpoints.of(context).isMobile ? 66.w : 66,
-          height: ResponsiveBreakpoints.of(context).isMobile ? 32.h : 28,
+          width: ResponsiveBreakpoints.of(context).isMobile ? 80.w : 90,
+          height: ResponsiveBreakpoints.of(context).isMobile ? 35.h : 28,
           padding: EdgeInsets.symmetric(
               vertical: ResponsiveBreakpoints.of(context).isMobile ? 6.0.h : 6,
               horizontal:
-                  ResponsiveBreakpoints.of(context).isMobile ? 19.0.h : 19),
+                  ResponsiveBreakpoints.of(context).isMobile ? 3.0.w : 5),
           decoration: BoxDecoration(
             color: AppColor.kGreen1Color.withOpacity(0.2),
             borderRadius: BorderRadius.circular(
@@ -220,7 +221,7 @@ Widget _buildLocationOption(
           child: Center(
             child: TextComponents(
               color: AppColor.kGreen1Color,
-              title: price,
+              title: 'KWD ${double.parse(price).toInt()}',
               size: ResponsiveBreakpoints.of(context).isMobile ? 12.sp : 14,
               weight: FontWeight.w500,
             ),

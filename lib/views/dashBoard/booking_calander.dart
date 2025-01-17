@@ -47,6 +47,8 @@ class _BookingCalanderState extends State<BookingCalander> {
     // TODO: implement dispose
     super.dispose();
     homeC.timeSlotList.value = [];
+    homeC.selectedDate.value = DateTime.now();
+    homeC.focusedDay.value = DateTime.now();
   }
 
   @override
@@ -62,7 +64,7 @@ class _BookingCalanderState extends State<BookingCalander> {
       //   child: ,
       // ),
       appBar: PreferredSize(
-          preferredSize: const Size(100, 50),
+          preferredSize: Size.fromHeight(isMobile ? 150 : 100),
           child: ResponsiveBreakpoints.of(context).isMobile
               ? AppbarWidget(
                   title: 'Date & Time',
@@ -336,11 +338,16 @@ class _BookingCalanderState extends State<BookingCalander> {
                                       })),
                                 )
                           : Center(
-                              child: TextComponents(
-                                color: Colors.white,
-                                title: homeC.timeSlotErrorMessage.value,
-                                size: isMobile ? 24.sp : 24,
-                                weight: FontWeight.bold,
+                              child: Padding(
+                                padding:
+                                    const EdgeInsets.all(8.0).copyWith(top: 34),
+                                child: TextComponents(
+                                  color: Colors.white,
+                                  title: homeC.timeSlotErrorMessage.value,
+                                  size: isMobile ? 20.sp : 24,
+                                  weight: FontWeight.bold,
+                                  textAlign: TextAlign.center,
+                                ),
                               ),
                             )),
                 ),

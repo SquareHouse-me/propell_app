@@ -70,11 +70,16 @@ dev_dependencies:
 flutter_launcher_icons:
   android: "launcher_icon"
   ios: true
-  image_path: "assets/images/appIcons.png"
+  image_path: "assets/images/propellIcon.png"
   min_sdk_android: 21
   remove_alpha_ios: true
   adaptive_icon_background: "#000000"
-  adaptive_icon_foreground:  "assets/images/appIcons.png"
+  adaptive_icon_foreground:  "assets/images/propellIcon.png"
+  web:
+    generate: true
+    image_path: "assets/images/propellIcon.png"
+    background_color: "#000000"
+    theme_color: "#000000"
 flutter_native_splash:
   color: "#000000"
   # image: assets/images/LogoLight.png 
