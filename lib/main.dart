@@ -7,6 +7,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get_it/get_it.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:propell/configs/res/colors.dart';
 import 'package:propell/data/repository/home_repo.dart';
 import 'package:propell/data/repository/summary_repo.dart';
 import 'package:propell/firebase_options.dart';
@@ -66,7 +67,7 @@ class MyApp extends StatelessWidget {
             
             scaffoldBackgroundColor:
                 Color(0xFF231F20), // Background color for the app
-            primaryColor: Color(0XFF00AD8D), // Primary color
+            primaryColor: AppColor.kGreen1Color, // Primary color
           ),
           debugShowCheckedModeBanner: false,
           builder: (context, child) => ResponsiveBreakpoints.builder(

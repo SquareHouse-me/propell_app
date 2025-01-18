@@ -64,7 +64,7 @@ class _BookingCalanderState extends State<BookingCalander> {
       //   child: ,
       // ),
       appBar: PreferredSize(
-          preferredSize: Size.fromHeight(isMobile ? 150 : 100),
+          preferredSize: Size.fromHeight(isMobile ? 60 : 100),
           child: ResponsiveBreakpoints.of(context).isMobile
               ? AppbarWidget(
                   title: 'Date & Time',

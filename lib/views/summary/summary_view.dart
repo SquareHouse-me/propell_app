@@ -33,7 +33,7 @@ class _SummaryStepperState extends State<SummaryStepper> {
     return Scaffold(
       backgroundColor: AppColor.kPrimary,
       appBar: PreferredSize(
-          preferredSize: Size.fromHeight(isMobile ? 150 : 100),
+          preferredSize: Size.fromHeight(isMobile ? 60 : 100),
           child: isMobile
               ? AppbarWidget(
                   title: 'Summary',

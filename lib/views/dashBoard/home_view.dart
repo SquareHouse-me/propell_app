@@ -20,7 +20,7 @@ class HomeView extends StatelessWidget {
     return Scaffold(
       backgroundColor: AppColor.kPrimary,
       appBar: PreferredSize(
-          preferredSize: Size.fromHeight(isMobile ? 150 : 100),
+          preferredSize: Size.fromHeight(isMobile ? 60 : 100),
           child: isMobile
               ? AppbarWidget(
                   title: '',
