@@ -26,16 +26,17 @@ class SelectType {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(isMobile ? 20.r : 20.0),
           ),
-          child: Container(
-            padding: EdgeInsets.symmetric(
-                horizontal: isMobile ? 14.w : 42,
-                vertical: isMobile ? 20.h : 39),
-            width: isMobile ? 312.w : 663,
-            // height: ResponsiveBreakpoints.of(context).isMobile ? 316.h : 397,
-            child: Obx(() => homeC.isLocationSelected.value
-                ?  ServiceTypeOne():ServiceTypeTwo()
-                 
-                ),
+          child: SingleChildScrollView(
+            child: Container(
+              padding: EdgeInsets.symmetric(
+                  horizontal: isMobile ? 14.w : 42,
+                  vertical: isMobile ? 20.h : 39),
+              width: isMobile ? 312.w : 663,
+              // height: ResponsiveBreakpoints.of(context).isMobile ? 316.h : 397,
+              child: Obx(() => homeC.isLocationSelected.value
+                  ? ServiceTypeOne()
+                  : ServiceTypeTwo()),
+            ),
           ),
         );
       },

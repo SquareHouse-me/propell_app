@@ -1,31 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:propell/configs/generalWidgets/customfield_components.dart';
-import 'package:propell/configs/generalWidgets/customphonefield_components.dart';
-import 'package:propell/configs/generalWidgets/dashContainer/dashed_container.dart';
+import 'package:propell/configs/generalWidgets/customphonefield_components.dart'; 
 import 'package:propell/configs/generalWidgets/export_general.dart';
 import 'package:propell/configs/generalWidgets/primary_button.dart';
 import 'package:propell/configs/generalWidgets/textstyle_component.dart';
-import 'package:propell/configs/res/colors.dart';
-import 'package:propell/configs/res/icons.dart';
+import 'package:propell/configs/res/colors.dart'; 
 import 'package:propell/configs/utlis/extension.dart';
 import 'package:propell/configs/utlis/validation_utils.dart';
-import 'package:propell/viewModels/controllers/summary_controller.dart';
-import 'package:propell/views/summary/summary_view.dart';
+import 'package:propell/viewModels/controllers/summary_controller.dart'; 
 import 'package:responsive_framework/responsive_framework.dart';
 
 class StepOne extends StatelessWidget {
   StepOne({super.key});
-  TextEditingController inputName = TextEditingController();
-  TextEditingController inputEmail = TextEditingController();
-  TextEditingController inputPhone = TextEditingController();
-  TextEditingController inputDescription = TextEditingController();
+
   final oneStepC = Get.find<SummaryController>();
-  final _formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     bool isMobile = ResponsiveBreakpoints.of(context).isMobile;
     return Form(
-      key: _formKey,
+      key: oneStepC.formKey,
       child: ResponsiveRowColumn(
         columnCrossAxisAlignment: CrossAxisAlignment.start,
         layout: ResponsiveRowColumnType.COLUMN,
@@ -45,7 +39,7 @@ class StepOne extends StatelessWidget {
             child: CustomFieldComponents(
               keyboardType: TextInputType.name,
               hint: 'Your Name',
-              controller: inputName,
+              controller: oneStepC.inputName,
               validator: (value) {
                 if (value!.isEmpty) {
                   return 'name field must not be empty';
@@ -61,7 +55,7 @@ class StepOne extends StatelessWidget {
             child: CustomFieldComponents(
                 keyboardType: TextInputType.emailAddress,
                 hint: 'Your email here',
-                controller: inputEmail,
+                controller: oneStepC.inputEmail,
                 validator: (value) {
                   if (value!.isEmpty) {
                     return 'Your email here';
@@ -74,7 +68,7 @@ class StepOne extends StatelessWidget {
           ResponsiveRowColumnItem(
               child: CustomPhoneFieldComponents(
                   keyboardType: TextInputType.phone,
-                  EditController: inputPhone,
+                  EditController: oneStepC.inputPhone,
                   validator: (value) {
                     if (value!.isEmpty) {
                       return 'phone field must not be empty';
@@ -89,7 +83,7 @@ class StepOne extends StatelessWidget {
                 minLines: isMobile ? 2 : 4,
                 maxLines: isMobile ? 4 : 5,
                 hint: 'Add Description (Optional)',
-                controller: inputDescription),
+                controller: oneStepC.inputDescription),
           ),
           // ResponsiveRowColumnItem(
           //   child: 9.heightSpace,
@@ -140,12 +134,8 @@ class StepOne extends StatelessWidget {
                   width: isMobile ? 346.w : 512,
                   height: isMobile ? 56.h : 56,
                   onTap: () async {
-                    if (_formKey.currentState!.validate()) {
-                      await oneStepC.checkout(
-                          name: inputName.text.trim().toString(),
-                          email: inputEmail.text.trim().toString(),
-                          phone: inputPhone.text.trim().toString(),
-                          description: inputDescription.text.trim().toString());
+                    if (oneStepC.formKey.currentState!.validate()) {
+                      await oneStepC.checkout();
                     }
                     // Increment the step value
                     // oneStepC.currentStep.value += 1;

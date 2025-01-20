@@ -47,32 +47,29 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyAXsUbrZGqyAHeJMIUOowoDIOra-6bEIdU',
-    appId: '1:254485088339:web:551671e5c4b6c24ef71ea6',
-    messagingSenderId: '254485088339',
-    projectId: 'propell-c04bd',
-    authDomain: 'propell-c04bd.firebaseapp.com',
-    databaseURL: 'https://propell-c04bd-default-rtdb.firebaseio.com',
-    storageBucket: 'propell-c04bd.firebasestorage.app',
-    measurementId: 'G-VGS8LFNGGV',
+    apiKey: 'AIzaSyCgCnnBr9VxR8yzeXN3LwkjZqSQ_DJ-iPs',
+    appId: '1:654910300478:web:d5fdce2e7000a807e44c6f',
+    messagingSenderId: '654910300478',
+    projectId: 'propellwebapp',
+    authDomain: 'propellwebapp.firebaseapp.com',
+    storageBucket: 'propellwebapp.firebasestorage.app',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyDx_iI0vMB7_CCLGRfxk1-cKk48hIPewoc',
-    appId: '1:254485088339:android:54dfa1d7ad6ce432f71ea6',
-    messagingSenderId: '254485088339',
-    projectId: 'propell-c04bd',
-    databaseURL: 'https://propell-c04bd-default-rtdb.firebaseio.com',
-    storageBucket: 'propell-c04bd.firebasestorage.app',
+    apiKey: 'AIzaSyBgmsQYmxc5Z3ocq2OpMxUROtZ8VwaLURM',
+    appId: '1:654910300478:android:b44dc68ac9723936e44c6f',
+    messagingSenderId: '654910300478',
+    projectId: 'propellwebapp',
+    storageBucket: 'propellwebapp.firebasestorage.app',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyA1Ed1CkZF9tnyrrJtk9zH2LzMmrt-hWoI',
-    appId: '1:254485088339:ios:046e06a0708257ebf71ea6',
-    messagingSenderId: '254485088339',
-    projectId: 'propell-c04bd',
-    databaseURL: 'https://propell-c04bd-default-rtdb.firebaseio.com',
-    storageBucket: 'propell-c04bd.firebasestorage.app',
+    apiKey: 'AIzaSyB6Ll_hyO5OfIl2JH_c57FpyLgv2EGz1tg',
+    appId: '1:654910300478:ios:809c3ebf0618ec25e44c6f',
+    messagingSenderId: '654910300478',
+    projectId: 'propellwebapp',
+    storageBucket: 'propellwebapp.firebasestorage.app',
     iosBundleId: 'com.propell',
   );
+
 }

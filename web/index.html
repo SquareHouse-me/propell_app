@@ -1,136 +1,39 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-messaging-compat.js"></script>
-    <!-- Base href for Flutter web deployment -->
-    <base href="/">
+<head>
+  <!--
+    If you are serving your web app in a path other than the root, change the
+    href value below to reflect the base path you are serving from.
 
-    <meta charset="UTF-8">
-    <meta content="IE=Edge" http-equiv="X-UA-Compatible">
-    <meta name="description" content="A new Flutter project.">
+    The path provided below has to start and end with a slash "/" in order for
+    it to work correctly.
 
-    <!-- iOS meta tags & icons -->
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta name="apple-mobile-web-app-title" content="propell">
-    <link rel="apple-touch-icon" href="icons/Icon-192.png">
+    For more details:
+    * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base
 
-    <!-- Favicon -->
-    <link rel="icon" type="image/png" href="favicon.png">
+    This is a placeholder for base href that will be replaced by the value of
+    the `--base-href` argument provided to `flutter build`.
+  -->
+  <base href="$FLUTTER_BASE_HREF">
 
-    <title>propell</title>
-    <link rel="manifest" href="manifest.json">
+  <meta charset="UTF-8">
+  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+  <meta name="description" content="A new Flutter project.">
 
-    <!-- Optimized viewport settings -->
-    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"> -->
+  <!-- iOS meta tags & icons -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="propell">
+  <link rel="apple-touch-icon" href="icons/Icon-192.png">
 
-    <!-- Splash screen styling -->
-    <style id="splash-screen-style">
-      html {
-        height: 100%;
-      }
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="favicon.png"/>
 
-      body {
-        margin: 0;
-        min-height: 100%;
-        background-color: #000000;
-        background-size: 100% 100%;
-      }
-
-      .center {
-        margin: 0;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-      }
-
-      .contain {
-        display: block;
-        width: 100%;
-        height: 100%;
-        object-fit: contain;
-      }
-
-      .stretch {
-        display: block;
-        width: 100%;
-        height: 100%;
-      }
-
-      .cover {
-        display: block;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-      }
-
-      .bottom {
-        position: absolute;
-        bottom: 0;
-        left: 50%;
-        transform: translate(-50%, 0);
-      }
-
-      @media (prefers-color-scheme: dark) {
-        body {
-          background-color: #000000;
-        }
-      }
-    </style>
-
-    <!-- Splash screen script -->
-    <script id="splash-screen-script">
-      function removeSplashFromWeb() {
-        document.getElementById("splash")?.remove();
-        document.getElementById("splash-branding")?.remove();
-        document.body.style.background = "transparent";
-      }
-    </script>
-      <!-- Firebase SDK -->
-    
-    <!-- Flutter engine initialization -->
-    <script type="module">
-      import { initializeEngine } from "https://www.gstatic.com/flutter/engine/v1.0.0/flutter_engine_loader.js";
-
-      const config = {
-        renderer: 'html', // Use 'canvaskit' for CanvasKit renderer
-      };
-
-      initializeEngine(config).then(() => {
-        console.log('Flutter web engine initialized');
-      });
-    </script>
-
-    <!-- Flutter web support (if using flutter_inappwebview) -->
-    <script type="application/javascript" src="/assets/packages/flutter_inappwebview_web/assets/web/web_support.js" defer></script>
-  </head>
-   <!-- Flutter bootstrap -->
-   <script src="flutter_bootstrap.js" async></script>
-  <body>
-    
-    <script>
-      <!--Update with yours config-->
-        const firebaseConfig = {
-          apiKey: "AIzaSyAXsUbrZGqyAHeJMIUOowoDIOra-6bEIdU",
-          authDomain: "propell-c04bd.firebaseapp.com",
-          databaseURL: "https://propell-c04bd-default-rtdb.firebaseio.com",
-          projectId: "propell-c04bd",
-          storageBucket: "propell-c04bd.firebasestorage.app",
-          messagingSenderId: "254485088339",
-          appId: "1:254485088339:web:551671e5c4b6c24ef71ea6",
-          measurementId: "G-VGS8LFNGGV"
-      };
-        firebase.initializeApp(firebaseConfig);
-        </script>
-      <script src="main.dart.js" type="application/javascript"></script>
-      <script>
-        if ("serviceWorker" in navigator) {
-            window.addEventListener("load", function () {
-              navigator.serviceWorker.register("/firebase-messaging-sw.js");
-            });
-          }
-          </script>
-  </body>
+  <title>propell</title>
+  <link rel="manifest" href="manifest.json">
+  <script type="application/javascript" src="/assets/packages/flutter_inappwebview_web/assets/web/web_support.js" defer></script>
+</head>
+<body>
+  <script src="flutter_bootstrap.js" async></script>
+</body>
 </html>

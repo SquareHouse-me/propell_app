@@ -31,6 +31,7 @@ class _SummaryStepperState extends State<SummaryStepper> {
   Widget build(BuildContext context) {
     bool isMobile = ResponsiveBreakpoints.of(context).isMobile;
     return Scaffold(
+      resizeToAvoidBottomInset: true,
       backgroundColor: AppColor.kPrimary,
       appBar: PreferredSize(
           preferredSize: Size.fromHeight(isMobile ? 60 : 100),
@@ -41,6 +42,8 @@ class _SummaryStepperState extends State<SummaryStepper> {
                 )
               : WebAppbarWidget()),
       body: Obx(() => SingleChildScrollView(
+            reverse: true,
+            physics: const ClampingScrollPhysics(),
             child: Center(
               child: SizedBox(
                 width: isMobile ? 347.w : 512,

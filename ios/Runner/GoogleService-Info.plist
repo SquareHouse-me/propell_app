@@ -3,17 +3,17 @@
 <plist version="1.0">
 <dict>
 	<key>API_KEY</key>
-	<string>AIzaSyA1Ed1CkZF9tnyrrJtk9zH2LzMmrt-hWoI</string>
+	<string>AIzaSyB6Ll_hyO5OfIl2JH_c57FpyLgv2EGz1tg</string>
 	<key>GCM_SENDER_ID</key>
-	<string>254485088339</string>
+	<string>654910300478</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
 	<string>com.propell</string>
 	<key>PROJECT_ID</key>
-	<string>propell-c04bd</string>
+	<string>propellwebapp</string>
 	<key>STORAGE_BUCKET</key>
-	<string>propell-c04bd.firebasestorage.app</string>
+	<string>propellwebapp.firebasestorage.app</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -25,8 +25,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:254485088339:ios:046e06a0708257ebf71ea6</string>
-	<key>DATABASE_URL</key>
-	<string>https://propell-c04bd-default-rtdb.firebaseio.com</string>
+	<string>1:654910300478:ios:809c3ebf0618ec25e44c6f</string>
 </dict>
 </plist>

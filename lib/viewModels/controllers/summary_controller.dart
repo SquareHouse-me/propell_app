@@ -17,19 +17,22 @@ class SummaryController extends GetxController {
   RxString phoneNumber = '601 106 1200'.obs;
   RxBool isCheckoutLoading = false.obs;
   RxInt totalHour = 0.obs;
+  TextEditingController inputName = TextEditingController();
+  TextEditingController inputEmail = TextEditingController();
+  TextEditingController inputPhone = TextEditingController();
+  TextEditingController inputDescription = TextEditingController();
+  final formKey = GlobalKey<FormState>();
   Rx<MessageModelResponse?> summaryModel = Rx<MessageModelResponse?>(null);
-  Future<void> checkout(
-      {required String name,
-      required String email,
-      String? description,
-      required String phone}) async {
+  Future<void> checkout() async {
     try {
       final HomeController home = Get.find<HomeController>();
+
       isCheckoutLoading.value = true;
       String formattedDate =
           DateFormat('yyyy-MM-dd').format(home.selectedDate.value);
       HomeController homeController = Get.find<HomeController>();
-     homeController. languageCode.value =homeController.  language.value.contains('English') ? 'en' : 'ar';
+      homeController.languageCode.value =
+          homeController.language.value.contains('English') ? 'en' : 'ar';
       var data = {
         "lang": homeController.languageCode.value.toString(),
         "service_id": home.serviceId,
@@ -37,10 +40,10 @@ class SummaryController extends GetxController {
         "cat_id": home.catId,
         "date": formattedDate,
         "timeslot_id": home.selectedTimeId.value,
-        "name": name,
-        "email": email,
-        "phone": countryCode + phone,
-        "discription": description,
+        "name": inputName.text.trim().toString(),
+        "email": inputEmail.text.trim().toString(),
+        "phone": countryCode + inputPhone.text.trim().toString(),
+        "discription": inputDescription.text.trim().toString(),
         "method": 'knet',
         'fcm_token': fCMtoken.value.toString()
       };
@@ -60,6 +63,10 @@ class SummaryController extends GetxController {
           log('message after');
           print(currentStep.value.toString() + " after update");
           isCheckoutLoading.value = false;
+          inputName.clear();
+          inputEmail.clear();
+          inputPhone.clear();
+          inputDescription.clear();
         } else {
           log('message else');
           isCheckoutLoading.value = false;
