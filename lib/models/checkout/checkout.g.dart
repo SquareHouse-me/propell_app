@@ -62,6 +62,9 @@ _$BookingResponseDataImpl _$$BookingResponseDataImplFromJson(
       service_name: json['service_name'] as String? ?? '',
       cat_id: (json['cat_id'] as num?)?.toInt() ?? 0,
       category_name: json['category_name'] as String? ?? '',
+      consultation_image: json['consultation_image'] as String? ?? '',
+      service_images: json['service_images'] as String? ?? '',
+      category_image: json['category_image'] as String? ?? '',
     );
 
 Map<String, dynamic> _$$BookingResponseDataImplToJson(
@@ -86,4 +89,7 @@ Map<String, dynamic> _$$BookingResponseDataImplToJson(
       'service_name': instance.service_name,
       'cat_id': instance.cat_id,
       'category_name': instance.category_name,
+      'consultation_image': instance.consultation_image,
+      'service_images': instance.service_images,
+      'category_image': instance.category_image,
     };

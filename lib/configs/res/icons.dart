@@ -18,4 +18,5 @@ class AppIcons {
   static const String calendarCircle = 'assets/icons/calendar.svg';
   static const String clockCircle = 'assets/icons/clock.svg';
   static const String thankyou = 'assets/icons/thankyou.svg';
-}
+  static const String failed = 'assets/icons/failed.svg';
+} 

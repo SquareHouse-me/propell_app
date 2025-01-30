@@ -80,15 +80,20 @@ class HomeController extends GetxController {
   void setTimeSlot(List<TimeSlotResponseData> _value) =>
       timeSlotList.value = _value;
 
-  NotificationServices services = NotificationServices();
+  // NotificationServices services = NotificationServices();
   @override
   void onReady() {
     super.onReady();
     _loadSavedValue();
-    services.requestNotificationPermission();
-    services.setupInteractMessage(Get.context!);
-    services.firebaseInit(Get.context!);
-    Get.put(SummaryController(summaryRepo: getIt()));
+    // services.requestNotificationPermission();
+    // services.setupInteractMessage(Get.context!);
+    // services.firebaseInit(Get.context!);
+    Get.put(
+      SummaryController(
+        summaryRepo: getIt(),
+      ),
+      permanent: true,
+    );
   }
 
   void _loadSavedValue() async {
@@ -238,12 +243,45 @@ class HomeController extends GetxController {
         // If the response is a Map
         if (value['success'].toString() == 'true') {
           TimeSlotModel categoryModel = TimeSlotModel.fromJson(value);
+          DateTime parseDate = DateTime.parse(date);
 
-          timeSlotList.value = [];
-          setTimeSlot(categoryModel.timeSlotModelResponse);
+          if (parseDate.isAfter(DateTime.now())) {
+            print(
+                parseDate.toString() + "parseDate" + DateTime.now().toString());
+            timeSlotList.value = [];
+            setTimeSlot(categoryModel.timeSlotModelResponse);
+            log('future date hai slot complete ayega');
+          } else {
+            timeSlotList.value = [];
+            // setTimeSlot(categoryModel.timeSlotModelResponse);
+            final tempSlotList = categoryModel.timeSlotModelResponse;
+            timeSlotList.value = tempSlotList.where((time) {
+              final now = DateTime.now();
+              final nowTime = DateTime(
+                now.year,
+                now.month,
+                now.day,
+                now.hour,
+                now.minute,
+              );
+              log(nowTime.toString() + " nowTime" + now.toString());
+              final timeParts = time.to.split(':'); // Split "HH:mm:ss"
+              final slotTime = DateTime(
+                now.year,
+                now.month,
+                now.day,
+                int.parse(timeParts[0]), // Hours
+                int.parse(timeParts[1]), // Minutes
+              );
+              return slotTime.isAfter(nowTime); // Include only future slots
+            }).toList();
+            timeSlotList.refresh();
+            log("${timeSlotList.value.length}timeSlotList");
+          }
 
           setTimeSlotStatus(Status.COMPLETED);
         } else {
+          timeSlotList.value = [];
           handleTimeSlotError(value['message'].toString());
           setTimeSlotStatus(Status.ERROR);
         }

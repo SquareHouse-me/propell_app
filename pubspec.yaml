@@ -1,5 +1,5 @@
 name: propell
-description: "A new Flutter project."
+description: "Propell Design"
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
@@ -16,7 +16,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
 # In Windows, build-name is used as the major, minor, and patch parts
 # of the product and file versions while build-number is used as the build suffix.
-version: 1.0.0+1
+version: 1.0.0+29
 
 environment:
   sdk: '>=3.4.1 <4.0.0'
@@ -63,7 +63,9 @@ dependencies:
   flutter_local_notifications: ^18.0.1
   permission_handler: ^11.3.1
   app_settings: ^5.1.1
-  shared_preferences: ^2.2.3
+  shared_preferences: ^2.2.3 
+  # flutter_html_iframe: ^3.0.0-beta.2
+  gif_view: ^1.0.0
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -86,7 +88,7 @@ flutter_launcher_icons:
     theme_color: "#000000"
 flutter_native_splash:
   color: "#000000"
-  # image: assets/images/LogoLight.png 
+  image:   assets/images/logoIndicator.gif
   color_dark: "#000000"
   # image_dark: assets/images/LogoLight.png 
   android_12:
@@ -94,6 +96,9 @@ flutter_native_splash:
     icon_background_color: "#000000"
     # image_dark: assets/images/LogoLight.png
     icon_background_color_dark: "#000000"
+ 
+     
+
 dependency_overrides:
   intl: ^0.19.0
   meta: ^1.14.0
@@ -128,17 +133,23 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  # fonts:
-  #   - family: Schyler
-  #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
-  #       - asset: fonts/Schyler-Italic.ttf
-  #         style: italic
-  #   - family: Trajan Pro
-  #     fonts:
-  #       - asset: fonts/TrajanPro.ttf
-  #       - asset: fonts/TrajanPro_Bold.ttf
-  #         weight: 700
+  fonts:
+    - family: NotoKufiArabic
+      fonts:
+        - asset: assets/fonts/arbic/NotoKufiArabic-Bold.ttf 
+        - asset: assets/fonts/arbic/NotoKufiArabic-Light.ttf 
+        - asset: assets/fonts/arbic/NotoKufiArabic-Medium.ttf
+        - asset: assets/fonts/arbic/NotoKufiArabic-Regular.ttf
+        - asset: assets/fonts/arbic/NotoKufiArabic-SemiBold.ttf 
+
+         
+    - family: Montserrat
+      fonts:
+        - asset: assets/fonts/english/Montserrat-Bold.ttf
+        - asset: assets/fonts/english/Montserrat-Light.ttf 
+        - asset: assets/fonts/english/Montserrat-Medium.ttf 
+        - asset: assets/fonts/english/Montserrat-Regular.ttf 
+        
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

@@ -13,7 +13,7 @@ class TextComponents extends StatelessWidget {
   final textAlign;
   final TextOverflow? overflow;
   TextComponents({
-    Key? key,
+    super.key,
     required this.title,
     required this.size,
     this.weight,
@@ -21,21 +21,35 @@ class TextComponents extends StatelessWidget {
     this.decoration,
     this.overflow,
     this.textAlign,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
     final homeC = Get.find<HomeController>();
-    return Text(
-      title,
-      style: GoogleFonts.montserrat(
-        fontSize: size,
-        color: color,
-        fontWeight: weight,
-        decoration: decoration,
-      ),
-      textAlign: textAlign,
-      overflow: overflow,
-    );
+    return Obx(() => homeC.languageCode.value == 'ar'
+        ? Text(
+            title,
+            style: TextStyle(
+              fontFamily: 'NotoKufiArabic',
+              fontSize: size,
+              color: color,
+              fontWeight: weight,
+              decoration: decoration,
+            ),
+            textAlign: textAlign,
+            overflow: overflow,
+          )
+        : Text(
+            title,
+            style: TextStyle(
+              fontFamily: 'Montserrat',
+              fontSize: size,
+              color: color,
+              fontWeight: weight,
+              decoration: decoration,
+            ),
+            textAlign: textAlign,
+            overflow: overflow,
+          ));
   }
 }

@@ -454,6 +454,12 @@ mixin _$BookingResponseData {
   int get cat_id => throw _privateConstructorUsedError;
   @JsonKey(name: 'category_name')
   String get category_name => throw _privateConstructorUsedError;
+  @JsonKey(name: 'consultation_image')
+  String get consultation_image => throw _privateConstructorUsedError;
+  @JsonKey(name: 'service_images')
+  String get service_images => throw _privateConstructorUsedError;
+  @JsonKey(name: 'category_image')
+  String get category_image => throw _privateConstructorUsedError;
 
   /// Serializes this BookingResponseData to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -490,7 +496,10 @@ abstract class $BookingResponseDataCopyWith<$Res> {
       @JsonKey(name: 'service_id') int service_id,
       @JsonKey(name: 'service_name') String service_name,
       @JsonKey(name: 'cat_id') int cat_id,
-      @JsonKey(name: 'category_name') String category_name});
+      @JsonKey(name: 'category_name') String category_name,
+      @JsonKey(name: 'consultation_image') String consultation_image,
+      @JsonKey(name: 'service_images') String service_images,
+      @JsonKey(name: 'category_image') String category_image});
 }
 
 /// @nodoc
@@ -527,6 +536,9 @@ class _$BookingResponseDataCopyWithImpl<$Res, $Val extends BookingResponseData>
     Object? service_name = null,
     Object? cat_id = null,
     Object? category_name = null,
+    Object? consultation_image = null,
+    Object? service_images = null,
+    Object? category_image = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -605,6 +617,18 @@ class _$BookingResponseDataCopyWithImpl<$Res, $Val extends BookingResponseData>
           ? _value.category_name
           : category_name // ignore: cast_nullable_to_non_nullable
               as String,
+      consultation_image: null == consultation_image
+          ? _value.consultation_image
+          : consultation_image // ignore: cast_nullable_to_non_nullable
+              as String,
+      service_images: null == service_images
+          ? _value.service_images
+          : service_images // ignore: cast_nullable_to_non_nullable
+              as String,
+      category_image: null == category_image
+          ? _value.category_image
+          : category_image // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -636,7 +660,10 @@ abstract class _$$BookingResponseDataImplCopyWith<$Res>
       @JsonKey(name: 'service_id') int service_id,
       @JsonKey(name: 'service_name') String service_name,
       @JsonKey(name: 'cat_id') int cat_id,
-      @JsonKey(name: 'category_name') String category_name});
+      @JsonKey(name: 'category_name') String category_name,
+      @JsonKey(name: 'consultation_image') String consultation_image,
+      @JsonKey(name: 'service_images') String service_images,
+      @JsonKey(name: 'category_image') String category_image});
 }
 
 /// @nodoc
@@ -671,6 +698,9 @@ class __$$BookingResponseDataImplCopyWithImpl<$Res>
     Object? service_name = null,
     Object? cat_id = null,
     Object? category_name = null,
+    Object? consultation_image = null,
+    Object? service_images = null,
+    Object? category_image = null,
   }) {
     return _then(_$BookingResponseDataImpl(
       id: null == id
@@ -749,6 +779,18 @@ class __$$BookingResponseDataImplCopyWithImpl<$Res>
           ? _value.category_name
           : category_name // ignore: cast_nullable_to_non_nullable
               as String,
+      consultation_image: null == consultation_image
+          ? _value.consultation_image
+          : consultation_image // ignore: cast_nullable_to_non_nullable
+              as String,
+      service_images: null == service_images
+          ? _value.service_images
+          : service_images // ignore: cast_nullable_to_non_nullable
+              as String,
+      category_image: null == category_image
+          ? _value.category_image
+          : category_image // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -775,7 +817,10 @@ class _$BookingResponseDataImpl implements _BookingResponseData {
       @JsonKey(name: 'service_id') this.service_id = 0,
       @JsonKey(name: 'service_name') this.service_name = '',
       @JsonKey(name: 'cat_id') this.cat_id = 0,
-      @JsonKey(name: 'category_name') this.category_name = ''});
+      @JsonKey(name: 'category_name') this.category_name = '',
+      @JsonKey(name: 'consultation_image') this.consultation_image = '',
+      @JsonKey(name: 'service_images') this.service_images = '',
+      @JsonKey(name: 'category_image') this.category_image = ''});
 
   factory _$BookingResponseDataImpl.fromJson(Map<String, dynamic> json) =>
       _$$BookingResponseDataImplFromJson(json);
@@ -837,10 +882,19 @@ class _$BookingResponseDataImpl implements _BookingResponseData {
   @override
   @JsonKey(name: 'category_name')
   final String category_name;
+  @override
+  @JsonKey(name: 'consultation_image')
+  final String consultation_image;
+  @override
+  @JsonKey(name: 'service_images')
+  final String service_images;
+  @override
+  @JsonKey(name: 'category_image')
+  final String category_image;
 
   @override
   String toString() {
-    return 'BookingResponseData(id: $id, name: $name, email: $email, phone: $phone, discription: $discription, total_amount: $total_amount, booking_date: $booking_date, booking_type: $booking_type, booking_status: $booking_status, timeslot_id: $timeslot_id, timeslot: $timeslot, timeslot_from: $timeslot_from, timeslot_to: $timeslot_to, consultation_id: $consultation_id, consultation_name: $consultation_name, service_id: $service_id, service_name: $service_name, cat_id: $cat_id, category_name: $category_name)';
+    return 'BookingResponseData(id: $id, name: $name, email: $email, phone: $phone, discription: $discription, total_amount: $total_amount, booking_date: $booking_date, booking_type: $booking_type, booking_status: $booking_status, timeslot_id: $timeslot_id, timeslot: $timeslot, timeslot_from: $timeslot_from, timeslot_to: $timeslot_to, consultation_id: $consultation_id, consultation_name: $consultation_name, service_id: $service_id, service_name: $service_name, cat_id: $cat_id, category_name: $category_name, consultation_image: $consultation_image, service_images: $service_images, category_image: $category_image)';
   }
 
   @override
@@ -880,7 +934,13 @@ class _$BookingResponseDataImpl implements _BookingResponseData {
                 other.service_name == service_name) &&
             (identical(other.cat_id, cat_id) || other.cat_id == cat_id) &&
             (identical(other.category_name, category_name) ||
-                other.category_name == category_name));
+                other.category_name == category_name) &&
+            (identical(other.consultation_image, consultation_image) ||
+                other.consultation_image == consultation_image) &&
+            (identical(other.service_images, service_images) ||
+                other.service_images == service_images) &&
+            (identical(other.category_image, category_image) ||
+                other.category_image == category_image));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -905,7 +965,10 @@ class _$BookingResponseDataImpl implements _BookingResponseData {
         service_id,
         service_name,
         cat_id,
-        category_name
+        category_name,
+        consultation_image,
+        service_images,
+        category_image
       ]);
 
   /// Create a copy of BookingResponseData
@@ -945,7 +1008,10 @@ abstract class _BookingResponseData implements BookingResponseData {
           @JsonKey(name: 'service_id') final int service_id,
           @JsonKey(name: 'service_name') final String service_name,
           @JsonKey(name: 'cat_id') final int cat_id,
-          @JsonKey(name: 'category_name') final String category_name}) =
+          @JsonKey(name: 'category_name') final String category_name,
+          @JsonKey(name: 'consultation_image') final String consultation_image,
+          @JsonKey(name: 'service_images') final String service_images,
+          @JsonKey(name: 'category_image') final String category_image}) =
       _$BookingResponseDataImpl;
 
   factory _BookingResponseData.fromJson(Map<String, dynamic> json) =
@@ -1008,6 +1074,15 @@ abstract class _BookingResponseData implements BookingResponseData {
   @override
   @JsonKey(name: 'category_name')
   String get category_name;
+  @override
+  @JsonKey(name: 'consultation_image')
+  String get consultation_image;
+  @override
+  @JsonKey(name: 'service_images')
+  String get service_images;
+  @override
+  @JsonKey(name: 'category_image')
+  String get category_image;
 
   /// Create a copy of BookingResponseData
   /// with the given fields replaced by the non-null parameter values.

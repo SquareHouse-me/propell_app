@@ -1,1 +1,45 @@
-{"flutter":{"platforms":{"android":{"default":{"projectId":"propellwebapp","appId":"1:654910300478:android:b44dc68ac9723936e44c6f","fileOutput":"android/app/google-services.json"}},"ios":{"default":{"projectId":"propellwebapp","appId":"1:654910300478:ios:809c3ebf0618ec25e44c6f","uploadDebugSymbols":false,"fileOutput":"ios/Runner/GoogleService-Info.plist"}},"dart":{"lib/firebase_options.dart":{"projectId":"propellwebapp","configurations":{"android":"1:654910300478:android:b44dc68ac9723936e44c6f","ios":"1:654910300478:ios:809c3ebf0618ec25e44c6f","web":"1:654910300478:web:d5fdce2e7000a807e44c6f"}}}}},"hosting":{"public":"build/web","ignore":["firebase.json","**/.*","**/node_modules/**"],"rewrites":[{"source":"**","destination":"/index.html"}]}}
+{
+  "flutter": {
+    "platforms": {
+      "android": {
+        "default": {
+          "projectId": "mypropellapp",
+          "appId": "1:311844172470:android:ed8d6aadbb53bb86a02c17",
+          "fileOutput": "android/app/google-services.json"
+        }
+      },
+      "ios": {
+        "default": {
+          "projectId": "mypropellapp",
+          "appId": "1:311844172470:ios:536c6b186eb6fed4a02c17",
+          "uploadDebugSymbols": false,
+          "fileOutput": "ios/Runner/GoogleService-Info.plist"
+        }
+      },
+      "dart": {
+        "lib/firebase_options.dart": {
+          "projectId": "mypropellapp",
+          "configurations": {
+            "android": "1:311844172470:android:ed8d6aadbb53bb86a02c17",
+            "ios": "1:311844172470:ios:536c6b186eb6fed4a02c17",
+            "web": "1:311844172470:web:5688cffc83f96938a02c17"
+          }
+        }
+      }
+    }
+  },
+  "hosting": {
+    "public": "build/web",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
+}

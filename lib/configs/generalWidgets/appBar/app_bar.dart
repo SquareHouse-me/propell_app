@@ -1,4 +1,3 @@
- 
 import 'package:propell/configs/generalWidgets/export_general.dart';
 
 import 'package:propell/configs/generalWidgets/textstyle_component.dart';
@@ -57,22 +56,34 @@ class AppbarWidget extends StatelessWidget {
                       children: [
                         SvgPicture.asset(
                           AppIcons.globalIcon,
-                          color: AppColor.kGreen1Color,
                         ),
                         8.widthSpace,
                         Obx(() => DropdownButton<String>(
                               value: homeC.language.value,
                               padding: EdgeInsets.zero,
-                              iconEnabledColor: AppColor.kGreen1Color,
+                              iconEnabledColor: Colors.white,
                               dropdownColor: Colors.black,
-                              style: GoogleFonts.montserrat(
-                                fontSize:
-                                    ResponsiveBreakpoints.of(context).isMobile
-                                        ? 12.sp
-                                        : 12,
-                                color: AppColor.kWhiteColor,
-                                fontWeight: FontWeight.w500,
-                              ),
+                              style: homeC.languageCode.value == 'ar'
+                                  ? TextStyle(
+                                      fontFamily: 'NotoKufiArabic',
+                                      fontSize:
+                                          ResponsiveBreakpoints.of(context)
+                                                  .isMobile
+                                              ? 12.sp
+                                              : 12,
+                                      color: AppColor.kWhiteColor,
+                                      fontWeight: FontWeight.w500,
+                                    )
+                                  : TextStyle(
+                                      fontSize:
+                                          ResponsiveBreakpoints.of(context)
+                                                  .isMobile
+                                              ? 12.sp
+                                              : 12,
+                                      color: AppColor.kWhiteColor,
+                                      fontWeight: FontWeight.w500,
+                                      fontFamily: 'Montserrat',
+                                    ),
                               items: ['English', 'Arabic']
                                   .map((e) => DropdownMenuItem(
                                         value: e,
@@ -116,7 +127,9 @@ class AppbarWidget extends StatelessWidget {
             elevation: 0,
             centerTitle: true,
             surfaceTintColor: AppColor.kPrimary,
-            iconTheme: const IconThemeData(color: AppColor.kGreen1Color),
+            iconTheme: const IconThemeData(
+              color: Colors.white,
+            ),
             title: TextComponents(
               color: Colors.white,
               title: title,

@@ -1,4 +1,4 @@
-import 'package:get/get.dart';
+ 
 import 'package:intl/intl.dart';
 import 'package:propell/configs/generalWidgets/export_general.dart';
 import 'package:propell/data/network/export_view.dart';
@@ -14,7 +14,7 @@ class SummaryController extends GetxController {
   RxString fCMtoken = ''.obs;
   RxString countryCode = '965'.obs;
   RxString countryEmoji = '🇰🇼'.obs;
-  RxString phoneNumber = '601 106 1200'.obs;
+  RxString phoneNumber = '997 329 98'.obs;
   RxBool isCheckoutLoading = false.obs;
   RxInt totalHour = 0.obs;
   TextEditingController inputName = TextEditingController();

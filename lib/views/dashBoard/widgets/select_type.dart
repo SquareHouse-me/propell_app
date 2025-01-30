@@ -1,13 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:loading_indicator/loading_indicator.dart';
-import 'package:propell/configs/generalWidgets/export_general.dart';
-import 'package:propell/configs/generalWidgets/textstyle_component.dart';
-import 'package:propell/configs/res/colors.dart';
-import 'package:propell/configs/res/icons.dart';
-import 'package:propell/data/response/status.dart';
-import 'package:propell/viewModels/controllers/home_controller.dart';
-import 'package:propell/views/dashBoard/booking_calander.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart'; 
+import 'package:propell/configs/generalWidgets/export_general.dart'; 
+import 'package:propell/configs/res/colors.dart'; 
+import 'package:propell/viewModels/controllers/home_controller.dart'; 
 import 'package:propell/views/dashBoard/widgets/service_type_one.dart';
 import 'package:propell/views/dashBoard/widgets/service_type_two.dart';
 import 'package:responsive_framework/responsive_framework.dart';

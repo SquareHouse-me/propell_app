@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "654910300478",
-    "project_id": "propellwebapp",
-    "storage_bucket": "propellwebapp.firebasestorage.app"
+    "project_number": "311844172470",
+    "project_id": "mypropellapp",
+    "storage_bucket": "mypropellapp.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:654910300478:android:b44dc68ac9723936e44c6f",
+        "mobilesdk_app_id": "1:311844172470:android:ed8d6aadbb53bb86a02c17",
         "android_client_info": {
           "package_name": "com.propell"
         }
@@ -15,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyBgmsQYmxc5Z3ocq2OpMxUROtZ8VwaLURM"
+          "current_key": "AIzaSyBpPW5mmqVA2Ah-9oGLPTumq0BC1rho-TQ"
         }
       ],
       "services": {

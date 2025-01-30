@@ -1,3 +1,4 @@
+import 'package:google_fonts/google_fonts.dart';
 import 'package:propell/configs/res/colors.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
@@ -39,9 +40,7 @@ class CustomFieldComponents extends StatelessWidget {
       readOnly: enabled,
       minLines: minLines??null,
       maxLines: maxLines??null,
-      onTapOutside: (v) {
-        FocusScope.of(context).unfocus();
-      },
+       
       keyboardType: keyboardType,
       cursorColor: AppColor.kGreen1Color,
       style: GoogleFonts.montserrat(

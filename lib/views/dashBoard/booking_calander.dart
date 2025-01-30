@@ -1,8 +1,9 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:propell/configs/utlis/validation_utils.dart';
 import 'package:propell/data/response/status.dart';
@@ -21,10 +22,8 @@ import 'package:propell/viewModels/controllers/home_controller.dart';
 import 'package:propell/views/summary/summary_view.dart';
 
 class BookingCalander extends StatefulWidget {
-  final String consultationId;
   const BookingCalander({
     Key? key,
-    required this.consultationId,
   }) : super(key: key);
 
   @override
@@ -38,19 +37,26 @@ class _BookingCalanderState extends State<BookingCalander> {
     super.initState();
     homeC.setTimeSlotStatus(Status.LOADING);
     homeC.setTimeSlotStatus(Status.COMPLETED);
-    homeC.consultationId = int.parse(widget.consultationId);
+
     print("${homeC.consultationId} consultationId");
+
+    print(" date   ${homeC.selectedDate.value}");
+    String formattedDate =
+        DateFormat('yyyy-MM-dd').format(homeC.selectedDate.value);
+
+    homeC.timeSlotApi(
+        consultationId: homeC.consultationId.toString(), date: formattedDate);
   }
 
   @override
   void dispose() {
-    // TODO: implement dispose
     super.dispose();
     homeC.timeSlotList.value = [];
     homeC.selectedDate.value = DateTime.now();
     homeC.focusedDay.value = DateTime.now();
   }
 
+  var filteredList = [];
   @override
   Widget build(BuildContext context) {
     bool isMobile = ResponsiveBreakpoints.of(context).isMobile;
@@ -67,7 +73,7 @@ class _BookingCalanderState extends State<BookingCalander> {
           preferredSize: Size.fromHeight(isMobile ? 60 : 100),
           child: ResponsiveBreakpoints.of(context).isMobile
               ? AppbarWidget(
-                  title: 'Date & Time',
+                  title: '',
                   isFirstPage: false,
                 )
               : WebAppbarWidget()),
@@ -120,17 +126,30 @@ class _BookingCalanderState extends State<BookingCalander> {
                               formatButtonVisible: false,
                               titleCentered: true,
 
-                              titleTextStyle: GoogleFonts.montserrat(
-                                color: Colors.white,
-                                fontSize:
-                                    ResponsiveBreakpoints.of(context).isMobile
-                                        ? 14.sp
-                                        : 14,
-                                fontWeight: FontWeight.w500,
-                              ),
-                              leftChevronIcon: Icon(Icons.chevron_left,
+                              titleTextStyle: homeC.languageCode.value == 'ar'
+                                  ? TextStyle(
+                                      color: Colors.white,
+                                      fontFamily: 'NotoKufiArabic',
+                                      fontSize:
+                                          ResponsiveBreakpoints.of(context)
+                                                  .isMobile
+                                              ? 14.sp
+                                              : 14,
+                                      fontWeight: FontWeight.w500,
+                                    )
+                                  : TextStyle(
+                                      color: Colors.white,
+                                      fontFamily: 'Montserrat',
+                                      fontSize:
+                                          ResponsiveBreakpoints.of(context)
+                                                  .isMobile
+                                              ? 14.sp
+                                              : 14,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                              leftChevronIcon: const Icon(Icons.chevron_left,
                                   color: AppColor.kLightIconsColor),
-                              rightChevronIcon: Icon(Icons.chevron_right,
+                              rightChevronIcon: const Icon(Icons.chevron_right,
                                   color: AppColor.kLightIconsColor),
                             ),
                             startingDayOfWeek: StartingDayOfWeek.monday,
@@ -139,38 +158,74 @@ class _BookingCalanderState extends State<BookingCalander> {
                                   DateFormat.E(locale)
                                       .format(date)
                                       .substring(0, 1),
-                              decoration:
-                                  BoxDecoration(color: AppColor.kPrimary2),
-                              weekdayStyle:
-                                  GoogleFonts.montserrat(color: Colors.white),
-                              weekendStyle:
-                                  GoogleFonts.montserrat(color: Colors.white),
+                              decoration: const BoxDecoration(
+                                  color: AppColor.kPrimary2),
+                              weekdayStyle: homeC.languageCode.value == 'ar'
+                                  ? const TextStyle(
+                                      color: Colors.white,
+                                      fontFamily: 'NotoKufiArabic',
+                                    )
+                                  : const TextStyle(
+                                      color: Colors.white,
+                                      fontFamily: 'Montserrat',
+                                    ),
+                              weekendStyle: homeC.languageCode.value == 'ar'
+                                  ? const TextStyle(
+                                      color: Colors.white,
+                                      fontFamily: 'NotoKufiArabic',
+                                    )
+                                  : const TextStyle(
+                                      color: Colors.white,
+                                      fontFamily: 'Montserrat',
+                                    ),
                             ),
                             calendarStyle: CalendarStyle(
                               markerMargin: EdgeInsets.zero,
                               cellMargin: EdgeInsets.zero,
-                              defaultTextStyle:
-                                  GoogleFonts.montserrat(color: Colors.white),
-                              weekendTextStyle:
-                                  GoogleFonts.montserrat(color: Colors.white),
-                              todayDecoration: BoxDecoration(
+                              defaultTextStyle: homeC.languageCode.value == 'ar'
+                                  ? const TextStyle(
+                                      color: Colors.white,
+                                      fontFamily: 'NotoKufiArabic',
+                                    )
+                                  : const TextStyle(
+                                      color: Colors.white,
+                                      fontFamily: 'Montserrat',
+                                    ),
+                              weekendTextStyle: homeC.languageCode.value == 'ar'
+                                  ? const TextStyle(
+                                      color: Colors.white,
+                                      fontFamily: 'NotoKufiArabic',
+                                    )
+                                  : const TextStyle(
+                                      color: Colors.white,
+                                      fontFamily: 'Montserrat',
+                                    ),
+                              todayDecoration: const BoxDecoration(
                                 color: Colors.transparent, // No color for today
                                 shape: BoxShape.circle,
                               ),
-                              selectedDecoration: BoxDecoration(
+                              selectedDecoration: const BoxDecoration(
                                 shape: BoxShape.circle,
                                 color: AppColor
                                     .kGreen1Color, // Highlight selected date
                               ),
                               outsideDaysVisible: false,
                               // Ensure unselected dates are transparent
-                              defaultDecoration: BoxDecoration(
+                              defaultDecoration: const BoxDecoration(
                                   color: Colors.transparent,
                                   shape: BoxShape.circle),
-                              selectedTextStyle: GoogleFonts.montserrat(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                              ),
+                              selectedTextStyle:
+                                  homeC.languageCode.value == 'ar'
+                                      ? const TextStyle(
+                                          color: Colors.white,
+                                          fontFamily: 'NotoKufiArabic',
+                                          fontWeight: FontWeight.bold,
+                                        )
+                                      : const TextStyle(
+                                          color: Colors.white,
+                                          fontFamily: 'Montserrat',
+                                          fontWeight: FontWeight.bold,
+                                        ),
                             ),
                             selectedDayPredicate: (day) {
                               // Highlight only the date selected by the user
@@ -188,7 +243,8 @@ class _BookingCalanderState extends State<BookingCalander> {
                                   DateFormat('yyyy-MM-dd').format(selectedDay);
                               homeC.focusedDay.value = focusedDay;
                               await homeC.timeSlotApi(
-                                  consultationId: widget.consultationId,
+                                  consultationId:
+                                      homeC.consultationId.toString(),
                                   date: formattedDate);
                             },
                             calendarFormat: CalendarFormat.month,
@@ -213,12 +269,12 @@ class _BookingCalanderState extends State<BookingCalander> {
                           ? homeC.timeSlotList.value.isEmpty
                               ? Padding(
                                   padding: const EdgeInsets.all(8.0)
-                                      .copyWith(left: 60, top: 60),
+                                      .copyWith(left: 66, top: 60),
                                   child: TextComponents(
                                     color: Colors.white,
                                     title: 'No Time Slot Available',
-                                    size: isMobile ? 15.sp : 24,
-                                    weight: FontWeight.bold,
+                                    size: isMobile ? 16.sp : 16,
+                                    weight: FontWeight.w400,
                                   ),
                                 )
                               : Container(
@@ -246,19 +302,18 @@ class _BookingCalanderState extends State<BookingCalander> {
                                               : 7, // Vertical space around the grid
                                       minItemWidth:
                                           1000, // The minimum item width (can be smaller, if the layout constraints are smaller)
-                                      minItemsPerRow:
-                                          ResponsiveBreakpoints.of(context)
-                                                  .isMobile
-                                              ? 2
-                                              : 3, // The minimum items to show in a single row. Takes precedence over minItemWidth
+                                      minItemsPerRow: ResponsiveBreakpoints.of(context).isMobile
+                                          ? 2
+                                          : 3, // The minimum items to show in a single row. Takes precedence over minItemWidth
                                       maxItemsPerRow:
-                                          ResponsiveBreakpoints.of(context)
-                                                  .isMobile
+                                          ResponsiveBreakpoints.of(context).isMobile
                                               ? 4
                                               : 4, // The maximum items to show in a single row. Can be useful on large screens
                                       listViewBuilderOptions: ListViewBuilderOptions(
-                                          physics: NeverScrollableScrollPhysics(),
-                                          padding: EdgeInsets.zero), // Options that are getting passed to the ListView.builder() function
+                                          physics:
+                                              const NeverScrollableScrollPhysics(),
+                                          padding: EdgeInsets
+                                              .zero), // Options that are getting passed to the ListView.builder() function
                                       children: List.generate(homeC.timeSlotList.value.length, (index) {
                                         final time =
                                             homeC.timeSlotList.value[index];
@@ -337,17 +392,15 @@ class _BookingCalanderState extends State<BookingCalander> {
                                             });
                                       })),
                                 )
-                          : Center(
-                              child: Padding(
-                                padding:
-                                    const EdgeInsets.all(8.0).copyWith(top: 34),
-                                child: TextComponents(
-                                  color: Colors.white,
-                                  title: homeC.timeSlotErrorMessage.value,
-                                  size: isMobile ? 20.sp : 24,
-                                  weight: FontWeight.bold,
-                                  textAlign: TextAlign.center,
-                                ),
+                          : Padding(
+                              padding: const EdgeInsets.all(8.0)
+                                  .copyWith(top: 34, left: 66),
+                              child: TextComponents(
+                                color: Colors.white,
+                                title: homeC.timeSlotErrorMessage.value,
+                                size: isMobile ? 16.sp : 16,
+                                weight: FontWeight.w400,
+                                textAlign: TextAlign.center,
                               ),
                             )),
                 ),
@@ -366,10 +419,10 @@ class _BookingCalanderState extends State<BookingCalander> {
                               if (homeC.selectedTimeId.value == '-1') {
                                 Get.snackbar(
                                     'Warning', 'Please Select Time Slot',
-                                    backgroundColor: Colors.amber,
+                                    backgroundColor: Colors.black,
                                     colorText: AppColor.kWhiteColor);
                               } else {
-                                Get.to(() => SummaryStepper());
+                                Get.toNamed('/SummaryStepper');
                               }
                             },
                             childWidget: TextComponents(

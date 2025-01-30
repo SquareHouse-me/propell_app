@@ -6,22 +6,26 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get_it/get_it.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:propell/configs/res/colors.dart';
 import 'package:propell/data/repository/home_repo.dart';
 import 'package:propell/data/repository/summary_repo.dart';
 import 'package:propell/firebase_options.dart';
 import 'package:propell/viewModels/controllers/home_controller.dart';
+import 'package:propell/views/dashBoard/booking_calander.dart';
+import 'package:propell/views/dashBoard/home_view.dart';
 import 'package:propell/views/splash/splash_view.dart';
+import 'package:propell/views/summary/summary_view.dart';
+import 'package:propell/views/summary/widgets/thankyou.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
 import 'package:firebase_messaging/firebase_messaging.dart';
 
+import 'package:flutter_web_plugins/flutter_web_plugins.dart';
+
 GetIt getIt = GetIt.instance;
-@pragma('vm:entry-point')
-Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
-  log(message.notification!.title.toString() + ' MessagingBackground');
-}
+// @pragma('vm:entry-point')
+// Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+//   log(message.notification!.title.toString() + ' MessagingBackground');
+// }
 
 void setup() {
   getIt.registerLazySingleton<HomeRepo>(() => HomeRepo());
@@ -46,8 +50,8 @@ void main() async {
       .then((value) async {
     log("Firebase initializeApp then is running");
   });
-  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
-
+  // FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+  setUrlStrategy(PathUrlStrategy());
   setup();
   runApp(MyApp());
 }
@@ -56,7 +60,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Get.put(
-      HomeController(homeRepo: getIt<HomeRepo>()),
+      HomeController(
+        homeRepo: getIt<HomeRepo>(),
+      ),
     );
     return ScreenUtilInit(
       designSize: const Size(360, 800), // Base design for mobile
@@ -64,10 +70,11 @@ class MyApp extends StatelessWidget {
         return GetMaterialApp(
           locale: Get.locale,
           theme: ThemeData(
-            
+            // fontFamily:  'Montserrat',
+
             scaffoldBackgroundColor:
                 Color(0xFF231F20), // Background color for the app
-            primaryColor: AppColor.kGreen1Color, // Primary color
+            primaryColor: Color(0xFF231F20), // Primary color
           ),
           debugShowCheckedModeBanner: false,
           builder: (context, child) => ResponsiveBreakpoints.builder(
@@ -79,7 +86,19 @@ class MyApp extends StatelessWidget {
               const Breakpoint(start: 2460, end: double.infinity, name: '4K'),
             ],
           ),
-          home: SplashView(),
+          initialRoute: '/',
+          getPages: [
+            GetPage(name: '/', page: () => SplashView()),
+            GetPage(name: '/HomeView', page: () => HomeView()),
+            GetPage(
+              name: '/BookingCalendar',
+              page: () => BookingCalander(),
+            ),
+            GetPage(name: '/SummaryStepper', page: () => SummaryStepper()),
+            GetPage(
+                name: '/ThankyouDialogPage', page: () => ThankyouDialogPage()),
+            GetPage(name: '/FailedDialogPage', page: () => FailedDialogPage()),
+          ],
         );
       },
     );

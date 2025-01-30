@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:gif_view/gif_view.dart';
 import 'package:propell/configs/res/colors.dart';
 import 'package:propell/configs/res/images.dart';
-import 'package:propell/viewModels/controllers/home_controller.dart';
-import 'package:propell/views/dashBoard/home_view.dart';
 import 'package:responsive_framework/responsive_framework.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class SplashView extends StatefulWidget {
   const SplashView({super.key});
@@ -17,21 +15,25 @@ class SplashView extends StatefulWidget {
 class _SplashViewState extends State<SplashView> {
   @override
   void initState() {
-    Future.delayed(const Duration(seconds: 2), () {
-       
-      Get.off(() => HomeView());
+    Future.delayed(const Duration(seconds: 5), () {
+      Get.offAllNamed('/HomeView');
     });
   }
-
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColor.kPrimary,
+      backgroundColor: Colors.black,
       body: Center(
-        child: ResponsiveBreakpoints.of(context).isMobile
-            ? Image.asset(AppImage.appLogo)
-            : Image.asset(AppImage.webLogo),
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: GifView.asset(
+            'assets/images/gifLogo.gif',
+            height: 150,
+            width: 150,
+            frameRate: 30,
+          ),
+        ),
       ),
     );
   }

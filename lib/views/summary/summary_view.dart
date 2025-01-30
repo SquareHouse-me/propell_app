@@ -37,7 +37,7 @@ class _SummaryStepperState extends State<SummaryStepper> {
           preferredSize: Size.fromHeight(isMobile ? 60 : 100),
           child: isMobile
               ? AppbarWidget(
-                  title: 'Summary',
+                  title: '',
                   isFirstPage: false,
                 )
               : WebAppbarWidget()),

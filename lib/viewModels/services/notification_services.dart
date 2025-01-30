@@ -52,7 +52,7 @@ class NotificationServices {
       if (kIsWeb) {
         token = await messaging.getToken(
             vapidKey:
-                "BO54y8SMWrlEFA2ywMi5uKR0AwCJt-HTovlJ8J8O5uucWrmJFfI6aPj_tk0M5b42Ib7wVtxkkkMpm6jzh31jeKs");
+                 "BESyVhvjRzaOI3AKxMJMVOfYPNKDb5utotJ31WAl-LHzKYJZufysCW00rWvHzfVO2KQTGd8XXEOG0ohFY2GjKM0");
         log('$token getDeviceToken');
 
         // Save the token and the current timestamp
@@ -107,7 +107,7 @@ class NotificationServices {
         // For web, use the vapidKey to fetch the token
         newToken = await messaging.getToken(
                 vapidKey:
-                    "BO54y8SMWrlEFA2ywMi5uKR0AwCJt-HTovlJ8J8O5uucWrmJFfI6aPj_tk0M5b42Ib7wVtxkkkMpm6jzh31jeKs") ??
+                    "BESyVhvjRzaOI3AKxMJMVOfYPNKDb5utotJ31WAl-LHzKYJZufysCW00rWvHzfVO2KQTGd8XXEOG0ohFY2GjKM0") ??
             '';
         await sp.setString('DeviceToken', newToken);
         await sp.setString(

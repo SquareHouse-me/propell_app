@@ -52,6 +52,9 @@ class BookingResponseData with _$BookingResponseData {
     @Default('') @JsonKey(name: 'service_name') String service_name,
     @Default(0) @JsonKey(name: 'cat_id') int cat_id,
     @Default('') @JsonKey(name: 'category_name') String category_name,
+    @Default('') @JsonKey(name: 'consultation_image') String consultation_image,
+    @Default('') @JsonKey(name: 'service_images') String service_images,
+    @Default('') @JsonKey(name: 'category_image') String category_image,
   }) = _BookingResponseData;
 
   factory BookingResponseData.fromJson(Map<String, dynamic> json) =>

@@ -22,13 +22,13 @@ class ServiceTypeOne extends StatefulWidget {
 class _ServiceTypeOneState extends State<ServiceTypeOne> {
   final homeC = Get.find<HomeController>();
   final summary = Get.find<SummaryController>();
-  NotificationServices services = NotificationServices();
+  // NotificationServices services = NotificationServices();
   @override
   void initState() {
     super.initState();
     homeC.servicesApi();
     homeC.consultationApi();
-    checkAndRefreshToken();
+    // checkAndRefreshToken();
     log('message');
     //studiolistController.studiolistApi(1.toString());
   }
@@ -36,7 +36,7 @@ class _ServiceTypeOneState extends State<ServiceTypeOne> {
   Future<void> checkAndRefreshToken() async {
     try {
       SharedPreferences sp = await SharedPreferences.getInstance();
-      String? deviceToken = await services.getDeviceToken();
+      String? deviceToken = await "services.getDeviceToken()";
 
       // Retrieve the saved token and its timestamp
       String? savedDeviceToken = await sp.getString('DeviceToken').toString();
@@ -63,7 +63,7 @@ class _ServiceTypeOneState extends State<ServiceTypeOne> {
         summary.fCMtoken.value = savedDeviceToken.toString();
       } else {
         log('Token is expired or different. Refreshing...');
-        String newToken = await services.isTokenRefresh();
+        String newToken = await "services.isTokenRefresh()";
         log('$newToken refreshed token');
         summary.fCMtoken.value = newToken.toString();
       }
@@ -144,8 +144,8 @@ class _ServiceTypeOneState extends State<ServiceTypeOne> {
                 child: TextComponents(
                   color: Colors.white,
                   title: homeC.consultErrorMessage.value,
-                  size: isMobile ? 24.sp : 24,
-                  weight: FontWeight.bold,
+                  size: isMobile ? 16.sp : 16,
+                  weight: FontWeight.w400,
                 ),
               ));
   }
@@ -162,6 +162,7 @@ Widget _buildLocationOption(
       Get.find<HomeController>().isLocationSelected.value = false;
       print(Get.find<HomeController>().isLocationSelected.value);
       Get.find<HomeController>().serviceId = id;
+      
     },
     child: Container(
       margin: EdgeInsets.only(
@@ -178,7 +179,8 @@ Widget _buildLocationOption(
         contentPadding: EdgeInsets.zero,
         leading: Image.network(
           icon, // URL of the image
-          width: 30, color: AppColor.kGreen1Color,
+          width: 30,
+          //  color: AppColor.kGreen1Color,
           height: 30,
           fit: BoxFit.fitHeight,
           loadingBuilder: (BuildContext context, Widget child,
@@ -215,7 +217,7 @@ Widget _buildLocationOption(
           ),
           child: Center(
             child: TextComponents(
-              color: AppColor.kGreen1Color,
+              color: AppColor.kWhiteColor,
               title: 'KWD ${double.parse(price).toInt()}',
               size: ResponsiveBreakpoints.of(context).isMobile ? 12.sp : 14,
               weight: FontWeight.w500,

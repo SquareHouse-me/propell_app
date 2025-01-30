@@ -1,13 +1,14 @@
- 
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart'; 
-import 'package:get/get.dart'; 
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:propell/configs/generalWidgets/textstyle_component.dart';
-import 'package:propell/configs/res/colors.dart'; 
+import 'package:propell/configs/res/colors.dart';
 import 'package:propell/configs/utlis/validation_utils.dart';
+import 'package:propell/data/network/export_view.dart';
 import 'package:propell/data/response/status.dart';
 import 'package:propell/viewModels/controllers/home_controller.dart';
 import 'package:propell/views/dashBoard/booking_calander.dart';
+import 'package:propell/views/summary/summary_view.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
 class ServiceTypeTwo extends StatelessWidget {
@@ -103,7 +104,7 @@ class ServiceTypeTwo extends StatelessWidget {
 }
 
 class ResUseableContainer extends StatelessWidget {
-  const ResUseableContainer({
+  ResUseableContainer({
     super.key,
     required this.isMobile,
     required this.title,
@@ -114,7 +115,7 @@ class ResUseableContainer extends StatelessWidget {
   final bool isMobile;
   final String title;
   final String appIcon;
-
+  HomeController homeC = Get.find<HomeController>();
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -130,21 +131,25 @@ class ResUseableContainer extends StatelessWidget {
       ),
       child: ListTile(
         onTap: () {
-          Get.to(() => BookingCalander(
-                    consultationId: id.toString(),
-                  ))!
-              .then((onValue) {
-            Get.find<HomeController>().isLocationSelected.value = true;
+          Get.back();
+          Get.toNamed(
+            '/BookingCalendar',
+          );
+          homeC.consultationId = int.parse(id.toString());
+          homeC.isLocationSelected.value = true;
 
-            Navigator.of(context).pop();
-          });
+          log(homeC.consultationId.toString() +
+              "consultationID print" +
+              id.toString());
+
+          // Get.to(() => SummaryStepper());
         },
         contentPadding: EdgeInsets.zero,
         leading: Container(
           width: 44,
           height: 44,
           decoration: BoxDecoration(
-            color: AppColor.kGreen1Color,
+            // color: AppColor.kGreen1Color,
             shape: BoxShape.circle,
             image: DecorationImage(
               image: NetworkImage(

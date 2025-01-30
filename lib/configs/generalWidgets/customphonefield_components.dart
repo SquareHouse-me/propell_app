@@ -51,7 +51,7 @@ class CustomPhoneFieldComponents extends StatelessWidget {
             ],
             keyboardType: keyboardType,
             cursorColor: AppColor.kGreen1Color,
-            style: GoogleFonts.montserrat(
+            style:  GoogleFonts.montserrat(
               fontSize: ResponsiveBreakpoints.of(context).isMobile ? 14.sp : 14,
               color: AppColor.kLightHintText,
               fontWeight: FontWeight.w400,

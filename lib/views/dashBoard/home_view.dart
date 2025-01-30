@@ -12,6 +12,7 @@ import 'package:propell/views/dashBoard/widgets/web_header.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 import 'package:responsive_grid_list/responsive_grid_list.dart';
 
+// import 'dart:html' as html;import 'dart:js' as js;//
 class HomeView extends StatelessWidget {
   final homeC = Get.find<HomeController>();
   @override
@@ -37,8 +38,8 @@ class HomeView extends StatelessWidget {
                       child: TextComponents(
                         color: Colors.white,
                         title: 'No Category is Found',
-                        size: isMobile ? 24.sp : 24,
-                        weight: FontWeight.bold,
+                        size: isMobile ? 16.sp : 16,
+                        weight: FontWeight.w400,
                       ),
                     )
                   : SingleChildScrollView(
@@ -55,7 +56,8 @@ class HomeView extends StatelessWidget {
                               ResponsiveRowColumnItem(
                                 child: Padding(
                                   padding: EdgeInsets.only(
-                                      left: isMobile ? 0.0 : 25.0),
+                                      left: isMobile ? 0.0 : 25.0,
+                                      right: isMobile ? 0.0 : 25.0),
                                   child: TextComponents(
                                     color: Colors.white,
                                     title: 'Book an appointment',
@@ -115,35 +117,52 @@ class HomeView extends StatelessWidget {
                                 ),
                               )),
                               ResponsiveRowColumnItem(child: 12.heightSpace),
-                              ResponsiveRowColumnItem(
-                                  child: Padding(
-                                padding: EdgeInsets.only(
-                                    left: isMobile ? 0.0 : 25.0),
-                                child: SizedBox(
-                                  width: isMobile ? null : 1100,
-                                  child: Image.network(
-                                    homeC.sliderList.value.first.image
-                                        .toString(),
-                                    fit: BoxFit.fill,
-                                    loadingBuilder: (BuildContext context,
-                                        Widget child,
-                                        ImageChunkEvent? loadingProgress) {
-                                      if (loadingProgress == null)
-                                        return child; // Return the image once loaded
-                                      return getIndicator(); // Show the custom loading indicator
-                                    },
-                                    errorBuilder: (BuildContext context,
-                                        Object error, StackTrace? stackTrace) {
-                                      return Icon(
-                                        Icons.error,
-                                        color: AppColor
-                                            .kGreen1Color, // Custom error icon and color
-                                      );
-                                    },
-                                  ),
-                                ),
-                              )),
+                              // ResponsiveRowColumnItem(
+                              //     child: Padding(
+                              //   padding: EdgeInsets.only(
+                              //     left: isMobile ? 0.0 : 25.0,
+                              //   ),
+                              //   child: Container(
+                              //     width: isMobile ? null : 1060,
+                              //     height: isMobile ? 200.h : 200,
+                              //     padding: EdgeInsets.symmetric(
+                              //         horizontal:
+                              //             ResponsiveBreakpoints.of(context)
+                              //                     .isMobile
+                              //                 ? 19.h
+                              //                 : 20,
+                              //         vertical:
+                              //             ResponsiveBreakpoints.of(context)
+                              //                     .isMobile
+                              //                 ? 12.h
+                              //                 : 20),
+                              //     decoration: BoxDecoration(
+                              //       color: Colors.transparent,
+                              //       borderRadius: BorderRadius.circular(
+                              //           ResponsiveBreakpoints.of(context)
+                              //                   .isMobile
+                              //               ? 15.r
+                              //               : 15),
+                              //       shape: BoxShape.rectangle,
+                              //       image: DecorationImage(
+                              //         image: NetworkImage(
+                              //           homeC.sliderList.value.first.image
+                              //               .toString(), // URL of the image
+                              //         ),
+                              //         fit: BoxFit.fill,
+                              //         onError: (exception, stackTrace) {},
+                              //       ),
+                              //     ),
+                              //   ),
+                              // )),
                               ResponsiveRowColumnItem(child: 36.heightSpace),
+                              // ResponsiveRowColumnItem(
+                              //   child: ElevatedButton(
+                              //       onPressed: () {
+                              //         Get.toNamed('/FailedDialogPage');
+                              //       },
+                              //       child: Text('Book Now')),
+                              // ),
                             ],
                           ),
                         ),
@@ -155,12 +174,16 @@ class HomeView extends StatelessWidget {
                     child: TextComponents(
                       color: Colors.white,
                       title: homeC.categoryErrorMessage.value,
-                      size: isMobile ? 18.sp : 24,
-                      weight: FontWeight.bold,
+                      size: isMobile ? 16.sp : 16,
+                      weight: FontWeight.w400,
                       textAlign: TextAlign.center,
                     ),
                   ),
                 )),
     );
   }
+  //void openInWindow(String uri) {
+  //   // html.window.location.replace(uri);
+  //   js.context.callMethod('eval', ['window.location.replace("$uri")']);
+  // }
 }

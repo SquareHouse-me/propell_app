@@ -47,29 +47,28 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyCgCnnBr9VxR8yzeXN3LwkjZqSQ_DJ-iPs',
-    appId: '1:654910300478:web:d5fdce2e7000a807e44c6f',
-    messagingSenderId: '654910300478',
-    projectId: 'propellwebapp',
-    authDomain: 'propellwebapp.firebaseapp.com',
-    storageBucket: 'propellwebapp.firebasestorage.app',
+    apiKey: 'AIzaSyB50WmRmVqOpxzFICXpQ_AQvIWkFZiKbXY',
+    appId: '1:311844172470:web:5688cffc83f96938a02c17',
+    messagingSenderId: '311844172470',
+    projectId: 'mypropellapp',
+    authDomain: 'mypropellapp.firebaseapp.com',
+    storageBucket: 'mypropellapp.firebasestorage.app',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyBgmsQYmxc5Z3ocq2OpMxUROtZ8VwaLURM',
-    appId: '1:654910300478:android:b44dc68ac9723936e44c6f',
-    messagingSenderId: '654910300478',
-    projectId: 'propellwebapp',
-    storageBucket: 'propellwebapp.firebasestorage.app',
+    apiKey: 'AIzaSyBpPW5mmqVA2Ah-9oGLPTumq0BC1rho-TQ',
+    appId: '1:311844172470:android:ed8d6aadbb53bb86a02c17',
+    messagingSenderId: '311844172470',
+    projectId: 'mypropellapp',
+    storageBucket: 'mypropellapp.firebasestorage.app',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyB6Ll_hyO5OfIl2JH_c57FpyLgv2EGz1tg',
-    appId: '1:654910300478:ios:809c3ebf0618ec25e44c6f',
-    messagingSenderId: '654910300478',
-    projectId: 'propellwebapp',
-    storageBucket: 'propellwebapp.firebasestorage.app',
+    apiKey: 'AIzaSyCvPeLEJN89_p6QIBbMqkBwTAMowLQBFW0',
+    appId: '1:311844172470:ios:536c6b186eb6fed4a02c17',
+    messagingSenderId: '311844172470',
+    projectId: 'mypropellapp',
+    storageBucket: 'mypropellapp.firebasestorage.app',
     iosBundleId: 'com.propell',
   );
-
 }

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:propell/configs/generalWidgets/textstyle_component.dart';
 import 'package:propell/configs/res/colors.dart';
 import 'package:propell/configs/res/icons.dart';
@@ -23,7 +22,9 @@ class WebAppbarWidget extends StatelessWidget {
       elevation: 0,
       toolbarHeight: 200,
       surfaceTintColor: Colors.transparent,
-      iconTheme: const IconThemeData(color: AppColor.kGreen1Color),
+      iconTheme: const IconThemeData(
+        color: Colors.white,
+      ),
       title: ResponsiveRowColumn(
         layout: ResponsiveRowColumnType.ROW,
         rowMainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -52,18 +53,31 @@ class WebAppbarWidget extends StatelessWidget {
                 children: [
                   SvgPicture.asset(
                     AppIcons.globalIcon,
-                    color: AppColor.kGreen1Color,
                   ),
                   8.widthSpace,
                   Obx(() => DropdownButton<String>(
                         value: homeC.language.value,
-                        iconEnabledColor: AppColor.kGreen1Color,
+                        iconEnabledColor: Colors.white,
                         dropdownColor: Colors.black,
-                        style: GoogleFonts.montserrat(
-                          fontSize: 12,
-                          color: AppColor.kWhiteColor,
-                          fontWeight: FontWeight.w500,
-                        ),
+                        style: homeC.languageCode.value == 'ar'
+                            ? TextStyle(
+                                fontFamily: 'NotoKufiArabic',
+                                fontSize:
+                                    ResponsiveBreakpoints.of(context).isMobile
+                                        ? 12.sp
+                                        : 12,
+                                color: AppColor.kWhiteColor,
+                                fontWeight: FontWeight.w500,
+                              )
+                            : TextStyle(
+                                fontSize:
+                                    ResponsiveBreakpoints.of(context).isMobile
+                                        ? 12.sp
+                                        : 12,
+                                color: AppColor.kWhiteColor,
+                                fontWeight: FontWeight.w500,
+                                fontFamily: 'Montserrat',
+                              ),
                         items: ['English', 'Arabic']
                             .map((e) => DropdownMenuItem(
                                   value: e,

@@ -1,20 +1,26 @@
+// ignore_for_file: avoid_web_libraries_in_flutter
+
 import 'package:propell/configs/generalWidgets/export_general.dart';
 import 'package:propell/configs/generalWidgets/primary_button.dart';
 import 'package:propell/configs/generalWidgets/textstyle_component.dart';
 import 'package:propell/configs/res/colors.dart';
 import 'package:propell/configs/res/icons.dart';
 import 'package:propell/configs/utlis/extension.dart';
+import 'package:propell/configs/utlis/validation_utils.dart';
 import 'package:propell/viewModels/controllers/home_controller.dart';
 import 'package:propell/viewModels/controllers/summary_controller.dart';
-import 'package:propell/views/summary/payment_for_web.dart';
-import 'package:propell/views/summary/payment_web.dart';
 import 'package:responsive_framework/responsive_framework.dart';
+import 'dart:html' as html;
 
 class StepTwo extends StatelessWidget {
   StepTwo({super.key});
   final SummaryController summaryC = Get.find<SummaryController>();
   @override
   Widget build(BuildContext context) {
+    print(summaryC.summaryModel.value!.bookingRespons.service_images);
+    print(summaryC.summaryModel.value!.bookingRespons.consultation_image);
+
+    checkForRedirect();
     summaryC.calculateTotal(
         timeSlot: summaryC.summaryModel.value!.bookingRespons.timeslot);
     bool isMobile = ResponsiveBreakpoints.of(context).isMobile;
@@ -38,14 +44,8 @@ class StepTwo extends StatelessWidget {
           ResponsiveRowColumnItem(
             child: ResUseableContainer(
               isMobile: isMobile,
-              appIcon: summaryC
-                          .summaryModel.value!.bookingRespons.category_name ==
-                      'Landscaping Consultation'
-                  ? AppIcons.landscapingConsultation
-                  : summaryC.summaryModel.value!.bookingRespons.category_name ==
-                          'Architecture Consultation'
-                      ? AppIcons.architectureConsultation
-                      : AppIcons.interiorConsultation,
+              appIcon:
+                  summaryC.summaryModel.value!.bookingRespons.category_image,
               title: summaryC.summaryModel.value!.bookingRespons.category_name
                   .split(' ')[0]
                   .toString(),
@@ -72,7 +72,8 @@ class StepTwo extends StatelessWidget {
           ResponsiveRowColumnItem(
             child: ResUseableTwoContainer(
               isMobile: isMobile,
-              appIcon: AppIcons.profileCircle,
+              appIcon: summaryC
+                  .summaryModel.value!.bookingRespons.consultation_image,
               title: summaryC
                   .summaryModel.value!.bookingRespons.consultation_name
                   .toString(),
@@ -124,21 +125,31 @@ class StepTwo extends StatelessWidget {
                             rowSpacing: 2,
                             children: [
                               ResponsiveRowColumnItem(
-                                child: SvgPicture.asset(
+                                child: Image.network(
                                   summaryC.summaryModel.value!.bookingRespons
-                                              .service_name ==
-                                          'Office'
-                                      ? AppIcons.buildings
-                                      : summaryC
-                                                  .summaryModel
-                                                  .value!
-                                                  .bookingRespons
-                                                  .service_name ==
-                                              'Online'
-                                          ? AppIcons.wifi
-                                          : AppIcons.profileUser,
-                                  color: AppColor.kLightTitleColor,
+                                      .service_images, // URL of the image
+                                  width: 20,
+                                  height: 20,
+                                  fit: BoxFit.fitHeight,
+                                  loadingBuilder: (BuildContext context,
+                                      Widget child,
+                                      ImageChunkEvent? loadingProgress) {
+                                    if (loadingProgress == null)
+                                      return child; // Return the image once loaded
+                                    return getIndicator(); // Show the custom loading indicator
+                                  },
+                                  errorBuilder: (BuildContext context,
+                                      Object error, StackTrace? stackTrace) {
+                                    return Icon(
+                                      Icons.error,
+                                      color: AppColor
+                                          .kGreen1Color, // Custom error icon and color
+                                    );
+                                  },
                                 ),
+                              ),
+                              ResponsiveRowColumnItem(
+                                child: 6.widthSpace,
                               ),
                               ResponsiveRowColumnItem(
                                   child: TextComponents(
@@ -345,9 +356,19 @@ class StepTwo extends StatelessWidget {
                     //       ));
                     //   Get.find<HomeController>().isLocationSelected = true.obs;
                     // } else {
-                    Get.to(() => PaymentWeb(
-                          url: summaryC.summaryModel.value!.url.toString(),
-                        ));
+                    // Get.to(() => PaymentWeb(
+                    //       url: summaryC.summaryModel.value!.url.toString(),
+                    //     ));
+                    print(summaryC.summaryModel.value!.url.toString());
+
+                    openInWindow(
+                      summaryC.summaryModel.value!.url.toString(),
+                    );
+
+                    // Get.to(() => PaymentWeb(
+                    //       url:
+                    //           'https://apiv2.upayments.com/?session_id=2025150609190118259129381892199159518764419895',
+                    //     ));
                     Get.find<HomeController>().isLocationSelected = true.obs;
                   },
                   childWidget: TextComponents(
@@ -364,6 +385,21 @@ class StepTwo extends StatelessWidget {
       ),
     );
   }
+
+  void openInWindow(String uri) {
+    html.window.location.replace(uri);
+    // Redirect user
+  }
+
+// Later, when your app reloads
+  void checkForRedirect() {
+    final hash = html.window.location.hash;
+    if (hash.contains("https://book.propell.design/#/ThankyouDialogPage")) {
+      print("Fragment received: $hash");
+      // Handle the fragment
+    }
+  }
+
 }
 
 class ResUseableContainer extends StatelessWidget {
@@ -388,21 +424,24 @@ class ResUseableContainer extends StatelessWidget {
       ),
       width: isMobile ? 343.w : 512,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(isMobile ? 15.r : 15),
         color: AppColor.kBlck23,
+        borderRadius: BorderRadius.circular(isMobile ? 15.r : 15),
       ),
       child: ListTile(
         contentPadding: EdgeInsets.zero,
         leading: Container(
-          width: 44,
-          height: 44,
+          width: 25,
+          height: 25,
+          padding: EdgeInsets.all(2),
           decoration: BoxDecoration(
-              color: AppColor.kWhiteColor, shape: BoxShape.circle),
-          child: Center(
-              child: Padding(
-            padding: EdgeInsets.all(8.0),
-            child: SvgPicture.asset(appIcon, color: AppColor.kGreen1Color),
-          )),
+            image: DecorationImage(
+              image: NetworkImage(
+                appIcon, // URL of the image
+              ),
+              fit: BoxFit.fill,
+              onError: (exception, stackTrace) {},
+            ),
+          ),
         ),
         title: TextComponents(
           color: Colors.white,
@@ -442,8 +481,8 @@ class ResUseableTwoContainer extends StatelessWidget {
       ),
       width: isMobile ? 343.w : 512,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(isMobile ? 15.r : 15),
         color: AppColor.kBlck23,
+        borderRadius: BorderRadius.circular(isMobile ? 15.r : 15),
       ),
       child: ListTile(
         contentPadding: EdgeInsets.zero,
@@ -451,12 +490,15 @@ class ResUseableTwoContainer extends StatelessWidget {
           width: 44,
           height: 44,
           decoration: BoxDecoration(
-              color: AppColor.kWhiteColor, shape: BoxShape.circle),
-          child: Center(
-              child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: SvgPicture.asset(appIcon, color: AppColor.kGreen1Color),
-          )),
+            shape: BoxShape.circle,
+            image: DecorationImage(
+              image: NetworkImage(
+                appIcon, // URL of the image
+              ),
+              fit: BoxFit.cover,
+              onError: (exception, stackTrace) {},
+            ),
+          ),
         ),
         title: TextComponents(
           color: Colors.white,

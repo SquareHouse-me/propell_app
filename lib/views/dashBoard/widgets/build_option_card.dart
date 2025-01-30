@@ -1,8 +1,6 @@
- 
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart'; 
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:propell/configs/generalWidgets/textstyle_component.dart';
 import 'package:propell/configs/res/colors.dart';
 import 'package:propell/configs/utlis/validation_utils.dart';
@@ -31,32 +29,25 @@ Widget buildOptionCard(BuildContext context,
             splashColor: AppColor.kGreen1Color.withOpacity(0.5),
             hoverColor: AppColor.kGreen1Color.withOpacity(0.5),
             contentPadding: EdgeInsets.zero,
-            leading: SizedBox(
+            leading: Image.network(
+              icon, // URL of the image
               width: 50,
               height: 50,
-              child: Padding(
-                padding: const EdgeInsets.all(8.0).copyWith(left: 0, right: 0),
-                child: Image.network(
-                  icon, // URL of the image
-                  width: 50, color: AppColor.kGreen1Color,
-                  height: 50,
-                  fit: BoxFit.fitWidth,
-                  loadingBuilder: (BuildContext context, Widget child,
-                      ImageChunkEvent? loadingProgress) {
-                    if (loadingProgress == null)
-                      return child; // Return the image once loaded
-                    return getIndicator(); // Show the custom loading indicator
-                  },
-                  errorBuilder: (BuildContext context, Object error,
-                      StackTrace? stackTrace) {
-                    return Icon(
-                      Icons.error,
-                      color:
-                          AppColor.kGreen1Color, // Custom error icon and color
-                    );
-                  },
-                ),
-              ),
+              // color: AppColor.kGreen1Color,
+              fit: BoxFit.fitWidth,
+              loadingBuilder: (BuildContext context, Widget child,
+                  ImageChunkEvent? loadingProgress) {
+                if (loadingProgress == null)
+                  return child; // Return the image once loaded
+                return getIndicator(); // Show the custom loading indicator
+              },
+              errorBuilder:
+                  (BuildContext context, Object error, StackTrace? stackTrace) {
+                return const Icon(
+                  Icons.error,
+                  color: AppColor.kGreen1Color, // Custom error icon and color
+                );
+              },
             ),
             title: TextComponents(
               color: Colors.white,
@@ -71,7 +62,7 @@ Widget buildOptionCard(BuildContext context,
               weight: FontWeight.w500,
             ),
             trailing: Icon(Icons.arrow_forward_ios,
-                color: AppColor.kGreen1Color, size: 18.sp),
+                color: Colors.white, size: 18.sp),
             onTap: () async {
               print('object pressed');
               homeC.catId = id;
@@ -101,7 +92,7 @@ Widget buildOptionCard(BuildContext context,
                       icon, // URL of the image
                       width: 50,
                       height: 50,
-                      color: AppColor.kGreen1Color,
+                      // color: AppColor.kGreen1Color,
                       fit: BoxFit.fitWidth,
                       loadingBuilder: (BuildContext context, Widget child,
                           ImageChunkEvent? loadingProgress) {
@@ -111,7 +102,7 @@ Widget buildOptionCard(BuildContext context,
                       },
                       errorBuilder: (BuildContext context, Object error,
                           StackTrace? stackTrace) {
-                        return Icon(
+                        return const Icon(
                           Icons.error,
                           color: AppColor
                               .kGreen1Color, // Custom error icon and color
@@ -121,27 +112,57 @@ Widget buildOptionCard(BuildContext context,
                   ),
                 ),
                 ResponsiveRowColumnItem(
-                    child: RichText(
-                  text: TextSpan(
-                    text: label + " ",
-                    style: GoogleFonts.montserrat(
-                      fontSize: 15,
-                      color: AppColor.kWhiteColor,
-                      fontWeight: FontWeight.w500,
-                    ),
-                    children: [
-                      TextSpan(
-                        text: subTitle,
-                        style: GoogleFonts.montserrat(
-                          fontSize: 15,
-                          color: AppColor.kWhiteColor,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                    ],
-                  ),
-                  textAlign: TextAlign.center,
-                ))
+                    child: Obx(() => RichText(
+                          text: TextSpan(
+                            text: label + " ",
+                            style: homeC.languageCode.value == 'ar'
+                                ? TextStyle(
+                                    fontFamily: 'NotoKufiArabic',
+                                    fontSize: ResponsiveBreakpoints.of(context)
+                                            .isMobile
+                                        ? 15.sp
+                                        : 15,
+                                    color: AppColor.kWhiteColor,
+                                    fontWeight: FontWeight.w500,
+                                  )
+                                : TextStyle(
+                                    fontSize: ResponsiveBreakpoints.of(context)
+                                            .isMobile
+                                        ? 15.sp
+                                        : 15,
+                                    color: AppColor.kWhiteColor,
+                                    fontWeight: FontWeight.w500,
+                                    fontFamily: 'Montserrat',
+                                  ),
+                            children: [
+                              TextSpan(
+                                text: subTitle,
+                                style: homeC.languageCode.value == 'ar'
+                                    ? TextStyle(
+                                        fontFamily: 'NotoKufiArabic',
+                                        fontSize:
+                                            ResponsiveBreakpoints.of(context)
+                                                    .isMobile
+                                                ? 12.sp
+                                                : 12,
+                                        color: AppColor.kWhiteColor,
+                                        fontWeight: FontWeight.w500,
+                                      )
+                                    : TextStyle(
+                                        fontSize:
+                                            ResponsiveBreakpoints.of(context)
+                                                    .isMobile
+                                                ? 12.sp
+                                                : 12,
+                                        color: AppColor.kWhiteColor,
+                                        fontWeight: FontWeight.w500,
+                                        fontFamily: 'Montserrat',
+                                      ),
+                              ),
+                            ],
+                          ),
+                          textAlign: TextAlign.center,
+                        )))
               ],
             ),
           ),
