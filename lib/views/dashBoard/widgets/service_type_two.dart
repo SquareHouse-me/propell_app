@@ -7,8 +7,7 @@ import 'package:propell/configs/utlis/validation_utils.dart';
 import 'package:propell/data/network/export_view.dart';
 import 'package:propell/data/response/status.dart';
 import 'package:propell/viewModels/controllers/home_controller.dart';
-import 'package:propell/views/dashBoard/booking_calander.dart';
-import 'package:propell/views/summary/summary_view.dart';
+import 'package:propell/viewModels/controllers/theme_controller.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
 class ServiceTypeTwo extends StatelessWidget {
@@ -16,6 +15,7 @@ class ServiceTypeTwo extends StatelessWidget {
 
   final homeC = Get.find<HomeController>();
 
+  ThemeController themeController = Get.find<ThemeController>();
   @override
   Widget build(BuildContext context) {
     bool isMobile = ResponsiveBreakpoints.of(context).isMobile;
@@ -31,7 +31,9 @@ class ServiceTypeTwo extends StatelessWidget {
             ? homeC.consultList.value.isEmpty
                 ? Center(
                     child: TextComponents(
-                      color: Colors.white,
+                      color: themeController.isDarkMode.value
+                          ? AppColor.kWhiteColor
+                          : AppColor.kGreen1Color,
                       title: 'No consultation is Found',
                       size: isMobile ? 24.sp : 24,
                       weight: FontWeight.bold,
@@ -46,7 +48,9 @@ class ServiceTypeTwo extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             TextComponents(
-                              color: AppColor.kWhiteColor,
+                              color: themeController.isDarkMode.value
+                                  ? AppColor.kWhiteColor
+                                  : AppColor.kGreen1Color,
                               title: 'Consultant',
                               size: ResponsiveBreakpoints.of(context).isMobile
                                   ? 14.sp
@@ -67,7 +71,9 @@ class ServiceTypeTwo extends StatelessWidget {
                         ),
                         SizedBox(height: isMobile ? 5.0.h : 5),
                         TextComponents(
-                          color: AppColor.kWhiteColor,
+                          color: themeController.isDarkMode.value
+                              ? AppColor.kWhiteColor
+                              : AppColor.kGreen1Color,
                           title: 'Please select a consultant',
                           size: isMobile ? 12.sp : 12,
                           weight: FontWeight.w400,
@@ -94,7 +100,9 @@ class ServiceTypeTwo extends StatelessWidget {
                   )
             : Center(
                 child: TextComponents(
-                  color: Colors.white,
+                  color: themeController.isDarkMode.value
+                      ? AppColor.kWhiteColor
+                      : AppColor.kGreen1Color,
                   title: homeC.servicesErrorMessage.value,
                   size: isMobile ? 24.sp : 24,
                   weight: FontWeight.bold,
@@ -116,6 +124,7 @@ class ResUseableContainer extends StatelessWidget {
   final String title;
   final String appIcon;
   HomeController homeC = Get.find<HomeController>();
+  ThemeController themeController = Get.find<ThemeController>();
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -125,7 +134,9 @@ class ResUseableContainer extends StatelessWidget {
           horizontal: ResponsiveBreakpoints.of(context).isMobile ? 20.w : 26,
           vertical: ResponsiveBreakpoints.of(context).isMobile ? 18.h : 34),
       decoration: BoxDecoration(
-        color: AppColor.kBlck23,
+        color: themeController.isDarkMode.value
+            ? AppColor.kBlck23
+            : AppColor.kWhiteColor,
         borderRadius: BorderRadius.circular(
             ResponsiveBreakpoints.of(context).isMobile ? 15.r : 15.0),
       ),
@@ -161,7 +172,9 @@ class ResUseableContainer extends StatelessWidget {
           ),
         ),
         title: TextComponents(
-          color: Colors.white,
+          color: themeController.isDarkMode.value
+              ? AppColor.kWhiteColor
+              : AppColor.kGreen1Color,
           title: title,
           size: isMobile ? 12.sp : 12,
           weight: FontWeight.w500,

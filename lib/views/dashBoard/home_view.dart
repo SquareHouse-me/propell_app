@@ -7,19 +7,26 @@ import 'package:propell/configs/generalWidgets/appBar/web_appbar.dart';
 import 'package:propell/configs/utlis/validation_utils.dart';
 import 'package:propell/data/response/status.dart';
 import 'package:propell/viewModels/controllers/home_controller.dart';
-import 'package:propell/views/dashBoard/widgets/build_option_card.dart';
-import 'package:propell/views/dashBoard/widgets/web_header.dart';
+import 'package:propell/viewModels/controllers/theme_controller.dart';
+import 'package:propell/views/dashBoard/widgets/build_option_card.dart'; 
 import 'package:responsive_framework/responsive_framework.dart';
 import 'package:responsive_grid_list/responsive_grid_list.dart';
 
 // import 'dart:html' as html;import 'dart:js' as js;//
-class HomeView extends StatelessWidget {
+class HomeView extends StatefulWidget {
+  @override
+  State<HomeView> createState() => _HomeViewState();
+}
+
+class _HomeViewState extends State<HomeView> {
   final homeC = Get.find<HomeController>();
+
+  ThemeController themeController = Get.find<ThemeController>();
+
   @override
   Widget build(BuildContext context) {
     bool isMobile = ResponsiveBreakpoints.of(context).isMobile;
     return Scaffold(
-      backgroundColor: AppColor.kPrimary,
       appBar: PreferredSize(
           preferredSize: Size.fromHeight(isMobile ? 60 : 100),
           child: isMobile
@@ -35,15 +42,17 @@ class HomeView extends StatelessWidget {
           : homeC.cateogryStatus.value == Status.COMPLETED
               ? homeC.categoryList.value.isEmpty
                   ? Center(
-                      child: TextComponents(
-                        color: Colors.white,
-                        title: 'No Category is Found',
-                        size: isMobile ? 16.sp : 16,
-                        weight: FontWeight.w400,
-                      ),
+                      child: Obx(() => TextComponents(
+                            color: themeController.isDarkMode.value
+                                ? AppColor.kWhiteColor
+                                : AppColor.kGreen1Color,
+                            title: 'No Category is Found',
+                            size: isMobile ? 16.sp : 16,
+                            weight: FontWeight.w400,
+                          )),
                     )
                   : SingleChildScrollView(
-                      child: Center(
+                      child:  Obx(()=>Center(
                         child: Padding(
                           padding: EdgeInsets.symmetric(horizontal: 16.w),
                           child: ResponsiveRowColumn(
@@ -59,7 +68,9 @@ class HomeView extends StatelessWidget {
                                       left: isMobile ? 0.0 : 25.0,
                                       right: isMobile ? 0.0 : 25.0),
                                   child: TextComponents(
-                                    color: Colors.white,
+                                    color: themeController.isDarkMode.value
+                                        ? AppColor.kWhiteColor
+                                        : AppColor.kGreen1Color,
                                     title: 'Book an appointment',
                                     size: isMobile ? 20.sp : 20,
                                     weight: FontWeight.w500,
@@ -166,24 +177,22 @@ class HomeView extends StatelessWidget {
                             ],
                           ),
                         ),
-                      ),
+                      )),
                     )
-              : Center(
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: TextComponents(
-                      color: Colors.white,
-                      title: homeC.categoryErrorMessage.value,
-                      size: isMobile ? 16.sp : 16,
-                      weight: FontWeight.w400,
-                      textAlign: TextAlign.center,
+              : Obx(() => Center(
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: TextComponents(
+                        color: themeController.isDarkMode.value
+                            ? AppColor.kWhiteColor
+                            : AppColor.kGreen1Color,
+                        title: homeC.categoryErrorMessage.value,
+                        size: isMobile ? 16.sp : 16,
+                        weight: FontWeight.w400,
+                        textAlign: TextAlign.center,
+                      ),
                     ),
-                  ),
-                )),
+                  ))),
     );
   }
-  //void openInWindow(String uri) {
-  //   // html.window.location.replace(uri);
-  //   js.context.callMethod('eval', ['window.location.replace("$uri")']);
-  // }
 }

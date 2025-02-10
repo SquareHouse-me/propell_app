@@ -1,4 +1,7 @@
-import 'package:flutter/material.dart';
+// ignore_for_file: public_member_api_docs, sort_constructors_first
+ 
+import 'package:responsive_framework/responsive_framework.dart'; 
+
 import 'package:propell/configs/generalWidgets/customfield_components.dart';
 import 'package:propell/configs/generalWidgets/customphonefield_components.dart';
 import 'package:propell/configs/generalWidgets/export_general.dart';
@@ -8,13 +11,18 @@ import 'package:propell/configs/res/colors.dart';
 import 'package:propell/configs/utlis/extension.dart';
 import 'package:propell/configs/utlis/validation_utils.dart';
 import 'package:propell/viewModels/controllers/summary_controller.dart';
-import 'package:responsive_framework/responsive_framework.dart';
+import 'package:propell/viewModels/controllers/theme_controller.dart';
 
 class StepOne extends StatelessWidget {
-  StepOne({super.key});
+  final String id;
+  StepOne({
+    Key? key,
+    required this.id,
+  }) : super(key: key);
 
   final oneStepC = Get.find<SummaryController>();
 
+  ThemeController themeController = Get.find<ThemeController>();
   @override
   Widget build(BuildContext context) {
     bool isMobile = ResponsiveBreakpoints.of(context).isMobile;
@@ -30,10 +38,12 @@ class StepOne extends StatelessWidget {
           children: [
             ResponsiveRowColumnItem(
               child: TextComponents(
-                color: Colors.white,
+                color: themeController.isDarkMode.value
+                    ? AppColor.kWhiteColor
+                    : AppColor.kDarkTitleColor,
                 title: 'Personal Details',
-                size: 14,
-                weight: FontWeight.w400,
+                size: isMobile ? 16.sp : 16,
+                weight: FontWeight.bold,
               ),
             ),
             ResponsiveRowColumnItem(
@@ -41,7 +51,7 @@ class StepOne extends StatelessWidget {
             ),
             ResponsiveRowColumnItem(
               child: CustomFieldComponents(
-                keyboardType: TextInputType.name,
+                keyboardType: TextInputType.text,
                 hint: 'Your Name',
                 controller: oneStepC.inputName,
                 validator: (value) {
@@ -57,6 +67,8 @@ class StepOne extends StatelessWidget {
             ),
             ResponsiveRowColumnItem(
               child: CustomFieldComponents(
+                enabled: id.isNotEmpty
+                            ?true:false,
                   keyboardType: TextInputType.emailAddress,
                   hint: 'Your email here',
                   controller: oneStepC.inputEmail,
@@ -139,7 +151,10 @@ class StepOne extends StatelessWidget {
                     height: isMobile ? 56.h : 56,
                     onTap: () async {
                       if (oneStepC.formKey.currentState!.validate()) {
-                        await oneStepC.checkout();
+                         
+                        id.isNotEmpty
+                            ? await oneStepC.checkoutUpdate(true,id) :await oneStepC.checkout()
+                            ;
                       }
                       // Increment the step value
                       // oneStepC.currentStep.value += 1;

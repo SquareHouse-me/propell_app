@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:gif_view/gif_view.dart';
-import 'package:propell/configs/res/colors.dart';
-import 'package:propell/configs/res/images.dart';
-import 'package:responsive_framework/responsive_framework.dart';
+import 'package:gif_view/gif_view.dart'; 
 
 class SplashView extends StatefulWidget {
   const SplashView({super.key});

@@ -8,6 +8,8 @@ class AppColor {
   static const Color kYellow = Colors.yellow;
   static const Color klightBalck = Color(0XFF322B2D);
   static const Color kWhiteColor = Colors.white;
+  static const Color klightWhite = Color(0XFFFAFAFB);
+  static const Color kCalenderWhite = Color(0XFFF8F8F8);
   static const Color KBody = Color(0xffA7AEC1);
   static const Color kGreen1Color = Color(0XFF305A96);
   static const Color kLightGrey = Color(0xffA7AEC1);
@@ -15,6 +17,10 @@ class AppColor {
   static const Color kLightHintText = Color(0XFFB5B5B5);
   static const Color kSquareText = Color(0XFF9D9FA7);
   static const Color kLightIconsColor = Color(0XFF494E50);
+  static const Color kCalenderHeaderColor = Color(0XFFD2DCDD);
+  static const Color kCalenderHeaderWeeklyColor = Color(0XFF424242);
 
   static const Color kLightTitleColor = Color(0XFFB7B7B7);
+  static const Color kCalenderTitleColor = Color(0XFF01040D);
+  static const Color kDarkTitleColor = Color(0XFF231F21);
 }

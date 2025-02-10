@@ -47,7 +47,6 @@ _$BookingResponseDataImpl _$$BookingResponseDataImplFromJson(
       name: json['name'] as String? ?? '',
       email: json['email'] as String? ?? '',
       phone: json['phone'] as String? ?? '',
-      discription: json['discription'] as String? ?? '',
       total_amount: json['total_amount'] as String? ?? '',
       booking_date: json['booking_date'] as String? ?? '',
       booking_type: json['booking_type'] as String? ?? '',
@@ -56,15 +55,16 @@ _$BookingResponseDataImpl _$$BookingResponseDataImplFromJson(
       timeslot: json['timeslot'] as String? ?? '',
       timeslot_from: json['timeslot_from'] as String? ?? '',
       timeslot_to: json['timeslot_to'] as String? ?? '',
-      consultation_id: (json['consultation_id'] as num?)?.toInt() ?? 0,
+      consultation_id: json['consultation_id'] as String? ?? '',
       consultation_name: json['consultation_name'] as String? ?? '',
-      service_id: (json['service_id'] as num?)?.toInt() ?? 0,
+      service_id: json['service_id'] as String? ?? '',
       service_name: json['service_name'] as String? ?? '',
-      cat_id: (json['cat_id'] as num?)?.toInt() ?? 0,
+      cat_id: json['cat_id'] as String? ?? '0',
       category_name: json['category_name'] as String? ?? '',
       consultation_image: json['consultation_image'] as String? ?? '',
       service_images: json['service_images'] as String? ?? '',
       category_image: json['category_image'] as String? ?? '',
+      transaction_id: json['transaction_id'] as String? ?? '',
     );
 
 Map<String, dynamic> _$$BookingResponseDataImplToJson(
@@ -74,7 +74,6 @@ Map<String, dynamic> _$$BookingResponseDataImplToJson(
       'name': instance.name,
       'email': instance.email,
       'phone': instance.phone,
-      'discription': instance.discription,
       'total_amount': instance.total_amount,
       'booking_date': instance.booking_date,
       'booking_type': instance.booking_type,
@@ -92,4 +91,5 @@ Map<String, dynamic> _$$BookingResponseDataImplToJson(
       'consultation_image': instance.consultation_image,
       'service_images': instance.service_images,
       'category_image': instance.category_image,
+      'transaction_id': instance.transaction_id,
     };

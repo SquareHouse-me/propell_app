@@ -30,6 +30,7 @@
   },
   "hosting": {
     "public": "build/web",
+    "site":"propell-test",
     "ignore": [
       "firebase.json",
       "**/.*",

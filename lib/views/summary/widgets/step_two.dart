@@ -9,20 +9,22 @@ import 'package:propell/configs/utlis/extension.dart';
 import 'package:propell/configs/utlis/validation_utils.dart';
 import 'package:propell/viewModels/controllers/home_controller.dart';
 import 'package:propell/viewModels/controllers/summary_controller.dart';
+import 'package:propell/viewModels/controllers/theme_controller.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 import 'dart:html' as html;
 
 class StepTwo extends StatelessWidget {
   StepTwo({super.key});
+  ThemeController themeController = Get.find<ThemeController>();
   final SummaryController summaryC = Get.find<SummaryController>();
   @override
   Widget build(BuildContext context) {
-    print(summaryC.summaryModel.value!.bookingRespons.service_images);
-    print(summaryC.summaryModel.value!.bookingRespons.consultation_image);
+    print(summaryC.summaryModel.value.bookingRespons.service_images);
+    print(summaryC.summaryModel.value.bookingRespons.consultation_image);
 
     checkForRedirect();
     summaryC.calculateTotal(
-        timeSlot: summaryC.summaryModel.value!.bookingRespons.timeslot);
+        timeSlot: summaryC.summaryModel.value.bookingRespons.timeslot);
     bool isMobile = ResponsiveBreakpoints.of(context).isMobile;
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: isMobile ? 10.w : 10),
@@ -32,7 +34,9 @@ class StepTwo extends StatelessWidget {
         children: [
           ResponsiveRowColumnItem(
             child: TextComponents(
-              color: Colors.white,
+              color: themeController.isDarkMode.value
+                  ? AppColor.kWhiteColor
+                  : AppColor.kDarkTitleColor,
               title: 'Your Booking',
               size: isMobile ? 16.sp : 16,
               weight: FontWeight.bold,
@@ -45,14 +49,10 @@ class StepTwo extends StatelessWidget {
             child: ResUseableContainer(
               isMobile: isMobile,
               appIcon:
-                  summaryC.summaryModel.value!.bookingRespons.category_image,
-              title: summaryC.summaryModel.value!.bookingRespons.category_name
-                  .split(' ')[0]
+                  summaryC.summaryModel.value.bookingRespons.category_image,
+              title: summaryC.summaryModel.value.bookingRespons.category_name
                   .toString(),
-              subTitle: summaryC
-                  .summaryModel.value!.bookingRespons.category_name
-                  .split(' ')[1]
-                  .toString(),
+              subTitle: '',
             ),
           ),
           ResponsiveRowColumnItem(
@@ -60,7 +60,9 @@ class StepTwo extends StatelessWidget {
           ),
           ResponsiveRowColumnItem(
             child: TextComponents(
-              color: Colors.white,
+              color: themeController.isDarkMode.value
+                  ? AppColor.kWhiteColor
+                  : AppColor.kDarkTitleColor,
               title: 'Consultant',
               size: isMobile ? 16.sp : 16,
               weight: FontWeight.bold,
@@ -73,9 +75,9 @@ class StepTwo extends StatelessWidget {
             child: ResUseableTwoContainer(
               isMobile: isMobile,
               appIcon: summaryC
-                  .summaryModel.value!.bookingRespons.consultation_image,
+                  .summaryModel.value.bookingRespons.consultation_image,
               title: summaryC
-                  .summaryModel.value!.bookingRespons.consultation_name
+                  .summaryModel.value.bookingRespons.consultation_name
                   .toString(),
             ),
           ),
@@ -84,7 +86,9 @@ class StepTwo extends StatelessWidget {
           ),
           ResponsiveRowColumnItem(
             child: TextComponents(
-              color: Colors.white,
+              color: themeController.isDarkMode.value
+                  ? AppColor.kWhiteColor
+                  : AppColor.kDarkTitleColor,
               title: 'Date and Time',
               size: isMobile ? 16.sp : 16,
               weight: FontWeight.bold,
@@ -102,7 +106,9 @@ class StepTwo extends StatelessWidget {
             width: isMobile ? 343.w : 512,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(isMobile ? 15.r : 15),
-              color: AppColor.kBlck23,
+              color: themeController.isDarkMode.value
+                  ? AppColor.kBlck23
+                  : AppColor.kCalenderWhite,
             ),
             child: ResponsiveRowColumn(
               layout: ResponsiveRowColumnType.COLUMN,
@@ -126,7 +132,8 @@ class StepTwo extends StatelessWidget {
                             children: [
                               ResponsiveRowColumnItem(
                                 child: Image.network(
-                                  summaryC.summaryModel.value!.bookingRespons
+                                  color: AppColor.kLightTitleColor,
+                                  summaryC.summaryModel.value.bookingRespons
                                       .service_images, // URL of the image
                                   width: 20,
                                   height: 20,
@@ -162,9 +169,11 @@ class StepTwo extends StatelessWidget {
                           )),
                           ResponsiveRowColumnItem(
                               child: TextComponents(
-                            color: AppColor.kWhiteColor,
+                            color: themeController.isDarkMode.value
+                                ? Colors.white
+                                : AppColor.kPrimary2,
                             title: summaryC
-                                .summaryModel.value!.bookingRespons.service_name
+                                .summaryModel.value.bookingRespons.service_name
                                 .toString(),
                             size: isMobile ? 12.sp : 12,
                             weight: FontWeight.w400,
@@ -200,9 +209,11 @@ class StepTwo extends StatelessWidget {
                           )),
                           ResponsiveRowColumnItem(
                               child: TextComponents(
-                            color: AppColor.kWhiteColor,
+                            color: themeController.isDarkMode.value
+                                ? Colors.white
+                                : AppColor.kPrimary2,
                             title: summaryC
-                                .summaryModel.value!.bookingRespons.booking_date
+                                .summaryModel.value.bookingRespons.booking_date
                                 .toString(),
                             size: isMobile ? 12.sp : 12,
                             weight: FontWeight.w400,
@@ -249,9 +260,11 @@ class StepTwo extends StatelessWidget {
                           )),
                           ResponsiveRowColumnItem(
                               child: TextComponents(
-                            color: AppColor.kWhiteColor,
+                            color: themeController.isDarkMode.value
+                                ? Colors.white
+                                : AppColor.kPrimary2,
                             title: summaryC
-                                .summaryModel.value!.bookingRespons.timeslot,
+                                .summaryModel.value.bookingRespons.timeslot,
                             size: isMobile ? 12.sp : 12,
                             weight: FontWeight.w400,
                           )),
@@ -286,7 +299,9 @@ class StepTwo extends StatelessWidget {
                           )),
                           ResponsiveRowColumnItem(
                               child: Obx(() => TextComponents(
-                                    color: AppColor.kWhiteColor,
+                                    color: themeController.isDarkMode.value
+                                        ? Colors.white
+                                        : AppColor.kPrimary2,
                                     title: '${summaryC.totalHour.value} hours',
                                     size: isMobile ? 12.sp : 12,
                                     weight: FontWeight.w400,
@@ -304,7 +319,9 @@ class StepTwo extends StatelessWidget {
           ),
           ResponsiveRowColumnItem(
             child: TextComponents(
-              color: Colors.white,
+              color: themeController.isDarkMode.value
+                  ? AppColor.kWhiteColor
+                  : AppColor.kDarkTitleColor,
               title: 'Payment ',
               size: isMobile ? 16.sp : 16,
               weight: FontWeight.bold,
@@ -322,19 +339,25 @@ class StepTwo extends StatelessWidget {
             width: isMobile ? 343.w : 512,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(isMobile ? 15.r : 15),
-              color: AppColor.kBlck23,
+              color: themeController.isDarkMode.value
+                  ? AppColor.kBlck23
+                  : AppColor.kCalenderWhite,
             ),
             child: ListTile(
               contentPadding: EdgeInsets.zero,
               trailing: TextComponents(
-                color: Colors.white,
-                title: summaryC.summaryModel.value!.bookingRespons.total_amount
+                color: themeController.isDarkMode.value
+                    ? Colors.white
+                    : AppColor.kPrimary2,
+                title: summaryC.summaryModel.value.bookingRespons.total_amount
                     .toString(),
                 size: isMobile ? 12.sp : 12,
                 weight: FontWeight.w500,
               ),
               title: TextComponents(
-                color: Colors.white,
+                color: themeController.isDarkMode.value
+                    ? Colors.white
+                    : AppColor.kPrimary2,
                 title: 'Total (KWD)',
                 size: isMobile ? 12.sp : 12,
                 weight: FontWeight.w500,
@@ -359,10 +382,10 @@ class StepTwo extends StatelessWidget {
                     // Get.to(() => PaymentWeb(
                     //       url: summaryC.summaryModel.value!.url.toString(),
                     //     ));
-                    print(summaryC.summaryModel.value!.url.toString());
+                    print(summaryC.summaryModel.value.url.toString());
 
                     openInWindow(
-                      summaryC.summaryModel.value!.url.toString(),
+                      summaryC.summaryModel.value.url.toString(),
                     );
 
                     // Get.to(() => PaymentWeb(
@@ -399,11 +422,10 @@ class StepTwo extends StatelessWidget {
       // Handle the fragment
     }
   }
-
 }
 
 class ResUseableContainer extends StatelessWidget {
-  const ResUseableContainer({
+  ResUseableContainer({
     super.key,
     required this.isMobile,
     required this.title,
@@ -415,6 +437,7 @@ class ResUseableContainer extends StatelessWidget {
   final String title, subTitle;
   final String appIcon;
 
+  ThemeController themeController = Get.find<ThemeController>();
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -424,34 +447,42 @@ class ResUseableContainer extends StatelessWidget {
       ),
       width: isMobile ? 343.w : 512,
       decoration: BoxDecoration(
-        color: AppColor.kBlck23,
+        color: themeController.isDarkMode.value
+            ? AppColor.kBlck23
+            : AppColor.kCalenderWhite,
         borderRadius: BorderRadius.circular(isMobile ? 15.r : 15),
       ),
       child: ListTile(
         contentPadding: EdgeInsets.zero,
-        leading: Container(
-          width: 25,
-          height: 25,
-          padding: EdgeInsets.all(2),
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              image: NetworkImage(
-                appIcon, // URL of the image
-              ),
-              fit: BoxFit.fill,
-              onError: (exception, stackTrace) {},
-            ),
+        leading: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Image.network(
+            appIcon, // URL of the image
+            width: 34,
+            height: 34,
+            color:
+                themeController.isDarkMode.value ? null : AppColor.kGreen1Color,
+            fit: BoxFit.cover,
+            loadingBuilder: (BuildContext context, Widget child,
+                ImageChunkEvent? loadingProgress) {
+              if (loadingProgress == null)
+                return child; // Return the image once loaded
+              return getIndicator(); // Show the custom loading indicator
+            },
+            errorBuilder:
+                (BuildContext context, Object error, StackTrace? stackTrace) {
+              return const Icon(
+                Icons.error,
+                color: AppColor.kGreen1Color, // Custom error icon and color
+              );
+            },
           ),
         ),
         title: TextComponents(
-          color: Colors.white,
+          color: themeController.isDarkMode.value
+              ? Colors.white
+              : AppColor.kPrimary2,
           title: title,
-          size: isMobile ? 12.sp : 12,
-          weight: FontWeight.w500,
-        ),
-        subtitle: TextComponents(
-          color: Colors.white,
-          title: subTitle,
           size: isMobile ? 12.sp : 12,
           weight: FontWeight.w500,
         ),
@@ -461,7 +492,7 @@ class ResUseableContainer extends StatelessWidget {
 }
 
 class ResUseableTwoContainer extends StatelessWidget {
-  const ResUseableTwoContainer({
+  ResUseableTwoContainer({
     super.key,
     required this.isMobile,
     required this.title,
@@ -472,6 +503,7 @@ class ResUseableTwoContainer extends StatelessWidget {
   final String title;
   final String appIcon;
 
+  ThemeController themeController = Get.find<ThemeController>();
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -481,7 +513,9 @@ class ResUseableTwoContainer extends StatelessWidget {
       ),
       width: isMobile ? 343.w : 512,
       decoration: BoxDecoration(
-        color: AppColor.kBlck23,
+        color: themeController.isDarkMode.value
+            ? AppColor.kBlck23
+            : AppColor.kCalenderWhite,
         borderRadius: BorderRadius.circular(isMobile ? 15.r : 15),
       ),
       child: ListTile(
@@ -501,7 +535,9 @@ class ResUseableTwoContainer extends StatelessWidget {
           ),
         ),
         title: TextComponents(
-          color: Colors.white,
+          color: themeController.isDarkMode.value
+              ? Colors.white
+              : AppColor.kPrimary2,
           title: title,
           size: isMobile ? 12.sp : 12,
           weight: FontWeight.w500,

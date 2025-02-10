@@ -1,8 +1,8 @@
 import 'dart:developer';
 
-import 'package:get/get.dart';
 import 'package:propell/configs/generalWidgets/export_general.dart';
 import 'package:propell/data/repository/home_repo.dart';
+import 'package:propell/data/repository/summary_repo.dart';
 import 'package:propell/data/response/status.dart';
 import 'package:propell/main.dart';
 import 'package:propell/models/category/category.dart';
@@ -10,7 +10,6 @@ import 'package:propell/models/consultation/consultation.dart';
 import 'package:propell/models/consultationTimeSlot/time_slot.dart';
 import 'package:propell/models/services/services.dart';
 import 'package:propell/viewModels/controllers/summary_controller.dart';
-import 'package:propell/viewModels/services/notification_services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class HomeController extends GetxController {
@@ -90,7 +89,7 @@ class HomeController extends GetxController {
     // services.firebaseInit(Get.context!);
     Get.put(
       SummaryController(
-        summaryRepo: getIt(),
+        summaryRepo: getIt<SummaryRepo>(),
       ),
       permanent: true,
     );
@@ -104,10 +103,12 @@ class HomeController extends GetxController {
     language.value == 'English'
         ? Get.updateLocale(Locale('en'))
         : Get.updateLocale(Locale('ar'));
-    print(language.value + 'fgdfgdgfdgdfg ' + languageCode.value);
-    await myCategoryApi();
+    print(language.value + '  ' + languageCode.value);
+     
+    
+   await myCategoryApi();
   }
-
+ 
   /// Category API
   Future<void> myCategoryApi() async {
     try {

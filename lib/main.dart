@@ -5,22 +5,23 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:get_it/get_it.dart';
+import 'package:get_it/get_it.dart'; 
+import 'package:propell/configs/res/theme.dart';
 import 'package:propell/data/repository/home_repo.dart';
 import 'package:propell/data/repository/summary_repo.dart';
 import 'package:propell/firebase_options.dart';
 import 'package:propell/viewModels/controllers/home_controller.dart';
-import 'package:propell/views/dashBoard/booking_calander.dart';
+import 'package:propell/viewModels/controllers/theme_controller.dart';
+import 'package:propell/views/booking/booking_calander.dart';
 import 'package:propell/views/dashBoard/home_view.dart';
 import 'package:propell/views/splash/splash_view.dart';
 import 'package:propell/views/summary/summary_view.dart';
+import 'package:propell/views/summary/widgets/failed.dart';
 import 'package:propell/views/summary/widgets/thankyou.dart';
 import 'package:responsive_framework/responsive_framework.dart';
+ 
 
-import 'package:firebase_messaging/firebase_messaging.dart';
-
-import 'package:flutter_web_plugins/flutter_web_plugins.dart';
-
+import 'package:flutter_web_plugins/flutter_web_plugins.dart'; 
 GetIt getIt = GetIt.instance;
 // @pragma('vm:entry-point')
 // Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
@@ -52,6 +53,8 @@ void main() async {
   });
   // FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
   setUrlStrategy(PathUrlStrategy());
+  // Storage Initialize karo
+  Get.put(ThemeController(), permanent: true);
   setup();
   runApp(MyApp());
 }
@@ -64,18 +67,25 @@ class MyApp extends StatelessWidget {
         homeRepo: getIt<HomeRepo>(),
       ),
     );
+    final ThemeController themeController = Get.find<ThemeController>();
     return ScreenUtilInit(
       designSize: const Size(360, 800), // Base design for mobile
       builder: (context, child) {
         return GetMaterialApp(
           locale: Get.locale,
-          theme: ThemeData(
-            // fontFamily:  'Montserrat',
+          theme: AppThemes.lightTheme,
+          darkTheme: AppThemes.darkTheme,
+          themeMode: themeController.isDarkMode.value
+              ? ThemeMode.dark
+              : ThemeMode.light,
 
-            scaffoldBackgroundColor:
-                Color(0xFF231F20), // Background color for the app
-            primaryColor: Color(0xFF231F20), // Primary color
-          ),
+          // theme: ThemeData(
+          //   // fontFamily:  'Montserrat',
+
+          //   scaffoldBackgroundColor:
+          //       Color(0xFF231F20), // Background color for the app
+          //   primaryColor: Color(0xFF231F20), // Primary color
+          // ),
           debugShowCheckedModeBanner: false,
           builder: (context, child) => ResponsiveBreakpoints.builder(
             child: child!,
@@ -86,9 +96,9 @@ class MyApp extends StatelessWidget {
               const Breakpoint(start: 2460, end: double.infinity, name: '4K'),
             ],
           ),
-          initialRoute: '/',
+          initialRoute: '/HomeView',
           getPages: [
-            GetPage(name: '/', page: () => SplashView()),
+            // GetPage(name: '/', page: () => SplashView()),
             GetPage(name: '/HomeView', page: () => HomeView()),
             GetPage(
               name: '/BookingCalendar',
@@ -96,8 +106,9 @@ class MyApp extends StatelessWidget {
             ),
             GetPage(name: '/SummaryStepper', page: () => SummaryStepper()),
             GetPage(
-                name: '/ThankyouDialogPage', page: () => ThankyouDialogPage()),
-            GetPage(name: '/FailedDialogPage', page: () => FailedDialogPage()),
+                name: '/ThankyouDialogPage/:id',
+                page: () => ThankyouDialogPage()),
+            GetPage(name: '/FailedDialogPage/:id', page: () => FailedDialogPage()),
           ],
         );
       },

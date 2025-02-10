@@ -8,7 +8,7 @@ import 'package:propell/configs/utlis/validation_utils.dart';
 import 'package:propell/data/response/status.dart';
 import 'package:propell/viewModels/controllers/home_controller.dart';
 import 'package:propell/viewModels/controllers/summary_controller.dart';
-import 'package:propell/viewModels/services/notification_services.dart';
+import 'package:propell/viewModels/controllers/theme_controller.dart'; 
 import 'package:responsive_framework/responsive_framework.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -73,6 +73,7 @@ class _ServiceTypeOneState extends State<ServiceTypeOne> {
     }
   }
 
+  ThemeController themeController = Get.find<ThemeController>();
   @override
   Widget build(BuildContext context) {
     bool isMobile = ResponsiveBreakpoints.of(context).isMobile;
@@ -88,7 +89,9 @@ class _ServiceTypeOneState extends State<ServiceTypeOne> {
             ? homeC.servicesList.value.isEmpty
                 ? Center(
                     child: TextComponents(
-                      color: Colors.white,
+                      color: themeController.isDarkMode.value
+                          ? AppColor.kWhiteColor
+                          : AppColor.kGreen1Color,
                       title: 'No Services is Found',
                       size: isMobile ? 24.sp : 24,
                       weight: FontWeight.bold,
@@ -102,13 +105,20 @@ class _ServiceTypeOneState extends State<ServiceTypeOne> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           TextComponents(
-                            color: AppColor.kWhiteColor,
+                            color: themeController.isDarkMode.value
+                                ? AppColor.kWhiteColor
+                                : AppColor.kGreen1Color,
                             title: 'Select Location',
                             size: isMobile ? 14.sp : 14,
                             weight: FontWeight.bold,
                           ),
                           IconButton(
-                            icon: Icon(Icons.close, color: Colors.white),
+                            icon: Icon(
+                              Icons.close,
+                              color: themeController.isDarkMode.value
+                                  ? AppColor.kWhiteColor
+                                  : AppColor.kGreen1Color,
+                            ),
                             onPressed: () {
                               Navigator.of(context).pop();
                             },
@@ -117,7 +127,9 @@ class _ServiceTypeOneState extends State<ServiceTypeOne> {
                       ),
                       SizedBox(height: isMobile ? 5.0.h : 5),
                       TextComponents(
-                        color: AppColor.kWhiteColor,
+                        color: themeController.isDarkMode.value
+                            ? AppColor.kWhiteColor
+                            : AppColor.kGreen1Color,
                         title:
                             'Please select a location where you would like to meet our consultant.',
                         size: isMobile ? 12.sp : 12,
@@ -142,7 +154,9 @@ class _ServiceTypeOneState extends State<ServiceTypeOne> {
                   )
             : Center(
                 child: TextComponents(
-                  color: Colors.white,
+                  color: themeController.isDarkMode.value
+                      ? AppColor.kWhiteColor
+                      : AppColor.kGreen1Color,
                   title: homeC.consultErrorMessage.value,
                   size: isMobile ? 16.sp : 16,
                   weight: FontWeight.w400,
@@ -157,12 +171,12 @@ Widget _buildLocationOption(
     required String price,
     required int id,
     required BuildContext context}) {
+  ThemeController themeController = Get.find<ThemeController>();
   return GestureDetector(
     onTap: () async {
       Get.find<HomeController>().isLocationSelected.value = false;
       print(Get.find<HomeController>().isLocationSelected.value);
       Get.find<HomeController>().serviceId = id;
-      
     },
     child: Container(
       margin: EdgeInsets.only(
@@ -171,7 +185,9 @@ Widget _buildLocationOption(
           horizontal: ResponsiveBreakpoints.of(context).isMobile ? 20.w : 26,
           vertical: ResponsiveBreakpoints.of(context).isMobile ? 18.h : 34),
       decoration: BoxDecoration(
-        color: AppColor.kBlck23,
+        color: themeController.isDarkMode.value
+            ? AppColor.kBlck23
+            : AppColor.kWhiteColor,
         borderRadius: BorderRadius.circular(
             ResponsiveBreakpoints.of(context).isMobile ? 15.r : 15.0),
       ),
@@ -180,7 +196,8 @@ Widget _buildLocationOption(
         leading: Image.network(
           icon, // URL of the image
           width: 30,
-          //  color: AppColor.kGreen1Color,
+          color:
+              themeController.isDarkMode.value ? null : AppColor.kGreen1Color,
           height: 30,
           fit: BoxFit.fitHeight,
           loadingBuilder: (BuildContext context, Widget child,
@@ -191,23 +208,25 @@ Widget _buildLocationOption(
           },
           errorBuilder:
               (BuildContext context, Object error, StackTrace? stackTrace) {
-            return Icon(
+            return const Icon(
               Icons.error,
               color: AppColor.kGreen1Color, // Custom error icon and color
             );
           },
         ),
         title: TextComponents(
-          color: AppColor.kWhiteColor,
+          color: themeController.isDarkMode.value
+              ? AppColor.kWhiteColor
+              : AppColor.kGreen1Color,
           title: label,
           size: ResponsiveBreakpoints.of(context).isMobile ? 12.sp : 14,
           weight: FontWeight.w500,
         ),
         trailing: Container(
-          width: ResponsiveBreakpoints.of(context).isMobile ? 80.w : 90,
-          height: ResponsiveBreakpoints.of(context).isMobile ? 35.h : 28,
+          width: ResponsiveBreakpoints.of(context).isMobile ? 84.w : 93,
+          height: ResponsiveBreakpoints.of(context).isMobile ? 35.h : 30,
           padding: EdgeInsets.symmetric(
-              vertical: ResponsiveBreakpoints.of(context).isMobile ? 6.0.h : 6,
+              vertical: ResponsiveBreakpoints.of(context).isMobile ? 5.0.h : 5,
               horizontal:
                   ResponsiveBreakpoints.of(context).isMobile ? 3.0.w : 5),
           decoration: BoxDecoration(
@@ -217,7 +236,9 @@ Widget _buildLocationOption(
           ),
           child: Center(
             child: TextComponents(
-              color: AppColor.kWhiteColor,
+              color: themeController.isDarkMode.value
+                  ? AppColor.kWhiteColor
+                  : AppColor.kGreen1Color,
               title: 'KWD ${double.parse(price).toInt()}',
               size: ResponsiveBreakpoints.of(context).isMobile ? 12.sp : 14,
               weight: FontWeight.w500,

@@ -1,6 +1,4 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'dart:developer';
-
+ 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -8,6 +6,7 @@ import 'package:intl/intl.dart';
 import 'package:propell/configs/utlis/validation_utils.dart';
 import 'package:propell/data/response/status.dart';
 import 'package:propell/main.dart';
+import 'package:propell/viewModels/controllers/theme_controller.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 import 'package:responsive_grid_list/responsive_grid_list.dart';
 import 'package:table_calendar/table_calendar.dart';
@@ -18,8 +17,7 @@ import 'package:propell/configs/generalWidgets/primary_button.dart';
 import 'package:propell/configs/generalWidgets/textstyle_component.dart';
 import 'package:propell/configs/res/colors.dart';
 import 'package:propell/configs/utlis/extension.dart';
-import 'package:propell/viewModels/controllers/home_controller.dart';
-import 'package:propell/views/summary/summary_view.dart';
+import 'package:propell/viewModels/controllers/home_controller.dart'; 
 
 class BookingCalander extends StatefulWidget {
   const BookingCalander({
@@ -48,6 +46,7 @@ class _BookingCalanderState extends State<BookingCalander> {
         consultationId: homeC.consultationId.toString(), date: formattedDate);
   }
 
+  ThemeController themeController = Get.find<ThemeController>();
   @override
   void dispose() {
     super.dispose();
@@ -62,7 +61,6 @@ class _BookingCalanderState extends State<BookingCalander> {
     bool isMobile = ResponsiveBreakpoints.of(context).isMobile;
 
     return Scaffold(
-      backgroundColor: AppColor.kPrimary,
       // bottomNavigationBar: Padding(
       //   padding: EdgeInsets.symmetric(
       //     horizontal: ResponsiveBreakpoints.of(context).isMobile ? 16.sp : 465,
@@ -94,8 +92,10 @@ class _BookingCalanderState extends State<BookingCalander> {
                     child: TextComponents(
                   title: "Select Date",
                   size: ResponsiveBreakpoints.of(context).isMobile ? 14.sp : 14,
-                  color: AppColor.kWhiteColor,
-                  weight: FontWeight.w700,
+                  color: themeController.isDarkMode.value
+                      ? AppColor.kWhiteColor
+                      : AppColor.kGreen1Color,
+                  weight: FontWeight.bold,
                 )),
                 ResponsiveRowColumnItem(child: 8.heightSpace),
                 ResponsiveRowColumnItem(
@@ -113,7 +113,9 @@ class _BookingCalanderState extends State<BookingCalander> {
                                       ? 14.h
                                       : 14),
                           decoration: BoxDecoration(
-                            color: AppColor.kBlck23,
+                            color: themeController.isDarkMode.value
+                                ? AppColor.kBlck23
+                                : AppColor.kWhiteColor,
                             borderRadius: BorderRadius.circular(
                                 ResponsiveBreakpoints.of(context).isMobile
                                     ? 8.h
@@ -128,7 +130,9 @@ class _BookingCalanderState extends State<BookingCalander> {
 
                               titleTextStyle: homeC.languageCode.value == 'ar'
                                   ? TextStyle(
-                                      color: Colors.white,
+                                      color: themeController.isDarkMode.value
+                                          ? Colors.white
+                                          : AppColor.kCalenderHeaderWeeklyColor,
                                       fontFamily: 'NotoKufiArabic',
                                       fontSize:
                                           ResponsiveBreakpoints.of(context)
@@ -138,7 +142,9 @@ class _BookingCalanderState extends State<BookingCalander> {
                                       fontWeight: FontWeight.w500,
                                     )
                                   : TextStyle(
-                                      color: Colors.white,
+                                      color: themeController.isDarkMode.value
+                                          ? Colors.white
+                                          : AppColor.kCalenderHeaderWeeklyColor,
                                       fontFamily: 'Montserrat',
                                       fontSize:
                                           ResponsiveBreakpoints.of(context)
@@ -158,24 +164,34 @@ class _BookingCalanderState extends State<BookingCalander> {
                                   DateFormat.E(locale)
                                       .format(date)
                                       .substring(0, 1),
-                              decoration: const BoxDecoration(
-                                  color: AppColor.kPrimary2),
+                              decoration: BoxDecoration(
+                                  color: themeController.isDarkMode.value
+                                      ? AppColor.kPrimary2
+                                      : AppColor.kCalenderHeaderColor),
                               weekdayStyle: homeC.languageCode.value == 'ar'
-                                  ? const TextStyle(
-                                      color: Colors.white,
+                                  ? TextStyle(
+                                      color: themeController.isDarkMode.value
+                                          ? Colors.white
+                                          : AppColor.kCalenderHeaderWeeklyColor,
                                       fontFamily: 'NotoKufiArabic',
                                     )
-                                  : const TextStyle(
-                                      color: Colors.white,
+                                  : TextStyle(
+                                      color: themeController.isDarkMode.value
+                                          ? Colors.white
+                                          : AppColor.kCalenderHeaderWeeklyColor,
                                       fontFamily: 'Montserrat',
                                     ),
                               weekendStyle: homeC.languageCode.value == 'ar'
-                                  ? const TextStyle(
-                                      color: Colors.white,
+                                  ? TextStyle(
+                                      color: themeController.isDarkMode.value
+                                          ? Colors.white
+                                          : AppColor.kCalenderHeaderWeeklyColor,
                                       fontFamily: 'NotoKufiArabic',
                                     )
-                                  : const TextStyle(
-                                      color: Colors.white,
+                                  : TextStyle(
+                                      color: themeController.isDarkMode.value
+                                          ? Colors.white
+                                          : AppColor.kCalenderHeaderWeeklyColor,
                                       fontFamily: 'Montserrat',
                                     ),
                             ),
@@ -183,25 +199,33 @@ class _BookingCalanderState extends State<BookingCalander> {
                               markerMargin: EdgeInsets.zero,
                               cellMargin: EdgeInsets.zero,
                               defaultTextStyle: homeC.languageCode.value == 'ar'
-                                  ? const TextStyle(
-                                      color: Colors.white,
+                                  ? TextStyle(
+                                      color: themeController.isDarkMode.value
+                                          ? Colors.white
+                                          : AppColor.kCalenderHeaderWeeklyColor,
                                       fontFamily: 'NotoKufiArabic',
                                     )
-                                  : const TextStyle(
-                                      color: Colors.white,
+                                  : TextStyle(
+                                      color: themeController.isDarkMode.value
+                                          ? Colors.white
+                                          : AppColor.kCalenderHeaderWeeklyColor,
                                       fontFamily: 'Montserrat',
                                     ),
                               weekendTextStyle: homeC.languageCode.value == 'ar'
-                                  ? const TextStyle(
-                                      color: Colors.white,
+                                  ? TextStyle(
+                                      color: themeController.isDarkMode.value
+                                          ? Colors.white
+                                          : AppColor.kCalenderHeaderWeeklyColor,
                                       fontFamily: 'NotoKufiArabic',
                                     )
-                                  : const TextStyle(
-                                      color: Colors.white,
+                                  : TextStyle(
+                                      color: themeController.isDarkMode.value
+                                          ? Colors.white
+                                          : AppColor.kCalenderHeaderWeeklyColor,
                                       fontFamily: 'Montserrat',
                                     ),
                               todayDecoration: const BoxDecoration(
-                                color: Colors.transparent, // No color for today
+                                color: Colors.grey, // No color for today
                                 shape: BoxShape.circle,
                               ),
                               selectedDecoration: const BoxDecoration(
@@ -255,8 +279,10 @@ class _BookingCalanderState extends State<BookingCalander> {
                     child: TextComponents(
                   title: "Select Time",
                   size: ResponsiveBreakpoints.of(context).isMobile ? 14.sp : 14,
-                  color: AppColor.kWhiteColor,
-                  weight: FontWeight.w700,
+                  color: themeController.isDarkMode.value
+                      ? AppColor.kWhiteColor
+                      : AppColor.kGreen1Color,
+                  weight: FontWeight.bold,
                 )),
                 ResponsiveRowColumnItem(
                   child: Obx(() => homeC.timeSlotStatus.value == Status.LOADING
@@ -271,7 +297,9 @@ class _BookingCalanderState extends State<BookingCalander> {
                                   padding: const EdgeInsets.all(8.0)
                                       .copyWith(left: 66, top: 60),
                                   child: TextComponents(
-                                    color: Colors.white,
+                                    color: themeController.isDarkMode.value
+                                        ? AppColor.kWhiteColor
+                                        : AppColor.kGreen1Color,
                                     title: 'No Time Slot Available',
                                     size: isMobile ? 16.sp : 16,
                                     weight: FontWeight.w400,
@@ -335,8 +363,8 @@ class _BookingCalanderState extends State<BookingCalander> {
                                                           'Slot Time Already Booked',
                                                           backgroundColor:
                                                               Colors.amber,
-                                                          colorText: AppColor
-                                                              .kWhiteColor);
+                                                          colorText:
+                                                              AppColor.kBlck23);
                                                     } else {
                                                       homeC.selectedTimeId
                                                               .value =
@@ -360,31 +388,74 @@ class _BookingCalanderState extends State<BookingCalander> {
                                                                     .isMobile
                                                                 ? 12.h
                                                                 : 7),
-                                                    decoration: BoxDecoration(
-                                                      color: time.isBooked == 1
-                                                          ? AppColor.kLightGrey
-                                                          : isSelected
-                                                              ? AppColor
-                                                                  .kGreen1Color
-                                                              : AppColor
-                                                                  .kBlck23,
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              8.0),
-                                                    ),
+                                                    decoration: themeController
+                                                            .isDarkMode.value
+                                                        ? BoxDecoration(
+                                                            color: time.isBooked ==
+                                                                    1
+                                                                ? AppColor
+                                                                    .kLightGrey
+                                                                : isSelected
+                                                                    ? AppColor
+                                                                        .kGreen1Color
+                                                                    : AppColor
+                                                                        .kBlck23,
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        8.0),
+                                                          )
+                                                        : BoxDecoration(
+                                                            border: Border.all(
+                                                                color: AppColor
+                                                                    .kCalenderWhite),
+                                                            color: time.isBooked ==
+                                                                    1
+                                                                ? AppColor
+                                                                    .kLightGrey
+                                                                : isSelected
+                                                                    ? AppColor
+                                                                        .kGreen1Color
+                                                                    : AppColor
+                                                                        .kCalenderWhite,
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        8.0),
+                                                          ),
                                                     child: Center(
-                                                      child: TextComponents(
-                                                        title: time.timeslot,
-                                                        size: ResponsiveBreakpoints
-                                                                    .of(context)
-                                                                .isMobile
-                                                            ? 9.sp
-                                                            : 14,
-                                                        color: isSelected
-                                                            ? Colors.white
-                                                            : Colors.white,
-                                                        weight: FontWeight.w400,
-                                                      ),
+                                                      child: themeController
+                                                              .isDarkMode.value
+                                                          ? TextComponents(
+                                                              title:
+                                                                  time.timeslot,
+                                                              size: ResponsiveBreakpoints.of(
+                                                                          context)
+                                                                      .isMobile
+                                                                  ? 9.sp
+                                                                  : 14,
+                                                              color: isSelected
+                                                                  ? Colors.white
+                                                                  : Colors
+                                                                      .white,
+                                                              weight: FontWeight
+                                                                  .w400,
+                                                            )
+                                                          : TextComponents(
+                                                              title:
+                                                                  time.timeslot,
+                                                              size: ResponsiveBreakpoints.of(
+                                                                          context)
+                                                                      .isMobile
+                                                                  ? 9.sp
+                                                                  : 14,
+                                                              color: isSelected
+                                                                  ? Colors.white
+                                                                  : AppColor
+                                                                      .kCalenderTitleColor,
+                                                              weight: FontWeight
+                                                                  .w400,
+                                                            ),
                                                     ),
                                                   ),
                                                 ),
@@ -396,7 +467,9 @@ class _BookingCalanderState extends State<BookingCalander> {
                               padding: const EdgeInsets.all(8.0)
                                   .copyWith(top: 34, left: 66),
                               child: TextComponents(
-                                color: Colors.white,
+                                color: themeController.isDarkMode.value
+                                    ? AppColor.kWhiteColor
+                                    : AppColor.kGreen1Color,
                                 title: homeC.timeSlotErrorMessage.value,
                                 size: isMobile ? 16.sp : 16,
                                 weight: FontWeight.w400,

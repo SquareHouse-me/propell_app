@@ -1,5 +1,6 @@
 import 'package:google_fonts/google_fonts.dart';
 import 'package:propell/configs/res/colors.dart';
+import 'package:propell/viewModels/controllers/theme_controller.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
 import 'export_general.dart';
@@ -18,8 +19,8 @@ class CustomFieldComponents extends StatelessWidget {
   final bool enabled;
   final Color? hintColor;
   final int? minLines;
-  final int?  maxLines;
-  const CustomFieldComponents({
+  final int? maxLines;
+  CustomFieldComponents({
     Key? key,
     required this.hint,
     this.hintColor,
@@ -31,36 +32,42 @@ class CustomFieldComponents extends StatelessWidget {
     required this.controller,
     this.obscureText = false,
     this.keyboardType,
-    this.onChanged, this.minLines, this.maxLines,
+    this.onChanged,
+    this.minLines,
+    this.maxLines,
   }) : super(key: key);
 
+  ThemeController themeController = Get.find<ThemeController>();
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       readOnly: enabled,
-      minLines: minLines??null,
-      maxLines: maxLines??null,
-       
+      minLines: minLines ?? null,
+      maxLines: maxLines ?? null,
       keyboardType: keyboardType,
       cursorColor: AppColor.kGreen1Color,
       style: GoogleFonts.montserrat(
         fontSize: ResponsiveBreakpoints.of(context).isMobile ? 14.sp : 14,
-        color: AppColor.kLightHintText,
+        color: AppColor.kGreen1Color,
         fontWeight: FontWeight.w400,
       ),
       obscureText: obscureText,
       decoration: InputDecoration(
         label: labelWidget,
         filled: true,
-        fillColor: AppColor.kBlck23,
+        fillColor: themeController.isDarkMode.value
+            ? AppColor.kBlck23
+            : AppColor.kCalenderWhite,
         contentPadding: EdgeInsets.symmetric(
             vertical: ResponsiveBreakpoints.of(context).isMobile ? 16.sp : 16,
             horizontal: ResponsiveBreakpoints.of(context).isMobile ? 23.w : 23),
-        focusColor: Colors.white,
+        focusColor: themeController.isDarkMode.value
+            ? AppColor.kBlck23
+            : AppColor.kCalenderWhite,
         hintText: hint,
         hintStyle: GoogleFonts.montserrat(
           fontSize: ResponsiveBreakpoints.of(context).isMobile ? 14.sp : 14,
-          color: hintColor ?? AppColor.kLightHintText,
+          color: AppColor.kLightHintText,
           fontWeight: FontWeight.w400,
         ),
         // prefixIcon: prefixIconSvg != null
@@ -96,8 +103,9 @@ class CustomFieldComponents extends StatelessWidget {
           borderRadius: BorderRadius.circular(
               ResponsiveBreakpoints.of(context).isMobile ? 15.r : 15),
           borderSide: BorderSide(
-            color: AppColor.kBlck23,
-          ),
+              color: themeController.isDarkMode.value
+                  ? AppColor.kBlck23
+                  : AppColor.kCalenderWhite),
         ),
         errorBorder: OutlineInputBorder(
           borderSide: const BorderSide(color: Colors.red),
@@ -108,8 +116,9 @@ class CustomFieldComponents extends StatelessWidget {
           borderRadius: BorderRadius.circular(
               ResponsiveBreakpoints.of(context).isMobile ? 15.r : 15),
           borderSide: BorderSide(
-            color: AppColor.kBlck23,
-          ),
+              color: themeController.isDarkMode.value
+                  ? AppColor.kBlck23
+                  : AppColor.kCalenderWhite),
         ),
         // focusedErrorBorder: OutlineInputBorder(
         //   borderSide: const BorderSide(color: Colors.red),
@@ -119,8 +128,9 @@ class CustomFieldComponents extends StatelessWidget {
           borderRadius: BorderRadius.circular(
               ResponsiveBreakpoints.of(context).isMobile ? 15.r : 15),
           borderSide: BorderSide(
-            color: AppColor.kBlck23,
-          ),
+              color: themeController.isDarkMode.value
+                  ? AppColor.kBlck23
+                  : AppColor.kCalenderWhite),
         ),
         errorStyle: const TextStyle(color: Colors.red, height: 0),
       ),

@@ -37,7 +37,6 @@ class BookingResponseData with _$BookingResponseData {
     @Default('') @JsonKey(name: 'name') String name,
     @Default('') @JsonKey(name: 'email') String email,
     @Default('') @JsonKey(name: 'phone') String phone,
-    @Default('') @JsonKey(name: 'discription') String discription,
     @Default('') @JsonKey(name: 'total_amount') String total_amount,
     @Default('') @JsonKey(name: 'booking_date') String booking_date,
     @Default('') @JsonKey(name: 'booking_type') String booking_type,
@@ -46,15 +45,16 @@ class BookingResponseData with _$BookingResponseData {
     @Default('') @JsonKey(name: 'timeslot') String timeslot,
     @Default('') @JsonKey(name: 'timeslot_from') String timeslot_from,
     @Default('') @JsonKey(name: 'timeslot_to') String timeslot_to,
-    @Default(0) @JsonKey(name: 'consultation_id') int consultation_id,
+    @Default('') @JsonKey(name: 'consultation_id') String consultation_id,
     @Default('') @JsonKey(name: 'consultation_name') String consultation_name,
-    @Default(0) @JsonKey(name: 'service_id') int service_id,
+    @Default('') @JsonKey(name: 'service_id') String service_id,
     @Default('') @JsonKey(name: 'service_name') String service_name,
-    @Default(0) @JsonKey(name: 'cat_id') int cat_id,
+    @Default('0') @JsonKey(name: 'cat_id') String cat_id,
     @Default('') @JsonKey(name: 'category_name') String category_name,
     @Default('') @JsonKey(name: 'consultation_image') String consultation_image,
     @Default('') @JsonKey(name: 'service_images') String service_images,
     @Default('') @JsonKey(name: 'category_image') String category_image,
+    @Default('') @JsonKey(name: 'transaction_id') String transaction_id,
   }) = _BookingResponseData;
 
   factory BookingResponseData.fromJson(Map<String, dynamic> json) =>

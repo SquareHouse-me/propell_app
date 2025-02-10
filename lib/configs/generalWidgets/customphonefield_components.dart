@@ -12,6 +12,7 @@ import 'package:propell/configs/res/colors.dart';
 import 'package:propell/configs/res/icons.dart';
 import 'package:propell/main.dart';
 import 'package:propell/viewModels/controllers/summary_controller.dart';
+import 'package:propell/viewModels/controllers/theme_controller.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
 class CustomPhoneFieldComponents extends StatelessWidget {
@@ -23,7 +24,7 @@ class CustomPhoneFieldComponents extends StatelessWidget {
   final TextInputType? keyboardType;
   final Function(String)? onChanged; // Added this line for real-time validation
   final Widget? labelWidget;
-  const CustomPhoneFieldComponents({
+  CustomPhoneFieldComponents({
     Key? key,
     this.suffixIcon,
     this.onpressed,
@@ -35,6 +36,7 @@ class CustomPhoneFieldComponents extends StatelessWidget {
     this.onChanged, // Added this line to pass the onChanged function
   }) : super(key: key);
 
+  ThemeController themeController = Get.find<ThemeController>();
   @override
   Widget build(BuildContext context) {
     return GetX<SummaryController>(
@@ -51,22 +53,26 @@ class CustomPhoneFieldComponents extends StatelessWidget {
             ],
             keyboardType: keyboardType,
             cursorColor: AppColor.kGreen1Color,
-            style:  GoogleFonts.montserrat(
+            style: GoogleFonts.montserrat(
               fontSize: ResponsiveBreakpoints.of(context).isMobile ? 14.sp : 14,
-              color: AppColor.kLightHintText,
+              color: AppColor.kGreen1Color,
               fontWeight: FontWeight.w400,
             ),
             obscureText: obscureText,
             decoration: InputDecoration(
               label: labelWidget,
               filled: true,
-              fillColor: AppColor.kBlck23,
+              fillColor: themeController.isDarkMode.value
+                  ? AppColor.kBlck23
+                  : AppColor.kCalenderWhite,
               contentPadding: EdgeInsets.symmetric(
                   vertical:
                       ResponsiveBreakpoints.of(context).isMobile ? 16.sp : 16,
                   horizontal:
                       ResponsiveBreakpoints.of(context).isMobile ? 23.w : 23),
-              focusColor: Colors.white,
+              focusColor: themeController.isDarkMode.value
+                  ? AppColor.kBlck23
+                  : AppColor.kCalenderWhite,
               hintText: '${controller.phoneNumber.value}',
               hintStyle: GoogleFonts.montserrat(
                 fontSize:
@@ -129,7 +135,7 @@ class CustomPhoneFieldComponents extends StatelessWidget {
                     children: [
                       FittedBox(
                         child: TextComponents(
-                          color: Colors.white,
+                          color: AppColor.kLightHintText,
                           title:
                               "${controller.countryEmoji}+${controller.countryCode.value}",
                           size: ResponsiveBreakpoints.of(context).isMobile
@@ -141,7 +147,9 @@ class CustomPhoneFieldComponents extends StatelessWidget {
                       FittedBox(
                         child: SvgPicture.asset(
                           AppIcons.directionDownArrow,
-                          color: AppColor.kWhiteColor,
+                          color: themeController.isDarkMode.value
+                              ? AppColor.kWhiteColor
+                              : AppColor.kGreen1Color,
                           height: ResponsiveBreakpoints.of(context).isMobile
                               ? 25.h
                               : 25,
@@ -169,8 +177,9 @@ class CustomPhoneFieldComponents extends StatelessWidget {
                 borderRadius: BorderRadius.circular(
                     ResponsiveBreakpoints.of(context).isMobile ? 15.r : 15),
                 borderSide: BorderSide(
-                  color: AppColor.kBlck23,
-                ),
+                    color: themeController.isDarkMode.value
+                        ? AppColor.kBlck23
+                        : AppColor.kCalenderWhite),
               ),
               errorBorder: OutlineInputBorder(
                 borderSide: const BorderSide(color: Colors.red),
@@ -181,8 +190,9 @@ class CustomPhoneFieldComponents extends StatelessWidget {
                 borderRadius: BorderRadius.circular(
                     ResponsiveBreakpoints.of(context).isMobile ? 15.r : 15),
                 borderSide: BorderSide(
-                  color: AppColor.kBlck23,
-                ),
+                    color: themeController.isDarkMode.value
+                        ? AppColor.kBlck23
+                        : AppColor.kCalenderWhite),
               ),
               // focusedErrorBorder: OutlineInputBorder(
               //   borderSide: const BorderSide(color: Colors.red),
@@ -192,8 +202,9 @@ class CustomPhoneFieldComponents extends StatelessWidget {
                 borderRadius: BorderRadius.circular(
                     ResponsiveBreakpoints.of(context).isMobile ? 15.r : 15),
                 borderSide: BorderSide(
-                  color: AppColor.kBlck23,
-                ),
+                    color: themeController.isDarkMode.value
+                        ? AppColor.kBlck23
+                        : AppColor.kCalenderWhite),
               ),
               errorStyle: const TextStyle(color: Colors.red, height: 0),
             ),

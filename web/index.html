@@ -4,9 +4,9 @@
   <meta charset="UTF-8">
   <meta content="IE=Edge" http-equiv="X-UA-Compatible">
   <meta name="description" content="Architecture + interior design consultants">
-  <meta http-equiv="cache-control" content="no-cache" />
-  <meta http-equiv="expires" content="0" />
-  <meta http-equiv="pragma" content="no-cache" />
+  <meta http-equiv="cache-control" content="no-cache">
+  <meta http-equiv="expires" content="0">
+  <meta http-equiv="pragma" content="no-cache">
   <!-- iOS meta tags & icons -->
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
@@ -29,7 +29,7 @@
     var serviceWorkerVersion = null;
 </script>
  <!-- This script adds the flutter initialization JS code -->
- <script src="/main.dart.js" defer></script>
+ <script src="/main.dart.js" defer=""></script>
 
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
   
@@ -42,6 +42,29 @@
   </script> -->
   
   
+  
+  
+   <!-- Firebase scripts -->
+   <script src="https://www.gstatic.com/firebasejs/10.5.2/firebase-app.js"></script>
+   <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-app.js"; 
+
+    // Replace with your Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyB50WmRmVqOpxzFICXpQ_AQvIWkFZiKbXY",
+      authDomain: "mypropellapp.firebaseapp.com",
+      projectId: "mypropellapp",
+      storageBucket: "mypropellapp.firebasestorage.app",
+      messagingSenderId: "311844172470",
+      appId: "1:311844172470:web:5688cffc83f96938a02c17",
+      measurementId: "G-KCLE2CTZ02"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+</script>
+   <script defer="" data-domain="book.propell.design" src="https://plausible.io/js/script.js"></script>
+   
   <style id="splash-screen-style">
     html {
       height: 100%
@@ -113,27 +136,6 @@
       document.body.style.background = "transparent";
     }
   </script>
-   <!-- Firebase scripts -->
-   <script src="https://www.gstatic.com/firebasejs/10.5.2/firebase-app.js"></script>
-   <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-app.js"; 
-
-    // Replace with your Firebase configuration
-    const firebaseConfig = {
-      apiKey: "AIzaSyB50WmRmVqOpxzFICXpQ_AQvIWkFZiKbXY",
-      authDomain: "mypropellapp.firebaseapp.com",
-      projectId: "mypropellapp",
-      storageBucket: "mypropellapp.firebasestorage.app",
-      messagingSenderId: "311844172470",
-      appId: "1:311844172470:web:5688cffc83f96938a02c17",
-      measurementId: "G-KCLE2CTZ02"
-    };
-
-    const app = initializeApp(firebaseConfig);
-    const analytics = getAnalytics(app);
-</script>
-   <script defer data-domain="book.propell.design" src="https://plausible.io/js/script.js"></script>
-   
 </head>
 
 <body>
@@ -144,6 +146,7 @@
   </picture>
   
   
+  
 
   <script src="flutter_bootstrap.js" async=""></script>
   <script src="flutter.js" async=""></script>
@@ -151,7 +154,7 @@
   <script>
     window.addEventListener('load', function (ev) {
         // Download main.dart.js
-        _flutter.loader.loadEntrypoint({
+        _flutter.loader.load({
             entrypointUrl: "main.dart.js?v=" + serviceWorkerVersion,
             serviceWorker: {
                 serviceWorkerVersion: serviceWorkerVersion,
@@ -168,4 +171,5 @@
 
 
 
-</body></html>
+</body>
+</html>
