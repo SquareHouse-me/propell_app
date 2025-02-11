@@ -8,7 +8,7 @@ import 'package:propell/data/network/export_view.dart';
 import 'package:propell/data/repository/summary_repo.dart';
 import 'package:propell/main.dart';
 import 'package:propell/viewModels/controllers/summary_controller.dart';
-import 'package:propell/viewModels/controllers/theme_controller.dart'; 
+import 'package:propell/viewModels/controllers/theme_controller.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 import 'dart:html' as html;
 
@@ -20,14 +20,14 @@ class FailedDialogPage extends StatefulWidget {
 }
 
 class _FailedDialogPageState extends State<FailedDialogPage> {
-  ThemeController themeController = Get.find<ThemeController>();
+  ThemeController themeController = Get.put(ThemeController(), permanent: true);
 
   String bookingId = '';
 
   @override
   void initState() {
     super.initState();
-    bookingId = Get.parameters['id'] ?? '';
+    bookingId = Get.parameters['id'] ?? '128';
   }
 
   @override
@@ -93,7 +93,7 @@ class _FailedDialogPageState extends State<FailedDialogPage> {
                         onTap: () {
                           // openInWindow(
                           //     "https://stg.propell.design/SummaryStepper");
-                          
+
                           log('booking id pass $bookingId');
                           Get.offNamed('/SummaryStepper', arguments: bookingId);
                         },

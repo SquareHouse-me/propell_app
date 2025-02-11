@@ -102,7 +102,7 @@ class MyApp extends StatelessWidget {
             GetPage(name: '/HomeView', page: () => HomeView()),
             GetPage(
               name: '/BookingCalendar',
-              page: () => BookingCalander(),
+              page: () => const BookingCalander(),
             ),
             GetPage(name: '/SummaryStepper', page: () => SummaryStepper()),
             GetPage(

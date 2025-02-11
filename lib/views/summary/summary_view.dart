@@ -1,14 +1,14 @@
-import 'package:easy_stepper/easy_stepper.dart'; 
+import 'package:easy_stepper/easy_stepper.dart';
 import 'package:propell/configs/generalWidgets/appBar/app_bar.dart';
 import 'package:propell/configs/generalWidgets/export_general.dart';
 import 'package:propell/configs/generalWidgets/textstyle_component.dart';
-import 'package:propell/configs/res/colors.dart'; 
+import 'package:propell/configs/res/colors.dart';
 import 'package:propell/viewModels/controllers/summary_controller.dart';
 import 'package:propell/viewModels/controllers/theme_controller.dart';
 import 'package:propell/views/summary/widgets/step_one.dart';
 import 'package:propell/views/summary/widgets/step_two.dart';
 import 'package:propell/configs/generalWidgets/appBar/web_appbar.dart';
-import 'package:responsive_framework/responsive_framework.dart'; 
+import 'package:responsive_framework/responsive_framework.dart';
 
 class SummaryStepper extends StatefulWidget {
   @override
@@ -31,7 +31,7 @@ class _SummaryStepperState extends State<SummaryStepper> {
   void initState() {
     super.initState();
     var args = Get.arguments;
-    if (args != null &&   args.isNotEmpty) {
+    if (args != null && args.isNotEmpty) {
       bookingId = args as String? ?? '';
       print('bookingId ${bookingId.toString()}');
     }
@@ -39,7 +39,9 @@ class _SummaryStepperState extends State<SummaryStepper> {
   }
 
   checkid() async {
-    bookingId.isNotEmpty ? await summaryController.checkoutUpdate(false,bookingId) : null;
+    bookingId.isNotEmpty
+        ? await summaryController.checkoutUpdate(false, bookingId)
+        : null;
   }
 
   @override

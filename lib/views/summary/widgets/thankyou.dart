@@ -1,4 +1,3 @@
- 
 import 'package:propell/configs/generalWidgets/appBar/app_bar.dart';
 import 'package:propell/configs/generalWidgets/appBar/web_appbar.dart';
 import 'package:propell/configs/generalWidgets/doted_lines.dart';
@@ -9,13 +8,15 @@ import 'package:propell/configs/res/colors.dart';
 import 'package:propell/configs/res/icons.dart';
 import 'package:propell/configs/utlis/extension.dart';
 import 'package:propell/configs/utlis/validation_utils.dart';
-import 'package:propell/data/network/export_view.dart'; 
-import 'package:propell/data/response/status.dart'; 
+import 'package:propell/data/network/export_view.dart';
+import 'package:propell/data/repository/summary_repo.dart';
+import 'package:propell/data/response/status.dart';
+import 'package:propell/main.dart';
 import 'package:propell/viewModels/controllers/summary_controller.dart';
 import 'package:propell/viewModels/controllers/theme_controller.dart';
 import 'package:propell/views/dashBoard/home_view.dart';
 import 'package:responsive_framework/responsive_framework.dart';
-import 'dart:html' as html; 
+import 'dart:html' as html;
 
 class ThankyouDialog {
   static showLocationDialog(BuildContext context) {
@@ -101,8 +102,13 @@ class ThankyouDialogPage extends StatefulWidget {
 }
 
 class _ThankyouDialogPageState extends State<ThankyouDialogPage> {
-  ThemeController themeController = Get.find<ThemeController>();
-  SummaryController summaryController = Get.find<SummaryController>();
+  ThemeController themeController = Get.put(ThemeController(), permanent: true);
+  SummaryController summaryController = Get.put(
+    SummaryController(
+      summaryRepo: getIt<SummaryRepo>(),
+    ),
+    permanent: true,
+  );
 
   String bookingId = '';
 
@@ -206,7 +212,8 @@ class _ThankyouDialogPageState extends State<ThankyouDialogPage> {
                               ],
                             ),
                           ),
-                          const ResponsiveRowColumnItem(child: SizedBox(height: 20)),
+                          const ResponsiveRowColumnItem(
+                              child: SizedBox(height: 20)),
                           ResponsiveRowColumnItem(
                               child: TextComponents(
                             color: themeController.isDarkMode.value
@@ -216,14 +223,15 @@ class _ThankyouDialogPageState extends State<ThankyouDialogPage> {
                             size: isMobile ? 16.sp : 16,
                             weight: FontWeight.w600,
                           )),
-                          const ResponsiveRowColumnItem(child: SizedBox(height: 8)),
+                          const ResponsiveRowColumnItem(
+                              child: SizedBox(height: 8)),
                           ResponsiveRowColumnItem(
                               child: Container(
                             padding: EdgeInsets.symmetric(
                               horizontal: isMobile ? 16.w : 16,
                               vertical: isMobile ? 11.h : 11,
                             ).copyWith(
-                              bottom: isMobile ? 0.h : 0,
+                              bottom: isMobile ? 13.h : 13,
                               right: isMobile ? 13.h : 13,
                             ),
                             width: isMobile ? 343.w : 512,
@@ -315,7 +323,8 @@ class _ThankyouDialogPageState extends State<ThankyouDialogPage> {
                               ],
                             ),
                           )),
-                          const ResponsiveRowColumnItem(child: SizedBox(height: 27)),
+                          const ResponsiveRowColumnItem(
+                              child: SizedBox(height: 27)),
                           ResponsiveRowColumnItem(
                               child: TextComponents(
                             color: themeController.isDarkMode.value
@@ -334,7 +343,7 @@ class _ThankyouDialogPageState extends State<ThankyouDialogPage> {
                               horizontal: isMobile ? 16.w : 16,
                               vertical: isMobile ? 11.h : 11,
                             ).copyWith(
-                              bottom: isMobile ? 0.h : 0,
+                              bottom: isMobile ? 13.h : 13,
                               right: isMobile ? 13.h : 13,
                             ),
                             width: isMobile ? 343.w : 512,
