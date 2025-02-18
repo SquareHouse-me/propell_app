@@ -39,4 +39,11 @@ class HomeRepo {
 
     return response;
   }
+
+  Future<dynamic> checkUserAvailabilityApi({required String lng}) async {
+    String url = "$userAvailabilityApi?lang=$lng";
+    dynamic response = _apiService.getApi(url: url, isHeaderRequired: false);
+
+    return response;
+  }
 }

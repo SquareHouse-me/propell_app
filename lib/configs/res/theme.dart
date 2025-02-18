@@ -7,7 +7,9 @@ class AppThemes {
     brightness: Brightness.light,
     primaryColor: AppColor.klightWhite,
     scaffoldBackgroundColor: AppColor.klightWhite,
-    dialogBackgroundColor: AppColor.klightWhite,
+    dialogTheme: DialogTheme(
+      backgroundColor: AppColor.klightWhite, // ✅ Correct way
+    ),
     appBarTheme: const AppBarTheme(
       surfaceTintColor: AppColor.klightWhite,
       iconTheme: IconThemeData(color: AppColor.kGreen1Color),
@@ -28,7 +30,10 @@ class AppThemes {
   static final ThemeData darkTheme = ThemeData(
     brightness: Brightness.dark,
     primaryColor: AppColor.kPrimary,
-    dialogBackgroundColor: AppColor.kPrimary,
+
+    dialogTheme: DialogTheme(
+      backgroundColor: AppColor.kPrimary, // ✅ Correct way
+    ),
     scaffoldBackgroundColor: AppColor.kPrimary,
     appBarTheme: const AppBarTheme(
       surfaceTintColor: AppColor.kPrimary,

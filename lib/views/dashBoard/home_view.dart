@@ -12,6 +12,7 @@ import 'package:propell/views/dashBoard/widgets/build_option_card.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 import 'package:responsive_grid_list/responsive_grid_list.dart';
 
+
 // import 'dart:html' as html;import 'dart:js' as js;//
 class HomeView extends StatefulWidget {
   @override
@@ -195,4 +196,6 @@ class _HomeViewState extends State<HomeView> {
                   ))),
     );
   }
+
+
 }

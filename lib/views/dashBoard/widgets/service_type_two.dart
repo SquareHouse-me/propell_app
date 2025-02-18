@@ -18,28 +18,30 @@ class ServiceTypeTwo extends StatelessWidget {
   ThemeController themeController = Get.find<ThemeController>();
   @override
   Widget build(BuildContext context) {
+    
     bool isMobile = ResponsiveBreakpoints.of(context).isMobile;
-    return Obx(() => homeC.consultStatus.value == Status.LOADING
-        ? SizedBox(
-            width: isMobile ? 150 : 150,
-            height: isMobile ? 150 : 150,
-            child: Center(
-              child: getIndicator(),
-            ),
-          )
-        : homeC.consultStatus.value == Status.COMPLETED
-            ? homeC.consultList.value.isEmpty
-                ? Center(
+    return Obx(
+      () =>
+          homeC.consultStatus.value == Status.LOADING
+              ? SizedBox(
+                width: isMobile ? 150 : 150,
+                height: isMobile ? 150 : 150,
+                child: Center(child: getIndicator()),
+              )
+              : homeC.consultStatus.value == Status.COMPLETED
+              ? homeC.consultList.value.isEmpty
+                  ? Center(
                     child: TextComponents(
-                      color: themeController.isDarkMode.value
-                          ? AppColor.kWhiteColor
-                          : AppColor.kGreen1Color,
+                      color:
+                          themeController.isDarkMode.value
+                              ? AppColor.kWhiteColor
+                              : AppColor.kGreen1Color,
                       title: 'No consultation is Found',
                       size: isMobile ? 24.sp : 24,
                       weight: FontWeight.bold,
                     ),
                   )
-                : SingleChildScrollView(
+                  : SingleChildScrollView(
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -48,18 +50,22 @@ class ServiceTypeTwo extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             TextComponents(
-                              color: themeController.isDarkMode.value
-                                  ? AppColor.kWhiteColor
-                                  : AppColor.kGreen1Color,
+                              color:
+                                  themeController.isDarkMode.value
+                                      ? AppColor.kWhiteColor
+                                      : AppColor.kGreen1Color,
                               title: 'Consultant',
-                              size: ResponsiveBreakpoints.of(context).isMobile
-                                  ? 14.sp
-                                  : 14,
+                              size:
+                                  ResponsiveBreakpoints.of(context).isMobile
+                                      ? 14.sp
+                                      : 14,
                               weight: FontWeight.bold,
                             ),
                             IconButton(
-                              icon:
-                                  const Icon(Icons.close, color: Colors.white),
+                              icon: const Icon(
+                                Icons.close,
+                                color: Colors.white,
+                              ),
                               onPressed: () {
                                 Get.find<HomeController>()
                                     .isLocationSelected
@@ -71,43 +77,48 @@ class ServiceTypeTwo extends StatelessWidget {
                         ),
                         SizedBox(height: isMobile ? 5.0.h : 5),
                         TextComponents(
-                          color: themeController.isDarkMode.value
-                              ? AppColor.kWhiteColor
-                              : AppColor.kGreen1Color,
+                          color:
+                              themeController.isDarkMode.value
+                                  ? AppColor.kWhiteColor
+                                  : AppColor.kGreen1Color,
                           title: 'Please select a consultant',
                           size: isMobile ? 12.sp : 12,
                           weight: FontWeight.w400,
                         ),
                         SizedBox(height: isMobile ? 17.h : 17.0),
                         ListView.builder(
-                            padding: EdgeInsets.zero,
-                            itemCount: homeC.consultList.value.length,
-                            shrinkWrap: true,
-                            itemBuilder: (BuildContext context, int index) {
-                              return Padding(
-                                padding: const EdgeInsets.all(2.0)
-                                    .copyWith(left: 0, right: 0, bottom: 0),
-                                child: ResUseableContainer(
-                                  id: homeC.consultList.value[index].id,
-                                  title: homeC.consultList.value[index].name,
-                                  isMobile: isMobile,
-                                  appIcon: homeC.consultList.value[index].image,
-                                ),
-                              );
-                            })
+                          padding: EdgeInsets.zero,
+                          itemCount: homeC.consultList.value.length,
+                          shrinkWrap: true,
+                          itemBuilder: (BuildContext context, int index) {
+                            return Padding(
+                              padding: const EdgeInsets.all(
+                                2.0,
+                              ).copyWith(left: 0, right: 0, bottom: 0),
+                              child: ResUseableContainer(
+                                id: homeC.consultList.value[index].id,
+                                title: homeC.consultList.value[index].name,
+                                isMobile: isMobile,
+                                appIcon: homeC.consultList.value[index].image,
+                              ),
+                            );
+                          },
+                        ),
                       ],
                     ),
                   )
-            : Center(
+              : Center(
                 child: TextComponents(
-                  color: themeController.isDarkMode.value
-                      ? AppColor.kWhiteColor
-                      : AppColor.kGreen1Color,
+                  color:
+                      themeController.isDarkMode.value
+                          ? AppColor.kWhiteColor
+                          : AppColor.kGreen1Color,
                   title: homeC.servicesErrorMessage.value,
                   size: isMobile ? 24.sp : 24,
                   weight: FontWeight.bold,
                 ),
-              ));
+              ),
+    );
   }
 }
 
@@ -129,29 +140,34 @@ class ResUseableContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.only(
-          top: ResponsiveBreakpoints.of(context).isMobile ? 7.h : 7),
+        top: ResponsiveBreakpoints.of(context).isMobile ? 7.h : 7,
+      ),
       padding: EdgeInsets.symmetric(
-          horizontal: ResponsiveBreakpoints.of(context).isMobile ? 20.w : 26,
-          vertical: ResponsiveBreakpoints.of(context).isMobile ? 18.h : 34),
+        horizontal: ResponsiveBreakpoints.of(context).isMobile ? 20.w : 26,
+        vertical: ResponsiveBreakpoints.of(context).isMobile ? 18.h : 34,
+      ),
       decoration: BoxDecoration(
-        color: themeController.isDarkMode.value
-            ? AppColor.kBlck23
-            : AppColor.kWhiteColor,
+        color:
+            themeController.isDarkMode.value
+                ? AppColor.kBlck23
+                : AppColor.kWhiteColor,
         borderRadius: BorderRadius.circular(
-            ResponsiveBreakpoints.of(context).isMobile ? 15.r : 15.0),
+          ResponsiveBreakpoints.of(context).isMobile ? 15.r : 15.0,
+        ),
       ),
       child: ListTile(
         onTap: () {
           Get.back();
-          Get.toNamed(
-            '/BookingCalendar',
-          );
+          Get.toNamed('/BookingCalendar');
+         
           homeC.consultationId = int.parse(id.toString());
           homeC.isLocationSelected.value = true;
 
-          log(homeC.consultationId.toString() +
-              "consultationID print" +
-              id.toString());
+          log(
+            homeC.consultationId.toString() +
+                "consultationID print" +
+                id.toString(),
+          );
 
           // Get.to(() => SummaryStepper());
         },
@@ -172,9 +188,10 @@ class ResUseableContainer extends StatelessWidget {
           ),
         ),
         title: TextComponents(
-          color: themeController.isDarkMode.value
-              ? AppColor.kWhiteColor
-              : AppColor.kGreen1Color,
+          color:
+              themeController.isDarkMode.value
+                  ? AppColor.kWhiteColor
+                  : AppColor.kGreen1Color,
           title: title,
           size: isMobile ? 12.sp : 12,
           weight: FontWeight.w500,

@@ -8,7 +8,7 @@ import 'package:propell/configs/utlis/validation_utils.dart';
 import 'package:propell/data/response/status.dart';
 import 'package:propell/viewModels/controllers/home_controller.dart';
 import 'package:propell/viewModels/controllers/summary_controller.dart';
-import 'package:propell/viewModels/controllers/theme_controller.dart'; 
+import 'package:propell/viewModels/controllers/theme_controller.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -28,6 +28,7 @@ class _ServiceTypeOneState extends State<ServiceTypeOne> {
     super.initState();
     homeC.servicesApi();
     homeC.consultationApi();
+    homeC.userAvailabilityApi();
     // checkAndRefreshToken();
     log('message');
     //studiolistController.studiolistApi(1.toString());
@@ -54,7 +55,8 @@ class _ServiceTypeOneState extends State<ServiceTypeOne> {
 
       // Define a token expiration period, for example, 24 hours
       const tokenExpirationPeriod = Duration(hours: 24);
-      bool isTokenExpired = savedTokenTimestamp == null ||
+      bool isTokenExpired =
+          savedTokenTimestamp == null ||
           DateTime.now().millisecondsSinceEpoch - savedTokenTimestamp >
               tokenExpirationPeriod.inMilliseconds;
 
@@ -77,27 +79,28 @@ class _ServiceTypeOneState extends State<ServiceTypeOne> {
   @override
   Widget build(BuildContext context) {
     bool isMobile = ResponsiveBreakpoints.of(context).isMobile;
-    return Obx(() => homeC.servicesStatus.value == Status.LOADING
-        ? SizedBox(
-            width: isMobile ? 150 : 150,
-            height: isMobile ? 150 : 150,
-            child: Center(
-              child: getIndicator(),
-            ),
-          )
-        : homeC.servicesStatus.value == Status.COMPLETED
-            ? homeC.servicesList.value.isEmpty
-                ? Center(
+    return Obx(
+      () =>
+          homeC.servicesStatus.value == Status.LOADING
+              ? SizedBox(
+                width: isMobile ? 150 : 150,
+                height: isMobile ? 150 : 150,
+                child: Center(child: getIndicator()),
+              )
+              : homeC.servicesStatus.value == Status.COMPLETED
+              ? homeC.servicesList.value.isEmpty
+                  ? Center(
                     child: TextComponents(
-                      color: themeController.isDarkMode.value
-                          ? AppColor.kWhiteColor
-                          : AppColor.kGreen1Color,
+                      color:
+                          themeController.isDarkMode.value
+                              ? AppColor.kWhiteColor
+                              : AppColor.kGreen1Color,
                       title: 'No Services is Found',
                       size: isMobile ? 24.sp : 24,
                       weight: FontWeight.bold,
                     ),
                   )
-                : Column(
+                  : Column(
                     mainAxisSize: MainAxisSize.min,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -105,9 +108,10 @@ class _ServiceTypeOneState extends State<ServiceTypeOne> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           TextComponents(
-                            color: themeController.isDarkMode.value
-                                ? AppColor.kWhiteColor
-                                : AppColor.kGreen1Color,
+                            color:
+                                themeController.isDarkMode.value
+                                    ? AppColor.kWhiteColor
+                                    : AppColor.kGreen1Color,
                             title: 'Select Location',
                             size: isMobile ? 14.sp : 14,
                             weight: FontWeight.bold,
@@ -115,9 +119,10 @@ class _ServiceTypeOneState extends State<ServiceTypeOne> {
                           IconButton(
                             icon: Icon(
                               Icons.close,
-                              color: themeController.isDarkMode.value
-                                  ? AppColor.kWhiteColor
-                                  : AppColor.kGreen1Color,
+                              color:
+                                  themeController.isDarkMode.value
+                                      ? AppColor.kWhiteColor
+                                      : AppColor.kGreen1Color,
                             ),
                             onPressed: () {
                               Navigator.of(context).pop();
@@ -127,9 +132,10 @@ class _ServiceTypeOneState extends State<ServiceTypeOne> {
                       ),
                       SizedBox(height: isMobile ? 5.0.h : 5),
                       TextComponents(
-                        color: themeController.isDarkMode.value
-                            ? AppColor.kWhiteColor
-                            : AppColor.kGreen1Color,
+                        color:
+                            themeController.isDarkMode.value
+                                ? AppColor.kWhiteColor
+                                : AppColor.kGreen1Color,
                         title:
                             'Please select a location where you would like to meet our consultant.',
                         size: isMobile ? 12.sp : 12,
@@ -137,40 +143,46 @@ class _ServiceTypeOneState extends State<ServiceTypeOne> {
                       ),
                       SizedBox(height: isMobile ? 17.h : 17.0),
                       ListView.builder(
-                          padding: EdgeInsets.zero,
-                          shrinkWrap: true,
-                          itemCount: homeC.servicesList.value.length,
-                          itemBuilder: (BuildContext context, int index) {
-                            log(homeC.servicesList.value[index].price);
-                            return _buildLocationOption(
-                                id: homeC.servicesList.value[index].id,
-                                icon: homeC.servicesList.value[index].images,
-                                label: homeC.servicesList.value[index].name,
-                                price: homeC.servicesList.value[index].price
+                        padding: EdgeInsets.zero,
+                        shrinkWrap: true,
+                        itemCount: homeC.servicesList.value.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          log(homeC.servicesList.value[index].price);
+                          return _buildLocationOption(
+                            id: homeC.servicesList.value[index].id,
+                            icon: homeC.servicesList.value[index].images,
+                            label: homeC.servicesList.value[index].name,
+                            price:
+                                homeC.servicesList.value[index].price
                                     .toString(),
-                                context: context);
-                          })
+                            context: context,
+                          );
+                        },
+                      ),
                     ],
                   )
-            : Center(
+              : Center(
                 child: TextComponents(
-                  color: themeController.isDarkMode.value
-                      ? AppColor.kWhiteColor
-                      : AppColor.kGreen1Color,
+                  color:
+                      themeController.isDarkMode.value
+                          ? AppColor.kWhiteColor
+                          : AppColor.kGreen1Color,
                   title: homeC.consultErrorMessage.value,
                   size: isMobile ? 16.sp : 16,
                   weight: FontWeight.w400,
                 ),
-              ));
+              ),
+    );
   }
 }
 
-Widget _buildLocationOption(
-    {required String icon,
-    required String label,
-    required String price,
-    required int id,
-    required BuildContext context}) {
+Widget _buildLocationOption({
+  required String icon,
+  required String label,
+  required String price,
+  required int id,
+  required BuildContext context,
+}) {
   ThemeController themeController = Get.find<ThemeController>();
   return GestureDetector(
     onTap: () async {
@@ -180,16 +192,20 @@ Widget _buildLocationOption(
     },
     child: Container(
       margin: EdgeInsets.only(
-          top: ResponsiveBreakpoints.of(context).isMobile ? 7.h : 7),
+        top: ResponsiveBreakpoints.of(context).isMobile ? 7.h : 7,
+      ),
       padding: EdgeInsets.symmetric(
-          horizontal: ResponsiveBreakpoints.of(context).isMobile ? 20.w : 26,
-          vertical: ResponsiveBreakpoints.of(context).isMobile ? 18.h : 34),
+        horizontal: ResponsiveBreakpoints.of(context).isMobile ? 20.w : 26,
+        vertical: ResponsiveBreakpoints.of(context).isMobile ? 18.h : 34,
+      ),
       decoration: BoxDecoration(
-        color: themeController.isDarkMode.value
-            ? AppColor.kBlck23
-            : AppColor.kWhiteColor,
+        color:
+            themeController.isDarkMode.value
+                ? AppColor.kBlck23
+                : AppColor.kWhiteColor,
         borderRadius: BorderRadius.circular(
-            ResponsiveBreakpoints.of(context).isMobile ? 15.r : 15.0),
+          ResponsiveBreakpoints.of(context).isMobile ? 15.r : 15.0,
+        ),
       ),
       child: ListTile(
         contentPadding: EdgeInsets.zero,
@@ -200,14 +216,20 @@ Widget _buildLocationOption(
               themeController.isDarkMode.value ? null : AppColor.kGreen1Color,
           height: 30,
           fit: BoxFit.fitHeight,
-          loadingBuilder: (BuildContext context, Widget child,
-              ImageChunkEvent? loadingProgress) {
+          loadingBuilder: (
+            BuildContext context,
+            Widget child,
+            ImageChunkEvent? loadingProgress,
+          ) {
             if (loadingProgress == null)
               return child; // Return the image once loaded
             return getIndicator(); // Show the custom loading indicator
           },
-          errorBuilder:
-              (BuildContext context, Object error, StackTrace? stackTrace) {
+          errorBuilder: (
+            BuildContext context,
+            Object error,
+            StackTrace? stackTrace,
+          ) {
             return const Icon(
               Icons.error,
               color: AppColor.kGreen1Color, // Custom error icon and color
@@ -215,9 +237,10 @@ Widget _buildLocationOption(
           },
         ),
         title: TextComponents(
-          color: themeController.isDarkMode.value
-              ? AppColor.kWhiteColor
-              : AppColor.kGreen1Color,
+          color:
+              themeController.isDarkMode.value
+                  ? AppColor.kWhiteColor
+                  : AppColor.kGreen1Color,
           title: label,
           size: ResponsiveBreakpoints.of(context).isMobile ? 12.sp : 14,
           weight: FontWeight.w500,
@@ -226,19 +249,21 @@ Widget _buildLocationOption(
           width: ResponsiveBreakpoints.of(context).isMobile ? 84.w : 93,
           height: ResponsiveBreakpoints.of(context).isMobile ? 35.h : 30,
           padding: EdgeInsets.symmetric(
-              vertical: ResponsiveBreakpoints.of(context).isMobile ? 5.0.h : 5,
-              horizontal:
-                  ResponsiveBreakpoints.of(context).isMobile ? 3.0.w : 5),
+            vertical: ResponsiveBreakpoints.of(context).isMobile ? 5.0.h : 5,
+            horizontal: ResponsiveBreakpoints.of(context).isMobile ? 3.0.w : 5,
+          ),
           decoration: BoxDecoration(
             color: AppColor.kGreen1Color.withOpacity(0.2),
             borderRadius: BorderRadius.circular(
-                ResponsiveBreakpoints.of(context).isMobile ? 8.r : 8.0),
+              ResponsiveBreakpoints.of(context).isMobile ? 8.r : 8.0,
+            ),
           ),
           child: Center(
             child: TextComponents(
-              color: themeController.isDarkMode.value
-                  ? AppColor.kWhiteColor
-                  : AppColor.kGreen1Color,
+              color:
+                  themeController.isDarkMode.value
+                      ? AppColor.kWhiteColor
+                      : AppColor.kGreen1Color,
               title: 'KWD ${double.parse(price).toInt()}',
               size: ResponsiveBreakpoints.of(context).isMobile ? 12.sp : 14,
               weight: FontWeight.w500,

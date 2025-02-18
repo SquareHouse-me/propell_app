@@ -391,7 +391,7 @@ class _ThankyouDialogPageState extends State<ThankyouDialogPage> {
                                     //     await SharedPreferences.getInstance();
                                     // await prefs.setString('bookingId', '');
                                     openInWindow(
-                                        "https://stg.propell.design/HomeView");
+                                        "https://book.propell.design/HomeView");
                                   },
                                   childWidget: TextComponents(
                                     title: "Home",

@@ -6,6 +6,7 @@ import 'package:propell/data/repository/summary_repo.dart';
 import 'package:propell/data/response/status.dart';
 import 'package:propell/main.dart';
 import 'package:propell/models/category/category.dart';
+import 'package:propell/models/consultCheck/consult_check.dart';
 import 'package:propell/models/consultation/consultation.dart';
 import 'package:propell/models/consultationTimeSlot/time_slot.dart';
 import 'package:propell/models/services/services.dart';
@@ -24,7 +25,7 @@ class HomeController extends GetxController {
   int consultationId = 0;
   Rx<DateTime> selectedDate = Rx<DateTime>(DateTime.now());
   Rx<DateTime> focusedDay = Rx<DateTime>(DateTime.now());
-// for Category api
+  // for Category api
   Rx<List<CategoryResponse>> categoryList = Rx<List<CategoryResponse>>([]);
   Rx<List<SliderResponse>> sliderList = Rx<List<SliderResponse>>([]);
   final cateogryStatus = Status.LOADING.obs;
@@ -37,7 +38,7 @@ class HomeController extends GetxController {
       categoryList.value = _value;
   void setSlider(List<SliderResponse> _value) => sliderList.value = _value;
 
-// for Consultation api
+  // for Consultation api
   Rx<List<ConsultationData>> consultList = Rx<List<ConsultationData>>([]);
 
   final consultStatus = Status.LOADING.obs;
@@ -51,8 +52,9 @@ class HomeController extends GetxController {
 
   /// services api
 
-  Rx<List<ServicesResponseData>> servicesList =
-      Rx<List<ServicesResponseData>>([]);
+  Rx<List<ServicesResponseData>> servicesList = Rx<List<ServicesResponseData>>(
+    [],
+  );
 
   final servicesStatus = Status.LOADING.obs;
   RxString servicesErrorMessage = ''.obs;
@@ -66,8 +68,9 @@ class HomeController extends GetxController {
 
   /// TimeSlot api
 
-  Rx<List<TimeSlotResponseData>> timeSlotList =
-      Rx<List<TimeSlotResponseData>>([]);
+  Rx<List<TimeSlotResponseData>> timeSlotList = Rx<List<TimeSlotResponseData>>(
+    [],
+  );
 
   final timeSlotStatus = Status.LOADING.obs;
   RxString timeSlotErrorMessage = ''.obs;
@@ -88,9 +91,7 @@ class HomeController extends GetxController {
     // services.setupInteractMessage(Get.context!);
     // services.firebaseInit(Get.context!);
     Get.put(
-      SummaryController(
-        summaryRepo: getIt<SummaryRepo>(),
-      ),
+      SummaryController(summaryRepo: getIt<SummaryRepo>()),
       permanent: true,
     );
   }
@@ -104,11 +105,10 @@ class HomeController extends GetxController {
         ? Get.updateLocale(Locale('en'))
         : Get.updateLocale(Locale('ar'));
     print(language.value + '  ' + languageCode.value);
-     
-    
-   await myCategoryApi();
+
+    await myCategoryApi();
   }
- 
+
   /// Category API
   Future<void> myCategoryApi() async {
     try {
@@ -117,26 +117,27 @@ class HomeController extends GetxController {
       await homeRepo
           .categoryApi(lng: languageCode.value.toString())
           .then((value) {
-        // Check if the response is a List or Map
-        if (value is Map<String, dynamic>) {
-          // If the response is a Map
-          if (value['success'].toString() == 'true') {
-            CategoryModel categoryModel = CategoryModel.fromJson(value);
+            // Check if the response is a List or Map
+            if (value is Map<String, dynamic>) {
+              // If the response is a Map
+              if (value['success'].toString() == 'true') {
+                CategoryModel categoryModel = CategoryModel.fromJson(value);
 
-            categoryList.value = [];
-            setCategory(categoryModel.dataResponse.categoryResponse);
-            setSlider(categoryModel.dataResponse.sliderResponse);
-            setCateogryStatus(Status.COMPLETED);
-          } else {
-            handleCategoryError(value['message'].toString());
+                categoryList.value = [];
+                setCategory(categoryModel.dataResponse.categoryResponse);
+                setSlider(categoryModel.dataResponse.sliderResponse);
+                setCateogryStatus(Status.COMPLETED);
+              } else {
+                handleCategoryError(value['message'].toString());
+                setCateogryStatus(Status.ERROR);
+              }
+            }
+          })
+          .onError((e, stackTrace) {
+            handleCategoryError(e.toString());
+            log(e.toString());
             setCateogryStatus(Status.ERROR);
-          }
-        }
-      }).onError((e, stackTrace) {
-        handleCategoryError(e.toString());
-        log(e.toString());
-        setCateogryStatus(Status.ERROR);
-      });
+          });
     } catch (e) {
       log('message 3');
       log(e.toString());
@@ -151,30 +152,30 @@ class HomeController extends GetxController {
     try {
       setConsultStatus(Status.LOADING);
       languageCode.value = language.value.contains('English') ? 'en' : 'ar';
-      var data = {
-        "lang": languageCode.value.toString(),
-        "category_id": catId,
-      };
+      var data = {"lang": languageCode.value.toString(), "category_id": catId};
       await homeRepo
           .getConsultations(data: data, isHeaderRequired: false)
           .then((value) {
-        // If the response is a Map
-        if (value['success'].toString() == 'true') {
-          ConsultationModel categoryModel = ConsultationModel.fromJson(value);
+            // If the response is a Map
+            if (value['success'].toString() == 'true') {
+              ConsultationModel categoryModel = ConsultationModel.fromJson(
+                value,
+              );
 
-          consultList.value = [];
-          setConsult(categoryModel.consultResponse.data);
+              consultList.value = [];
+              setConsult(categoryModel.consultResponse.data);
 
-          setConsultStatus(Status.COMPLETED);
-        } else {
-          handleCategoryError(value['message'].toString());
-          setConsultStatus(Status.ERROR);
-        }
-      }).onError((e, stackTrace) {
-        handleConsultError(e.toString());
-        log(e.toString());
-        setConsultStatus(Status.ERROR);
-      });
+              setConsultStatus(Status.COMPLETED);
+            } else {
+              handleCategoryError(value['message'].toString());
+              setConsultStatus(Status.ERROR);
+            }
+          })
+          .onError((e, stackTrace) {
+            handleConsultError(e.toString());
+            log(e.toString());
+            setConsultStatus(Status.ERROR);
+          });
     } catch (e) {
       log('message 3');
       log(e.toString());
@@ -189,32 +190,30 @@ class HomeController extends GetxController {
     try {
       setServicesStatus(Status.LOADING);
       languageCode.value = language.value.contains('English') ? 'en' : 'ar';
-      var data = {
-        "lang": languageCode.value.toString(),
-        "category_id": catId,
-      };
+      var data = {"lang": languageCode.value.toString(), "category_id": catId};
       await homeRepo
           .getServices(data: data, isHeaderRequired: false)
           .then((value) {
-        // Check if the response is a List or Map
+            // Check if the response is a List or Map
 
-        // If the response is a Map
-        if (value['success'].toString() == 'true') {
-          ServicesModel categoryModel = ServicesModel.fromJson(value);
+            // If the response is a Map
+            if (value['success'].toString() == 'true') {
+              ServicesModel categoryModel = ServicesModel.fromJson(value);
 
-          servicesList.value = [];
-          setServices(categoryModel.consultResponse.data);
+              servicesList.value = [];
+              setServices(categoryModel.consultResponse.data);
 
-          setServicesStatus(Status.COMPLETED);
-        } else {
-          handleServicesStatusError(value['message'].toString());
-          setServicesStatus(Status.ERROR);
-        }
-      }).onError((e, stackTrace) {
-        handleServicesStatusError(e.toString());
-        log(e.toString());
-        setServicesStatus(Status.ERROR);
-      });
+              setServicesStatus(Status.COMPLETED);
+            } else {
+              handleServicesStatusError(value['message'].toString());
+              setServicesStatus(Status.ERROR);
+            }
+          })
+          .onError((e, stackTrace) {
+            handleServicesStatusError(e.toString());
+            log(e.toString());
+            setServicesStatus(Status.ERROR);
+          });
     } catch (e) {
       log('message 3');
       log(e.toString());
@@ -223,10 +222,12 @@ class HomeController extends GetxController {
     }
   }
 
-// Time Solt api get
+  // Time Solt api get
 
-  Future<void> timeSlotApi(
-      {required String consultationId, required String date}) async {
+  Future<void> timeSlotApi({
+    required String consultationId,
+    required String date,
+  }) async {
     try {
       setTimeSlotStatus(Status.LOADING);
 
@@ -239,63 +240,114 @@ class HomeController extends GetxController {
       await homeRepo
           .getConsultationTime(data: data, isHeaderRequired: false)
           .then((value) {
-        // Check if the response is a List or Map
+            if (value['success'].toString() == 'true') {
+              TimeSlotModel categoryModel = TimeSlotModel.fromJson(value);
+              DateTime parseDate = DateTime.parse(date);
 
-        // If the response is a Map
-        if (value['success'].toString() == 'true') {
-          TimeSlotModel categoryModel = TimeSlotModel.fromJson(value);
-          DateTime parseDate = DateTime.parse(date);
+              if (parseDate.isAfter(DateTime.now())) {
+                print(
+                  parseDate.toString() +
+                      "parseDate" +
+                      DateTime.now().toString(),
+                );
+                timeSlotList.value = [];
+                setTimeSlot(categoryModel.timeSlotModelResponse);
+                log('future date hai slot complete ayega');
+              } else {
+                timeSlotList.value = [];
+                // setTimeSlot(categoryModel.timeSlotModelResponse);
+                final tempSlotList = categoryModel.timeSlotModelResponse;
+                timeSlotList.value =
+                    tempSlotList.where((time) {
+                      final now = DateTime.now();
+                      final nowTime = DateTime(
+                        now.year,
+                        now.month,
+                        now.day,
+                        now.hour,
+                        now.minute,
+                      );
+                      log(nowTime.toString() + " nowTime" + now.toString());
+                      final timeParts = time.to.split(':'); // Split "HH:mm:ss"
+                      final slotTime = DateTime(
+                        now.year,
+                        now.month,
+                        now.day,
+                        int.parse(timeParts[0]), // Hours
+                        int.parse(timeParts[1]), // Minutes
+                      );
+                      return slotTime.isAfter(
+                        nowTime.add(Duration(minutes: 30)),
+                      ); // Include only future slots
+                    }).toList();
+                timeSlotList.refresh();
+                log("${timeSlotList.value.length}timeSlotList");
+              }
 
-          if (parseDate.isAfter(DateTime.now())) {
-            print(
-                parseDate.toString() + "parseDate" + DateTime.now().toString());
-            timeSlotList.value = [];
-            setTimeSlot(categoryModel.timeSlotModelResponse);
-            log('future date hai slot complete ayega');
-          } else {
-            timeSlotList.value = [];
-            // setTimeSlot(categoryModel.timeSlotModelResponse);
-            final tempSlotList = categoryModel.timeSlotModelResponse;
-            timeSlotList.value = tempSlotList.where((time) {
-              final now = DateTime.now();
-              final nowTime = DateTime(
-                now.year,
-                now.month,
-                now.day,
-                now.hour,
-                now.minute,
-              );
-              log(nowTime.toString() + " nowTime" + now.toString());
-              final timeParts = time.to.split(':'); // Split "HH:mm:ss"
-              final slotTime = DateTime(
-                now.year,
-                now.month,
-                now.day,
-                int.parse(timeParts[0]), // Hours
-                int.parse(timeParts[1]), // Minutes
-              );
-              return slotTime.isAfter(nowTime); // Include only future slots
-            }).toList();
-            timeSlotList.refresh();
-            log("${timeSlotList.value.length}timeSlotList");
-          }
-
-          setTimeSlotStatus(Status.COMPLETED);
-        } else {
-          timeSlotList.value = [];
-          handleTimeSlotError(value['message'].toString());
-          setTimeSlotStatus(Status.ERROR);
-        }
-      }).onError((e, stackTrace) {
-        handleTimeSlotError(e.toString());
-        log(e.toString());
-        setTimeSlotStatus(Status.ERROR);
-      });
+              setTimeSlotStatus(Status.COMPLETED);
+            } else {
+              timeSlotList.value = [];
+              handleTimeSlotError(value['message'].toString());
+              setTimeSlotStatus(Status.ERROR);
+            }
+          })
+          .onError((e, stackTrace) {
+            handleTimeSlotError(e.toString());
+            log(e.toString());
+            setTimeSlotStatus(Status.ERROR);
+          });
     } catch (e) {
       log('message 3');
       log(e.toString());
       handleTimeSlotError(e.toString());
       setTimeSlotStatus(Status.ERROR);
+    }
+  }
+
+  Rx<ConsultCheckResponse> consultCheck = Rx<ConsultCheckResponse>(
+    ConsultCheckResponse(),
+  );
+
+  final consultCheckStatus = Status.LOADING.obs;
+  RxString consultCheckErrorMessage = ''.obs;
+  void handleConsultCheckError(String errorMessage) =>
+      consultCheckErrorMessage.value = errorMessage;
+  // Setter functions
+  void setConsultCheckStatus(Status _value) =>
+      consultCheckStatus.value = _value;
+  void setConsultCheck(ConsultCheckResponse _value) =>
+      consultCheck.value = _value;
+
+  Future<void> userAvailabilityApi() async {
+    try {
+      setConsultCheckStatus(Status.LOADING);
+      languageCode.value = language.value.contains('English') ? 'en' : 'ar';
+      await homeRepo
+          .checkUserAvailabilityApi(lng: languageCode.value.toString())
+          .then((value) {
+            // If the response is a Map
+            if (value['success'].toString() == 'true') {
+              ConsultCheckModel checkConsult = ConsultCheckModel.fromJson(
+                value,
+              );
+
+              setConsultCheck(checkConsult.consultResponse);
+              setConsultCheckStatus(Status.COMPLETED);
+            } else {
+              handleConsultCheckError(value['message'].toString());
+              setConsultCheckStatus(Status.ERROR);
+            }
+          })
+          .onError((e, stackTrace) {
+            handleCategoryError(e.toString());
+            log(e.toString());
+            setConsultCheckStatus(Status.ERROR);
+          });
+    } catch (e) {
+      log('message 3');
+      log(e.toString());
+      handleCategoryError(e.toString());
+      setConsultCheckStatus(Status.ERROR);
     }
   }
 }

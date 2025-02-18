@@ -1,6 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
- 
-import 'package:responsive_framework/responsive_framework.dart'; 
+
+import 'package:responsive_framework/responsive_framework.dart';
 
 import 'package:propell/configs/generalWidgets/customfield_components.dart';
 import 'package:propell/configs/generalWidgets/customphonefield_components.dart';
@@ -51,7 +51,7 @@ class StepOne extends StatelessWidget {
             ),
             ResponsiveRowColumnItem(
               child: CustomFieldComponents(
-                keyboardType: TextInputType.text,
+                keyboardType: TextInputType.name,
                 hint: 'Your Name',
                 controller: oneStepC.inputName,
                 validator: (value) {
@@ -67,8 +67,7 @@ class StepOne extends StatelessWidget {
             ),
             ResponsiveRowColumnItem(
               child: CustomFieldComponents(
-                enabled: id.isNotEmpty
-                            ?true:false,
+                  enabled: id.isNotEmpty ? true : false,
                   keyboardType: TextInputType.emailAddress,
                   hint: 'Your email here',
                   controller: oneStepC.inputEmail,
@@ -151,10 +150,9 @@ class StepOne extends StatelessWidget {
                     height: isMobile ? 56.h : 56,
                     onTap: () async {
                       if (oneStepC.formKey.currentState!.validate()) {
-                         
                         id.isNotEmpty
-                            ? await oneStepC.checkoutUpdate(true,id) :await oneStepC.checkout()
-                            ;
+                            ? await oneStepC.checkoutUpdate(true, id)
+                            : await oneStepC.checkout();
                       }
                       // Increment the step value
                       // oneStepC.currentStep.value += 1;
