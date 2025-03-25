@@ -201,7 +201,7 @@ class _ThankyouDialogPageState extends State<ThankyouDialogPage> {
                                                   ? Colors.white
                                                   : AppColor.kPrimary2,
                                           title:
-                                              'Your Appointment has been book',
+                                              'YourAppointmentBeenBook'.tr,
                                           size: isMobile ? 16.sp : 16,
                                           weight: FontWeight.w400,
                                         ),
@@ -219,7 +219,7 @@ class _ThankyouDialogPageState extends State<ThankyouDialogPage> {
                             color: themeController.isDarkMode.value
                                 ? AppColor.kWhiteColor
                                 : AppColor.kDarkTitleColor,
-                            title: 'Appointment Details',
+                            title: 'AppointmentDetails'.tr,
                             size: isMobile ? 16.sp : 16,
                             weight: FontWeight.w600,
                           )),
@@ -255,7 +255,7 @@ class _ThankyouDialogPageState extends State<ThankyouDialogPage> {
                                 ),
                                 const SizedBox(height: 8),
                                 _detailRow(
-                                    "Appointment:",
+                                    "Appointment".tr+":",
                                     summaryController.thankYouModel.value
                                         .bookingRespons.category_name,
                                     isMobile),
@@ -270,7 +270,7 @@ class _ThankyouDialogPageState extends State<ThankyouDialogPage> {
                                 ),
                                 const SizedBox(height: 8),
                                 _detailRow(
-                                    "Service:",
+                                    "Service".tr+":",
                                     summaryController.thankYouModel.value
                                         .bookingRespons.service_name,
                                     color: Colors.green,
@@ -286,7 +286,7 @@ class _ThankyouDialogPageState extends State<ThankyouDialogPage> {
                                 ),
                                 const SizedBox(height: 8),
                                 _detailRow(
-                                    "Consultant:",
+                                    "consultant".tr+":",
                                     summaryController.thankYouModel.value
                                         .bookingRespons.consultation_name,
                                     isMobile),
@@ -301,7 +301,7 @@ class _ThankyouDialogPageState extends State<ThankyouDialogPage> {
                                 ),
                                 const SizedBox(height: 8),
                                 _detailRow(
-                                    "Date:",
+                                    "Date".tr+":",
                                     summaryController.thankYouModel.value
                                         .bookingRespons.booking_date,
                                     isMobile),
@@ -316,7 +316,7 @@ class _ThankyouDialogPageState extends State<ThankyouDialogPage> {
                                 ),
                                 const SizedBox(height: 8),
                                 _detailRow(
-                                    "Time:",
+                                    "Time".tr+":",
                                     summaryController.thankYouModel.value
                                         .bookingRespons.timeslot,
                                     isMobile),
@@ -330,7 +330,7 @@ class _ThankyouDialogPageState extends State<ThankyouDialogPage> {
                             color: themeController.isDarkMode.value
                                 ? AppColor.kWhiteColor
                                 : AppColor.kDarkTitleColor,
-                            title: 'Appointment Details',
+                            title: 'AppointmentDetails'.tr,
                             size: isMobile ? 16.sp : 16,
                             weight: FontWeight.w600,
                           )),
@@ -356,7 +356,7 @@ class _ThankyouDialogPageState extends State<ThankyouDialogPage> {
                             child: Column(
                               children: [
                                 _detailRow(
-                                    "Paid Amount:",
+                                    "Paid Amount".tr+":",
                                     summaryController.thankYouModel.value
                                         .bookingRespons.total_amount
                                         .toString(),
@@ -372,7 +372,7 @@ class _ThankyouDialogPageState extends State<ThankyouDialogPage> {
                                 ),
                                 const SizedBox(height: 8),
                                 _detailRow(
-                                    "Transactions ID:",
+                                    "TransactionsID".tr+":",
                                     summaryController.thankYouModel.value
                                         .bookingRespons.transaction_id,
                                     isMobile),
@@ -394,7 +394,7 @@ class _ThankyouDialogPageState extends State<ThankyouDialogPage> {
                                         "https://book.propell.design/HomeView");
                                   },
                                   childWidget: TextComponents(
-                                    title: "Home",
+                                    title: "Home".tr,
                                     size: isMobile ? 16.sp : 16,
                                     color: AppColor.kWhiteColor,
                                     weight: FontWeight.w400,
@@ -415,7 +415,7 @@ class _ThankyouDialogPageState extends State<ThankyouDialogPage> {
                       color: themeController.isDarkMode.value
                           ? AppColor.kWhiteColor
                           : AppColor.kGreen1Color,
-                      title: 'something went wrong..',
+                      title: 'Something went wrong'.tr,
                       size: isMobile ? 16.sp : 16,
                       weight: FontWeight.w400,
                       textAlign: TextAlign.center,

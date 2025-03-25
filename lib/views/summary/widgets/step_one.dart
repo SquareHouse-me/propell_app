@@ -41,7 +41,7 @@ class StepOne extends StatelessWidget {
                 color: themeController.isDarkMode.value
                     ? AppColor.kWhiteColor
                     : AppColor.kDarkTitleColor,
-                title: 'Personal Details',
+                title: 'personalDetails'.tr,
                 size: isMobile ? 16.sp : 16,
                 weight: FontWeight.bold,
               ),
@@ -52,11 +52,11 @@ class StepOne extends StatelessWidget {
             ResponsiveRowColumnItem(
               child: CustomFieldComponents(
                 keyboardType: TextInputType.name,
-                hint: 'Your Name',
+                hint: 'yourName'.tr,
                 controller: oneStepC.inputName,
                 validator: (value) {
                   if (value!.isEmpty) {
-                    return 'name field must not be empty';
+                    return 'nameValidation'.tr;
                   }
                   // Display the real-time error
                 },
@@ -69,11 +69,11 @@ class StepOne extends StatelessWidget {
               child: CustomFieldComponents(
                   enabled: id.isNotEmpty ? true : false,
                   keyboardType: TextInputType.emailAddress,
-                  hint: 'Your email here',
+                  hint: 'yourEmail'.tr,
                   controller: oneStepC.inputEmail,
                   validator: (value) {
                     if (value!.isEmpty) {
-                      return 'Your email here';
+                      return 'emailValidation'.tr;
                     }
                   }),
             ),
@@ -86,7 +86,7 @@ class StepOne extends StatelessWidget {
                     EditController: oneStepC.inputPhone,
                     validator: (value) {
                       if (value!.isEmpty) {
-                        return 'phone field must not be empty';
+                        return 'phoneValidation'.tr;
                       }
                     })),
             // ResponsiveRowColumnItem(
@@ -162,7 +162,7 @@ class StepOne extends StatelessWidget {
                     childWidget: oneStepC.isCheckoutLoading.value
                         ? getIndicator()
                         : TextComponents(
-                            title: "Continue",
+                            title: "continue".tr,
                             size: isMobile ? 16.sp : 16,
                             color: AppColor.kWhiteColor,
                             weight: FontWeight.w400,

@@ -152,7 +152,7 @@ class _BookingCalanderState extends State<BookingCalander> {
                           ResponsiveRowColumnItem(
                             child: Obx(
                               () => TextComponents(
-                                title: "Select Date",
+                                title: "selectDate".tr,
                                 size:
                                     ResponsiveBreakpoints.of(context).isMobile
                                         ? 14.sp
@@ -417,7 +417,7 @@ class _BookingCalanderState extends State<BookingCalander> {
                           ResponsiveRowColumnItem(
                             child: Obx(
                               () => TextComponents(
-                                title: "Select Time",
+                                title: "date&Time".tr,
                                 size:
                                     ResponsiveBreakpoints.of(context).isMobile
                                         ? 14.sp
@@ -456,7 +456,7 @@ class _BookingCalanderState extends State<BookingCalander> {
                                                           .value
                                                       ? AppColor.kWhiteColor
                                                       : AppColor.kGreen1Color,
-                                              title: 'No Time Slot Available',
+                                              title: 'selectTimeDes'.tr,
                                               size: isMobile ? 16.sp : 16,
                                               weight: FontWeight.w400,
                                             ),
@@ -540,8 +540,8 @@ class _BookingCalanderState extends State<BookingCalander> {
                                                           if (time.isBooked ==
                                                               1) {
                                                             Get.snackbar(
-                                                              'Warning',
-                                                              'Slot Time Already Booked',
+                                                              'warning'.tr,
+                                                              'slotTimeAlreadyBooked'.tr,
                                                               backgroundColor:
                                                                   Colors.amber,
                                                               colorText:
@@ -700,8 +700,8 @@ class _BookingCalanderState extends State<BookingCalander> {
                                           if (homeC.selectedTimeId.value ==
                                               '-1') {
                                             Get.snackbar(
-                                              'Warning',
-                                              'Please Select Time Slot',
+                                              'warning'.tr,
+                                              'PleaseSelectTimeSlot'.tr,
                                               backgroundColor: Colors.black,
                                               colorText: AppColor.kWhiteColor,
                                             );
@@ -710,7 +710,7 @@ class _BookingCalanderState extends State<BookingCalander> {
                                           }
                                         },
                                         childWidget: TextComponents(
-                                          title: "Continue",
+                                          title: "continue".tr,
                                           size:
                                               ResponsiveBreakpoints.of(
                                                     context,

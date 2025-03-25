@@ -67,7 +67,7 @@ class _FailedDialogPageState extends State<FailedDialogPage> {
                   color: themeController.isDarkMode.value
                       ? AppColor.kWhiteColor
                       : AppColor.kDarkTitleColor,
-                  title: 'Oops!',
+                  title: 'Oops'.tr+"!",
                   size: isMobile ? 26.sp : 26,
                   weight: FontWeight.w600,
                 )),
@@ -79,7 +79,7 @@ class _FailedDialogPageState extends State<FailedDialogPage> {
                   color: themeController.isDarkMode.value
                       ? AppColor.kWhiteColor
                       : AppColor.kDarkTitleColor,
-                  title: 'payment Failed please try again',
+                  title: 'Payment Failed, please try again'.tr,
                   size: isMobile ? 18.sp : 18,
                   weight: FontWeight.w400,
                 )),
@@ -98,7 +98,7 @@ class _FailedDialogPageState extends State<FailedDialogPage> {
                           Get.offNamed('/SummaryStepper', arguments: bookingId);
                         },
                         childWidget: TextComponents(
-                          title: "Back",
+                          title: "Back".tr,
                           size: isMobile ? 16.sp : 16,
                           color: AppColor.kWhiteColor,
                           weight: FontWeight.w400,

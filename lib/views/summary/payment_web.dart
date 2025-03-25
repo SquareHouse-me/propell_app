@@ -24,7 +24,7 @@ class _PaymentWebState extends State<PaymentWeb> {
       backgroundColor: AppColor.kWhiteColor,
       appBar: AppBar(
         backgroundColor: AppColor.kWhiteColor,
-        title: const Text('Payment'),
+        title:   Text('payment'.tr),
         centerTitle: true,
         surfaceTintColor: Colors.white,
       ),

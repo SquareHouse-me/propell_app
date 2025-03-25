@@ -101,7 +101,7 @@ class _SummaryStepperState extends State<SummaryStepper> {
                                 color: themeController.isDarkMode.value
                                     ? AppColor.kWhiteColor
                                     : AppColor.kDarkTitleColor,
-                                title: 'Personal Details',
+                                title: 'personalDetails'.tr,
                                 size: 14,
                                 weight: FontWeight.w400,
                               ),
@@ -120,7 +120,7 @@ class _SummaryStepperState extends State<SummaryStepper> {
                                 color: themeController.isDarkMode.value
                                     ? AppColor.kWhiteColor
                                     : AppColor.kDarkTitleColor,
-                                title: 'Booking Details',
+                                title: 'bookingDetails'.tr,
                                 size: 14,
                                 weight: FontWeight.w400,
                               ),

@@ -36,7 +36,7 @@ class ServiceTypeTwo extends StatelessWidget {
                           themeController.isDarkMode.value
                               ? AppColor.kWhiteColor
                               : AppColor.kGreen1Color,
-                      title: 'No consultation is Found',
+                      title: "NoConsultationFound".tr,
                       size: isMobile ? 24.sp : 24,
                       weight: FontWeight.bold,
                     ),
@@ -54,7 +54,7 @@ class ServiceTypeTwo extends StatelessWidget {
                                   themeController.isDarkMode.value
                                       ? AppColor.kWhiteColor
                                       : AppColor.kGreen1Color,
-                              title: 'Consultant',
+                              title: 'consultant'.tr,
                               size:
                                   ResponsiveBreakpoints.of(context).isMobile
                                       ? 14.sp
@@ -81,7 +81,7 @@ class ServiceTypeTwo extends StatelessWidget {
                               themeController.isDarkMode.value
                                   ? AppColor.kWhiteColor
                                   : AppColor.kGreen1Color,
-                          title: 'Please select a consultant',
+                          title: 'PleaseConsultantTitle'.tr,
                           size: isMobile ? 12.sp : 12,
                           weight: FontWeight.w400,
                         ),

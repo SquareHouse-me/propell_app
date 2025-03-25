@@ -37,7 +37,7 @@ class StepTwo extends StatelessWidget {
               color: themeController.isDarkMode.value
                   ? AppColor.kWhiteColor
                   : AppColor.kDarkTitleColor,
-              title: 'Your Booking',
+              title: 'yourBooking'.tr,
               size: isMobile ? 16.sp : 16,
               weight: FontWeight.bold,
             ),
@@ -63,7 +63,7 @@ class StepTwo extends StatelessWidget {
               color: themeController.isDarkMode.value
                   ? AppColor.kWhiteColor
                   : AppColor.kDarkTitleColor,
-              title: 'Consultant',
+              title: 'consultant'.tr,
               size: isMobile ? 16.sp : 16,
               weight: FontWeight.bold,
             ),
@@ -89,7 +89,7 @@ class StepTwo extends StatelessWidget {
               color: themeController.isDarkMode.value
                   ? AppColor.kWhiteColor
                   : AppColor.kDarkTitleColor,
-              title: 'Date and Time',
+              title: 'date&Time'.tr,
               size: isMobile ? 16.sp : 16,
               weight: FontWeight.bold,
             ),
@@ -161,7 +161,7 @@ class StepTwo extends StatelessWidget {
                               ResponsiveRowColumnItem(
                                   child: TextComponents(
                                 color: AppColor.kLightTitleColor,
-                                title: 'Type',
+                                title: 'type'.tr,
                                 size: isMobile ? 12.sp : 12,
                                 weight: FontWeight.w400,
                               ))
@@ -201,7 +201,7 @@ class StepTwo extends StatelessWidget {
                               ResponsiveRowColumnItem(
                                   child: TextComponents(
                                 color: AppColor.kLightTitleColor,
-                                title: 'Date',
+                                title: 'date'.tr,
                                 size: isMobile ? 12.sp : 12,
                                 weight: FontWeight.w400,
                               ))
@@ -252,7 +252,7 @@ class StepTwo extends StatelessWidget {
                               ResponsiveRowColumnItem(
                                   child: TextComponents(
                                 color: AppColor.kLightTitleColor,
-                                title: 'Time',
+                                title: 'time'.tr,
                                 size: isMobile ? 12.sp : 12,
                                 weight: FontWeight.w400,
                               ))
@@ -291,7 +291,7 @@ class StepTwo extends StatelessWidget {
                               ResponsiveRowColumnItem(
                                   child: TextComponents(
                                 color: AppColor.kLightTitleColor,
-                                title: 'Duration',
+                                title: 'duration'.tr,
                                 size: isMobile ? 12.sp : 12,
                                 weight: FontWeight.w400,
                               ))
@@ -302,7 +302,7 @@ class StepTwo extends StatelessWidget {
                                     color: themeController.isDarkMode.value
                                         ? Colors.white
                                         : AppColor.kPrimary2,
-                                    title: '${summaryC.totalHour.value} hours',
+                                    title: '${summaryC.totalHour.value} ${'Hours'.tr}',
                                     size: isMobile ? 12.sp : 12,
                                     weight: FontWeight.w400,
                                   ))),
@@ -322,7 +322,7 @@ class StepTwo extends StatelessWidget {
               color: themeController.isDarkMode.value
                   ? AppColor.kWhiteColor
                   : AppColor.kDarkTitleColor,
-              title: 'Payment ',
+              title: 'payment'.tr,
               size: isMobile ? 16.sp : 16,
               weight: FontWeight.bold,
             ),
@@ -358,7 +358,7 @@ class StepTwo extends StatelessWidget {
                 color: themeController.isDarkMode.value
                     ? Colors.white
                     : AppColor.kPrimary2,
-                title: 'Total (KWD)',
+                title: 'totalTitle'.tr+' (KWD)',
                 size: isMobile ? 12.sp : 12,
                 weight: FontWeight.w500,
               ),
@@ -395,7 +395,7 @@ class StepTwo extends StatelessWidget {
                     Get.find<HomeController>().isLocationSelected = true.obs;
                   },
                   childWidget: TextComponents(
-                    title: "Pay Now",
+                    title: "payNow".tr,
                     size: isMobile ? 16.sp : 16,
                     color: AppColor.kWhiteColor,
                     weight: FontWeight.w400,

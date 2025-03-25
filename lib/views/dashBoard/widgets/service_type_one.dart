@@ -95,7 +95,7 @@ class _ServiceTypeOneState extends State<ServiceTypeOne> {
                           themeController.isDarkMode.value
                               ? AppColor.kWhiteColor
                               : AppColor.kGreen1Color,
-                      title: 'No Services is Found',
+                      title: 'noCategoryFound'.tr,
                       size: isMobile ? 24.sp : 24,
                       weight: FontWeight.bold,
                     ),
@@ -112,7 +112,7 @@ class _ServiceTypeOneState extends State<ServiceTypeOne> {
                                 themeController.isDarkMode.value
                                     ? AppColor.kWhiteColor
                                     : AppColor.kGreen1Color,
-                            title: 'Select Location',
+                            title: 'selectLocation'.tr,
                             size: isMobile ? 14.sp : 14,
                             weight: FontWeight.bold,
                           ),
@@ -137,7 +137,7 @@ class _ServiceTypeOneState extends State<ServiceTypeOne> {
                                 ? AppColor.kWhiteColor
                                 : AppColor.kGreen1Color,
                         title:
-                            'Please select a location where you would like to meet our consultant.',
+                             'selectLocationDes'.tr,
                         size: isMobile ? 12.sp : 12,
                         weight: FontWeight.w400,
                       ),
