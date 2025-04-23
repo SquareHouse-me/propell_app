@@ -41,7 +41,7 @@ class _BookingCalanderState extends State<BookingCalander> {
     print(" date   ${homeC.selectedDate.value}");
     String formattedDate = DateFormat(
       'yyyy-MM-dd',
-    ).format(homeC.selectedDate.value);
+    ).format(homeC.selectedDate.value.add(Duration(days: 1)));
 
     homeC.consultCheck.value.status.toString() == 'inactive'
         ? null
@@ -195,6 +195,11 @@ class _BookingCalanderState extends State<BookingCalander> {
                                   ),
                                 ),
                                 child: TableCalendar(
+                                  enabledDayPredicate: (day) {
+                                    DateTime now = DateTime.now();
+                                    // Disable today's date
+                                    return !isSameDay(now, day);
+                                  },
                                   daysOfWeekHeight: 30,
                                   headerStyle: HeaderStyle(
                                     // decoration: BoxDecoration(color: AppColor.kPrimary2),
@@ -387,7 +392,9 @@ class _BookingCalanderState extends State<BookingCalander> {
                                       day,
                                     );
                                   },
-                                  focusedDay: homeC.focusedDay.value,
+                                  focusedDay: homeC.focusedDay.value.add(
+                                    Duration(days: 1),
+                                  ),
                                   firstDay: DateTime.now(),
                                   lastDay: DateTime.utc(2030, 3, 14),
                                   onDaySelected: (
@@ -541,7 +548,8 @@ class _BookingCalanderState extends State<BookingCalander> {
                                                               1) {
                                                             Get.snackbar(
                                                               'warning'.tr,
-                                                              'slotTimeAlreadyBooked'.tr,
+                                                              'slotTimeAlreadyBooked'
+                                                                  .tr,
                                                               backgroundColor:
                                                                   Colors.amber,
                                                               colorText:
